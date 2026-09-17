@@ -1,6 +1,6 @@
 # PortableMind user guides
 
-> The in-app guides from https://www.portablemind.ai/docs, in reading order. For the MCP tool reference see [https://github.com/portablemind/docs/blob/main/mcp/README.md](https://github.com/portablemind/docs/blob/main/mcp/README.md).
+> The in-app guides from https://www.portablemind.ai/docs, in reading order. For the MCP tool reference see [https://github.com/portablemind-ai/docs/blob/main/mcp/README.md](https://github.com/portablemind-ai/docs/blob/main/mcp/README.md).
 
 ## Getting Started
 

@@ -4,7 +4,7 @@
 # LLMS_BASE_URL overrides where the pages are said to live.
 set -euo pipefail
 repo=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-base=${LLMS_BASE_URL:-https://raw.githubusercontent.com/portablemind/docs/main}
+base=${LLMS_BASE_URL:-https://raw.githubusercontent.com/portablemind-ai/docs/main}
 cd "$repo"
 
 title()   { grep -m1 '^# ' "$1" | sed 's/^# //'; }

@@ -1,6 +1,6 @@
 # portablemind-docs — validate on MRs, refresh Context7 on every push to main.
 #
-# The repo is push-mirrored to github.com/portablemind/docs (GitLab → Settings →
+# The repo is push-mirrored to github.com/portablemind-ai/docs (GitLab → Settings →
 # Repository → Mirroring repositories). Context7 indexes the GitHub copy, so the
 # refresh waits until the mirror shows this commit before asking Context7 to
 # re-index. Needs CONTEXT7_API_KEY (context7.com/dashboard, ctx7sk-…, protected +
@@ -15,8 +15,8 @@ stages:
   - publish
 
 variables:
-  CONTEXT7_LIBRARY: /portablemind/docs
-  GITHUB_MIRROR: portablemind/docs
+  CONTEXT7_LIBRARY: /portablemind-ai/docs
+  GITHUB_MIRROR: portablemind-ai/docs
 
 validate:
   stage: validate

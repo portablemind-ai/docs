@@ -23,10 +23,10 @@ model_api (GitLab) ──publish_mcp_docs──▶ mcp/README.md + mcp/tools/   
 harmoniq-frontend (GitLab) ──publish_user_docs──▶ guides/             ├─▶ this repo (GitLab, source of truth)
 hand edits (MRs here) ──▶ mcp/connect.md, mcp/recipes.md, context7.json ┘         │ push mirror
                                                                                   ▼
-                                                                  github.com/portablemind/docs
+                                                                  github.com/portablemind-ai/docs
                                                                                   │ POST /v1/refresh (CI here)
                                                                                   ▼
-                                                                    Context7  /portablemind/docs
+                                                                    Context7  /portablemind-ai/docs
 ```
 
 - **Do not edit generated files** (`mcp/README.md`, `mcp/tools/*`). Change the tool class in
@@ -41,6 +41,6 @@ hand edits (MRs here) ──▶ mcp/connect.md, mcp/recipes.md, context7.json �
 
 With the Context7 MCP server installed, ask for PortableMind and add `use context7`, e.g.
 "How do I change a task's status through the PortableMind MCP? use context7". Context7
-resolves the library as `/portablemind/docs`.
+resolves the library as `/portablemind-ai/docs`.
 
 To connect the agent to a PortableMind workspace itself, see [`mcp/connect.md`](mcp/connect.md).
