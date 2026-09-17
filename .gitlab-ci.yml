@@ -22,11 +22,14 @@ validate:
   stage: validate
   image: alpine:3.20
   script:
-    - apk add --no-cache jq bash
+    - apk add --no-cache jq bash git
     - jq -e '.rules | type == "array" and length > 0' context7.json > /dev/null
-    - jq -r '.rules[] | select(length > 300) | "rule too long: \(.)"' context7.json | (! grep .)
+    - |
+      long=$(jq -r '.rules[] | select(length > 300)' context7.json)
+      if [ -n "$long" ]; then echo "context7.json rule over 300 chars:"; echo "$long"; exit 1; fi
     - test -f mcp/README.md && test -d mcp/tools && test -f mcp/connect.md && test -f mcp/recipes.md
-    - bash scripts/build-llms-txt.sh && git diff --exit-code -- llms.txt || (echo "llms.txt is stale — run scripts/build-llms-txt.sh" && exit 1)
+    - bash scripts/build-llms-txt.sh
+    - git diff --exit-code -- llms.txt || (echo "llms.txt is stale — run scripts/build-llms-txt.sh and commit" && exit 1)
 
 context7_refresh:
   stage: publish
