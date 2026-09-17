@@ -1,0 +1,58 @@
+# portablemind-docs — validate on MRs, refresh Context7 on every push to main.
+#
+# The repo is push-mirrored to github.com/portablemind/docs (GitLab → Settings →
+# Repository → Mirroring repositories). Context7 indexes the GitHub copy, so the
+# refresh waits until the mirror shows this commit before asking Context7 to
+# re-index. Needs CONTEXT7_API_KEY (context7.com/dashboard, ctx7sk-…, protected +
+# masked); without it the job logs and exits green.
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+stages:
+  - validate
+  - publish
+
+variables:
+  CONTEXT7_LIBRARY: /portablemind/docs
+  GITHUB_MIRROR: portablemind/docs
+
+validate:
+  stage: validate
+  image: alpine:3.20
+  script:
+    - apk add --no-cache jq bash
+    - jq -e '.rules | type == "array" and length > 0' context7.json > /dev/null
+    - jq -r '.rules[] | select(length > 300) | "rule too long: \(.)"' context7.json | (! grep .)
+    - test -f mcp/README.md && test -d mcp/tools && test -f mcp/connect.md && test -f mcp/recipes.md
+    - bash scripts/build-llms-txt.sh && git diff --exit-code -- llms.txt || (echo "llms.txt is stale — run scripts/build-llms-txt.sh" && exit 1)
+
+context7_refresh:
+  stage: publish
+  image: alpine:3.20
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - apk add --no-cache curl jq
+    - |
+      if [ -z "$CONTEXT7_API_KEY" ]; then
+        echo "CONTEXT7_API_KEY not set — skipping Context7 refresh."
+        exit 0
+      fi
+      # Wait for the GitHub mirror to carry this commit (push mirroring is async).
+      for i in $(seq 1 30); do
+        sha=$(curl -fsS "https://api.github.com/repos/${GITHUB_MIRROR}/commits/main" | jq -r .sha || true)
+        [ "$sha" = "$CI_COMMIT_SHA" ] && break
+        echo "mirror at ${sha:-?}, waiting for ${CI_COMMIT_SHA} ($i/30)"; sleep 10
+      done
+      if [ "$sha" != "$CI_COMMIT_SHA" ]; then
+        echo "GitHub mirror never caught up — refresh would index a stale commit; failing so it is visible."
+        exit 1
+      fi
+      curl -fsS -X POST https://context7.com/api/v1/refresh \
+        -H "Authorization: Bearer ${CONTEXT7_API_KEY}" \
+        -H "Content-Type: application/json" \
+        -d "{\"libraryName\": \"${CONTEXT7_LIBRARY}\"}"
+      echo
+      echo "Context7 refresh requested for ${CONTEXT7_LIBRARY} at ${CI_COMMIT_SHORT_SHA}."

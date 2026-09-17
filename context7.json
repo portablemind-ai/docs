@@ -1,0 +1,23 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "PortableMind",
+  "description": "PortableMind — the AI-native workspace (team memory, agents, files, tasks, conversations) exposed to any AI app as an MCP server. MCP tool reference, connection guide, recipes and user guides.",
+  "folders": ["mcp", "guides"],
+  "excludeFolders": ["scripts"],
+  "excludeFiles": ["README.md"],
+  "rules": [
+    "The PortableMind MCP endpoint is https://www.dsiloed.com/api/v1/mcp; connect with OAuth (Claude Code: `claude mcp add --transport http portablemind <url>` then /mcp → Authenticate) or a personal MCP token as `Authorization: Bearer`.",
+    "Never send tenant_id in a tool call; the server derives the workspace from the credential and every call acts as the connected user with their permissions.",
+    "Status changes go through apply_status_tool with an entity-prefixed identifier (task_completed, not completed); never set a status attribute through general_crud_tool.",
+    "Call model_schema_tool before the first general_crud_tool call on a model to learn its filters and required fields; filter names are model-specific.",
+    "general_crud_tool list returns 10 rows by default; pass limit: -1 for all rows or page with offset.",
+    "Records shared from another workspace: general_crud_tool details resolves them automatically; list, update and destroy need include_shared: true.",
+    "Post to a conversation with conversation_chat_tool, whose message is a plain string. A raw LlmMessage body is message: {role, content}, not a top-level content field.",
+    "Start a message with @AgentName to make an agent act on it; an unmentioned message is not dispatched to any agent.",
+    "Open a direct message with start_dm_with_user_tool using party_id (not user_id or llm_agent_id); never create LlmConversation and LlmConversationMember rows by hand.",
+    "Use the file tools (list_llm_files_tool, read_llm_file_tool, create_llm_file_tool, update_llm_file_tool) for files, not general_crud_tool on LlmFile; create_llm_file_tool picks text/markdown for things to read and text/html for dashboards.",
+    "execute_agent_tool takes the agent_name returned by list_available_agents_tool and, from a conversation, reply_conversation_id; poll with check_agent_status_tool using run_id.",
+    "load_memories_tool queries are semantic: plain words, no AND/OR/quotes; if rewording returns the same rows the fact is not in memory. Keep store_memory_tool entries short — they are re-injected verbatim.",
+    "Narrow the tool set per client with ?categories=data,conversation or ?tools=general_crud_tool on the endpoint URL to cut tokens per turn."
+  ]
+}
