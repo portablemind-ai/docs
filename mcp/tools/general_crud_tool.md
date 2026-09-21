@@ -40,6 +40,10 @@ Create: {model_name: "Individual", action: "create", attributes: {first_name: "J
 Search: {model_name: "Party", action: "list", search_query: {"where": {"custom_fields.dept": "eng"}}}
 Link: {model_name: "ProductType", relationship_action: "link", id: 1, related_model_name: "PricingPlan", related_id: 2}
 
+LINKS: Tasks, Projects, Files and Conversations come back with `app_link` — the page
+a person opens. Link people with it, e.g. [Task #12](/app/task/12). Never hand a
+person an /api/ URL; that is raw JSON, not a page.
+
 PAGINATION: limit (default 10, -1 for all), offset
 SORTING: sort: {column: "created_at", direction: "desc"}
 
