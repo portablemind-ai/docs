@@ -24,6 +24,12 @@
 - [Workspace Sharing](workspace-sharing.md): Give users from other organizations access to your workspace.
 - [Communications Hub](communications-hub.md): Connect conversations to Teams, Slack, Discord, and SMS.
 
+## Plans & Billing
+
+- [Plans, Limits & Fair Use](plans-and-limits.md): What your plan includes, the warnings before a limit stops you, and what is metered.
+- [Enterprise Sub-workspaces](sub-workspaces.md): Run separate workspaces for clients or business units under one agreement.
+- [White-label Branding & Single Sign-on](white-label.md): Your logo, colours and emails, and sign-in from your own app — for your workspace and your sub-workspaces.
+
 ## Automation & Advanced
 
 - [Skills](skills.md): Reusable instruction bundles that extend what your agents can do.

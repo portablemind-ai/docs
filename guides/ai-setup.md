@@ -97,6 +97,18 @@ When you create a model, you:
 
 > **Note:** Model configuration is workspace-wide — once a model is created it powers AI features for your whole workspace, and its usage is billed to the provider key you supplied. Portablemind tracks per-message token usage and cost for every configured model, so you can see exactly what your AI spend looks like.
 
+## Who pays for each model
+
+Your model list can hold models paid for in three different ways, and the **Who pays** column in AI Studio → Models says which is which for every row:
+
+| Label | What it runs on | Uses your AI tokens? |
+|---|---|---|
+| **Your own provider key** | the API key you configured on that model | no — your provider bills you directly |
+| **Uses your AI tokens** | a model Portablemind provides, on our provider account | **yes** — metered against your workspace's AI token balance |
+| **Paid by _(workspace)_** | the provider account of a parent workspace that [shared it down to you](sub-workspaces.md) | no — they pay, under any monthly cap they set |
+
+This matters most in a [sub-workspace](sub-workspaces.md), which can see all three at once. Your AI token balance — including any tokens a parent workspace transferred to you — is only ever spent by models labelled **Uses your AI tokens**. If you work entirely on a model your parent shared down, or on your own provider key, your token balance will not move at all. That is expected, not a fault.
+
 ## Keeping AI spend down
 
 Most of what you pay a provider is for **input** — the conversation the model has to read before it can answer. Two things reduce that, and Portablemind does both for you:

@@ -71,5 +71,7 @@ Some Portablemind features have both a user-facing side (documented here) and a 
 | Coding agents | [Coding Agents (SiloLink)](coding-agents.md) | SiloLink session APIs and MCP bridge |
 | Agents | [Building AI Agents](agents.md) | Agent and model configuration APIs |
 | Dynamic functions | [Dynamic Functions](dynamic-functions.md) | Function management and execution APIs |
+| White-label & single sign-on | [White-label Branding & Single Sign-on](white-label.md) | White-label setup and sign-on key APIs, the signed sign-on assertion and its exchange for a session |
+| Sub-workspaces | [Enterprise Sub-workspaces](sub-workspaces.md) | Creating sub-workspaces, agent template publishing and install, sharing a model with a spend cap, and the per-sub-workspace metrics a parent can read (names and numbers, never content) |
 
 > **Tip:** If you're building AI agents that act on the platform, start with the MCP tools reference — it's usually a faster path than the raw REST API.
