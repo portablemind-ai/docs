@@ -46,6 +46,26 @@ Your app's server proves who someone is by signing a short-lived pass with a **s
 - Keep it on the server. Never put it in a web page or a mobile app.
 - **Replace the sign-on key** makes a new one. The old key stops working immediately, so sign-in from your app fails until its server has the new one.
 
+### What people from your app can open
+
+Arriving signed in is one thing; what they may **use** is another. Each section of the app — Team
+Chat, Files, Projects, Tickets — opens for someone only if they hold the matching access role, and
+what they can see inside it comes from their security role. For people who come from your own app:
+
+| Give them | Why |
+|---|---|
+| **External Member** | The baseline every outside person needs for the app to load at all: their notifications, their preferences, their saved views. It carries no access to your work |
+| **A role of your own, scoped to their own records** | What they may actually see — their team's projects, their own files, the conversations they are in |
+| **Team Chat / Files / Projects / Tickets access** | The sections you want them to open. These only decide what appears in the navigation — they never widen what a person can see |
+
+Leave the section roles off and people arrive on the welcome page and can go no further. **Admin
+Panel access is not one of these** — it opens Administration, User Management and the AI Studio, so
+keep it for your own staff. People outside your organization work with AI agents simply by chatting
+with them in a conversation they're part of.
+
+A private conversation is visible only to its members, so a channel per customer team is the simplest
+way to keep each of them to their own. Your developers have the details in the API guide.
+
 Creating and replacing a key are both recorded in the workspace's audit log — if the record can't be written, the key isn't changed. While a new key is on screen the dialog stays open until you confirm you've stored it. The API guide listed in [Developer Resources](developers.md) has the technical details for your developers.
 
 ## Setting it up for your sub-workspaces

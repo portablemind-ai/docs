@@ -13,6 +13,15 @@ This is the right model when **you** are running the environments. If instead yo
 
 You manage them from the **Tenants** page, using **New Tenant**.
 
+## Bringing in the people who work inside them
+
+The people in a sub-workspace are its own members, invited there — you have no back door into it, by
+design. If you run your own app in front of these workspaces and register people from it, give each
+of them three things: **External Member** (the baseline anyone from outside needs for the app to
+load), **a role of your own scoped to their own records**, and the **section access** — Team Chat,
+Files, Projects — you want them to have. [White-label and single sign-on](white-label.md) covers
+this, including what to keep for your own staff.
+
 ## The billing agreement
 
 Sub-workspaces are covered by an agreement between you and us rather than a self-service setting, so the terms match your contract. The agreement names two things:
