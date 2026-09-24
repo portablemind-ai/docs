@@ -25,7 +25,8 @@ PICK THE FORMAT FROM THE ASK (text content only — all require the 'content' fi
   self-contained page (inline <style>, no external assets, no <script> — the preview
   sandbox does not run scripts; draw charts as inline SVG). Markdown tables are not a
   dashboard — if the ask says "dashboard", "scorecard", "board" or "visual", use HTML.
-  A "dashboard" skill, when granted, carries the on-brand page template.
+  A "dashboard" skill, when granted, carries the on-brand page template. For a chart
+  or card INSIDE the chat reply (not a file), use the "charts-and-cards" skill if granted.
 - "text/plain", "text/csv" — raw text / tabular data exports
 - "application/x-yaml" — config / orchestration pipeline definitions
 - Not the right tool for decks, diagrams, infographics, images or PDFs — if a skill or

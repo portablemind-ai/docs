@@ -14,7 +14,7 @@ acting as the connected user, in that user's workspace, with that user's permiss
 - **Never send `tenant_id`.** The server resolves the workspace from your credential.
 - **Recipes** for the calls agents most often get wrong: [recipes.md](../recipes.md).
 
-92 tools in 18 categories.
+93 tools in 18 categories.
 
 ## agents
 
@@ -151,6 +151,7 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=utility`
 | Tool | What it does |
 |---|---|
 | [`current_date_time_tool`](tools/current_date_time_tool.md) | Get the current date and time with timezone support. |
+| [`validate_rich_content_tool`](tools/validate_rich_content_tool.md) | Validate a chart or card before you post it. |
 
 ## mdm
 

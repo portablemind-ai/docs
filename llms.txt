@@ -95,6 +95,7 @@
 - [update_llm_file_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/update_llm_file_tool.md): Update existing LlmFile records with new content, title, or directory location.
 - [update_memory_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/update_memory_tool.md): Correct or refine an existing memory you own (title / content / importance / tags).
 - [use_skill_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/use_skill_tool.md): Fetch a Skill so you can use it locally.
+- [validate_rich_content_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/validate_rich_content_tool.md): Validate a chart or card before you post it.
 - [walk_user_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/walk_user_tool.md): Walk the user through a MULTI-STEP task with guided on-screen callouts.
 - [web_research_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/web_research_tool.md): Web research tool for researcher agents.
 - [worker_completion_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/worker_completion_tool.md): Signal that your dispatched work is COMPLETE.
