@@ -1,6 +1,6 @@
 # Communications Hub
 
-The Communications Hub connects Portablemind conversations to external messaging platforms — Microsoft Teams, Slack, Discord, Twilio SMS, and Twilio Voice. Once configured, messages flow bidirectionally: when someone sends a message in Teams or Slack, it appears in the linked Portablemind conversation. When an AI agent or user replies in Portablemind, the response is delivered back to the external platform.
+The Communications Hub connects Portablemind conversations to external messaging platforms — Microsoft Teams, Slack, Discord, Twilio SMS, and Twilio Voice — and it's where you connect the Twilio account your [video meetings](meet.md) run on. Once configured, messages flow bidirectionally: when someone sends a message in Teams or Slack, it appears in the linked Portablemind conversation. When an AI agent or user replies in Portablemind, the response is delivered back to the external platform.
 
 This enables powerful workflows: a customer can text your Twilio number and get an AI-powered response, your team can interact with [AI agents](agents.md) directly in their Teams or Slack channels, and all conversations are centralized in Portablemind with full history, analytics, and agent capabilities.
 
@@ -18,7 +18,7 @@ This enables powerful workflows: a customer can text your Twilio number and get 
 
 ### The Manage page
 
-All in-app configuration lives on one screen: **Administration → Communications Hub → Manage**. The page shows a tile for each channel — **Slack, Teams, Discord, SMS, Voice** — with a status dot (grey = not configured, orange = configured but disabled, green = enabled). The Hub itself must be switched on first via **Get Started**; it's available on qualifying plan tiers, and the page shows an upgrade prompt if your current plan doesn't include it.
+All in-app configuration lives on one screen: **Administration → Communications Hub → Manage**. The page shows a tile for each channel — **Slack, Teams, Discord, SMS, Voice, Video** — with a status dot (grey = not configured, orange = configured but disabled, green = enabled). The Hub itself must be switched on first via **Get Started**; it's available on qualifying plan tiers, and the page shows an upgrade prompt if your current plan doesn't include it.
 
 Clicking a channel tile opens that channel's **setup wizard**: numbered setup steps for the external platform, your tenant's exact webhook URLs with copy buttons, and a credential form. **Save & Enable** turns the channel on; **Disable Channel** turns it off while preserving the saved credentials.
 
@@ -31,6 +31,7 @@ Clicking a channel tile opens that channel's **setup wizard**: numbered setup st
 | Discord | Server text channels |
 | Twilio SMS | Inbound and outbound text messages |
 | Twilio Voice | AI-powered voice calls with context enrichment |
+| Twilio Video | The account your [Meet video meetings](meet.md) run on |
 
 ## Finding your tenant ID
 
@@ -46,7 +47,7 @@ This happens automatically — no extra configuration needed. The agent's displa
 
 ## Microsoft Teams setup
 
-Connecting Microsoft Teams requires creating an Azure Bot and a Teams App Package. This is the most involved setup of the five channels, but each step is straightforward.
+Connecting Microsoft Teams requires creating an Azure Bot and a Teams App Package. This is the most involved setup of the channels, but each step is straightforward.
 
 ### Step 1: Create an Azure App Registration
 
@@ -391,6 +392,48 @@ Voice and SMS share the same conversation for a given phone number. When a calle
 
 When the context provider is enabled, the voice agent automatically looks up the caller's phone number in Portablemind to find who they are, what projects they're associated with, and any relevant history. This context is injected into the AI prompt so the agent can greet the caller by name and have informed conversations.
 
+## Twilio Video setup
+
+The **Video** channel connects your own Twilio account to [Meet](meet.md). With it, your meetings run on your Twilio account: Twilio bills you for the video directly, and meetings use **no tokens** from your balance (your plan's monthly meeting minutes still apply — see [Meeting minutes and billing](meet.md#meeting-minutes-and-billing)).
+
+Video can use the same Twilio account as SMS and Voice. Unlike them, it needs no phone number and no webhook: rooms, access and meeting status are all set up automatically.
+
+### Step 1: Get your Account SID and Auth Token
+
+1. Log in to the [Twilio Console](https://console.twilio.com/)
+2. On the dashboard, under **Account Info**, copy:
+
+| Value | Notes |
+|-------|-------|
+| Account SID | Starts with `AC` |
+| Auth Token | Click to reveal. Used to verify the meeting status updates Twilio sends |
+
+If you've already set up SMS or Voice, the wizard fills these in for you.
+
+### Step 2: Create an API key
+
+Video access uses an API key rather than your Auth Token.
+
+1. In the Twilio Console, go to **Account → API keys & tokens** (from the account menu at the top right)
+2. Click **Create API key**
+3. Give it a name (e.g., "Portablemind Meet"), leave the key type as **Standard**, and click **Create**
+4. Copy the key's **SID** (starts with `SK`) and its **Secret**
+
+> **Warning:** The API key secret is shown **only once**, when the key is created. If you lose it, create a new key and update the Video channel with it.
+
+### Step 3: Store credentials in Portablemind
+
+Save the following in the **Video** channel's setup wizard (**Administration → Communications Hub → Manage** → Video tile), then click **Save & Enable**:
+
+| Field | Value | Where to find it |
+|-------|-------|------------------|
+| Account SID | `AC...` | Twilio Console → Dashboard → Account Info |
+| Auth Token | Auth Token | Twilio Console → Dashboard → Account Info |
+| API Key SID | `SK...` | Twilio Console → Account → API keys & tokens |
+| API Key Secret | The key's secret | Shown once, when you create the API key |
+
+Meetings started after you save use your account. To go back, click **Disable Channel** in the same wizard — your credentials are kept.
+
 ## Linking channels to conversations
 
 After setting up credentials, you link external channels to specific Portablemind conversations. This determines which conversation receives messages from which external channel.
@@ -426,6 +469,7 @@ These are the webhook URLs used by each channel (replace `YOUR_TENANT_ID` with y
 | Discord | *No webhook needed — Discord uses a Gateway (WebSocket) connection* | — |
 | Twilio SMS | `https://hub.portablemind.ai/webhooks/twilio/YOUR_TENANT_ID/sms/inbound` | Twilio Console → Phone Number → Messaging |
 | Twilio Voice | `https://hub.portablemind.ai/webhooks/twilio/YOUR_TENANT_ID/voice/twiml` | Twilio Console → Phone Number → Voice |
+| Twilio Video | *No webhook needed — set automatically for each meeting* | — |
 
 ## Troubleshooting
 
@@ -438,4 +482,5 @@ These are the webhook URLs used by each channel (replace `YOUR_TENANT_ID` with y
 | No channels found when adding a mapping | Credentials not configured or Hub hasn't refreshed | Verify credentials are saved in Portablemind. The Hub refreshes its channel list every 5 minutes. |
 | Slack shows "Your request URL responded with an HTTP error" | Wrong webhook URL format | Use the tenant-scoped URL: `.../webhooks/slack/YOUR_TENANT_ID/events` |
 | SMS outbound blocked (error 30034) | A2P registration not complete | Complete 10DLC campaign registration or toll-free verification in Twilio |
+| Meet says it isn't set up after you saved the Video channel | Credentials incomplete, or the channel is disabled | Open the **Video** tile and check all four fields are filled in, then **Save & Enable** |
 | Azure client secret expired | Teams integration stopped working | Create a new client secret in Azure and update the `bot_password` in your Portablemind channel configuration |

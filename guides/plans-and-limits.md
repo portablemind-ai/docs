@@ -51,7 +51,7 @@ Dismissing a dialog suppresses that same limit briefly, so a background refresh 
 
 ### "Not included in your plan"
 
-Some features are switched off on lower plans by setting their limit to zero — coding sessions and video generation on Free, outbound calls below Professional, and so on. When you try one you don't get "limit reached", because you never had an allowance to use up: you get **Not included in your plan**, with an upgrade prompt.
+Some features are switched off on lower plans by setting their limit to zero — coding sessions and video generation on Free, outbound calls and video meetings below Professional, and so on. When you try one you don't get "limit reached", because you never had an allowance to use up: you get **Not included in your plan**, with an upgrade prompt.
 
 A brand-new workspace is therefore never told it has used up something it never had.
 
@@ -75,6 +75,12 @@ AI usage draws from a token balance rather than a limit. Anything that costs us 
 Bring your own provider key and that usage costs no tokens at all: the call goes to your account, not ours. [Setting Up AI Models](ai-setup.md) covers connecting your own provider, and [Connecting AWS Bedrock](bedrock-setup.md) and [Connecting Google Vertex AI](vertex-setup.md) cover running models through your own cloud billing.
 
 > **Tip:** a turn that begins with tokens left may run slightly past zero rather than stopping mid-answer. The overrun is carried as a small debt and cleared by your next top-up or renewal.
+
+## Meeting minutes
+
+[Video meetings](meet.md) have their own monthly allowance, counted in **participant-minutes** (one person connected for one minute): 1,000 on Professional, 5,000 on Business and 20,000 on Enterprise. Free and Starter don't include meetings, and Meet appears only on plans that do (for people with Meet access, in a workspace with a video account set up).
+
+Meetings that run on the platform's Twilio account also draw on your token balance: the tokens worth 1¢ (US) per participant-minute, at the same conversion as AI usage. Connect your own Twilio account in the [Communications Hub](communications-hub.md#twilio-video-setup) and meetings use no tokens — only the minute allowance. A running meeting is ended when the minutes — or, on the platform's account, the tokens — run out; this is checked every few minutes. [Meeting minutes and billing](meet.md#meeting-minutes-and-billing) has the details, and what each message means when a meeting can't start or is ended.
 
 ## Running many workspaces
 
