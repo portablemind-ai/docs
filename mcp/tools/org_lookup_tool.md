@@ -38,7 +38,7 @@ INPUTS:
   find_person. Defaults to escalation_path.
 - name: (find_person) who to look up.
 - topic: (optional) what you need help with (find_help) or the work to hand off (delegate).
-- llm_agent_id: (optional) inspect another agent's org position instead of your own
+- agent_id: (optional) inspect another agent's org position instead of your own
   (e.g. a manager checking a report's chain). Defaults to you, the caller.
 
 RETURNS: a list of contacts. Each contact has party_id, name, role, is_agent / is_human,
@@ -53,7 +53,7 @@ execute_agent_tool (agents only).
 | `action` | string | no | What to look up. Defaults to escalation_path. One of: `escalation_path`, `find_help`, `delegate`, `who_can_i_delegate_to`, `who_do_i_report_to`, `my_team`, `find_person`. |
 | `name` | string | no | find_person: the person or agent to look up (full or partial, case-insensitive). |
 | `topic` | string | no | Optional: what you are stuck on (find_help) or the work to delegate (delegate). |
-| `llm_agent_id` | integer | no | Optional: inspect another agent's org position instead of your own. |
+| `agent_id` | integer | no | Optional: inspect another agent's org position instead of your own. |
 
 ## Input schema
 
@@ -84,7 +84,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       "type": "string",
       "description": "Optional: what you are stuck on (find_help) or the work to delegate (delegate)."
     },
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
       "description": "Optional: inspect another agent's org position instead of your own."
     }

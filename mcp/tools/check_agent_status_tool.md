@@ -29,7 +29,6 @@ parent_llm_agent_run_id: Id of parent LlmAgentRun if you need to check the paren
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `run_id` | integer | no | LlmAgentRun ID to check (the "runner id" execute_agent_tool returned). Use THIS, not llm_agent_run_id, from inside an agent run. |
-| `llm_agent_run_id` | integer | no | Deprecated alias of run_id for non-agent callers; ignored when run_id is present. |
 
 ## Example
 
@@ -42,7 +41,8 @@ message), and the parent run id for child runs.
 
 ## Gotchas
 
-- **Use `run_id`** (the id `execute_agent_tool` returned). `llm_agent_run_id` is a deprecated alias.
+- **Use `run_id`** (the id `execute_agent_tool` returned). `llm_agent_run_id` is runtime context the platform
+  injects (your own run) — never a parameter you pass; it is stripped from client arguments (#3832).
 - **Poll with backoff.** Runs that read large conversations can take minutes; do not re-execute
   the agent while a run is open.
 
@@ -57,10 +57,6 @@ The JSON Schema served for `inputSchema`, verbatim.
     "run_id": {
       "type": "integer",
       "description": "LlmAgentRun ID to check (the \"runner id\" execute_agent_tool returned). Use THIS, not llm_agent_run_id, from inside an agent run."
-    },
-    "llm_agent_run_id": {
-      "type": "integer",
-      "description": "Deprecated alias of run_id for non-agent callers; ignored when run_id is present."
     }
   },
   "required": []

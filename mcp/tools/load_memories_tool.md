@@ -17,11 +17,11 @@ This is the description the server sends to the model, verbatim.
 Load memories to provide context for AI conversations.
 
 MODES: conversation, agent, search, semantic, recent, important, type, related, all
-Auto-selects: search (if query), conversation (if llm_conversation_id), agent (if llm_agent_id), recent (default)
+Auto-selects: search (if query), conversation (if llm_conversation_id), agent (if agent_id), recent (default)
 
 MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact, preference, decision, insight, context, solution, relationship, goal, execution
 
-PARAMS: mode, query, llm_agent_id, llm_conversation_id, llm_mind_id (for scoping), memory_types [], memory_id (for related),
+PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [], memory_id (for related),
         limit (1-100, default 20), min_importance (0.0-1.0), include_related (default true), include_content (default true),
         max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags []
 
@@ -32,7 +32,7 @@ If two differently-worded queries return the same rows, it is not in memory — 
 RECOLLECTION, NOT A DIRECTORY: ids and current facts come from org_lookup_tool (people),
 list_available_agents_tool (agents), general_crud_tool (records).
 
-CROSS-TENANT: llm_conversation_id / llm_agent_id may reference a conversation or agent
+CROSS-TENANT: llm_conversation_id / agent_id may reference a conversation or agent
 shared with you from another tenant — resolution falls back to your shared access
 automatically when the id is not in your tenant.
 
@@ -42,9 +42,9 @@ automatically when the id is not in your tenant.
 |---|---|---|---|
 | `mode` | string | no | Retrieval mode determining how to find memories. Use "semantic" for vector similarity search. Defaults to "search" if query provided, "all" otherwise. One of: `conversation`, `agent`, `search`, `semantic`, `recent`, `important`, `type`, `related`, `all`. |
 | `query` | string | no | Search query for content-based memory retrieval. Used with "search" mode. |
-| `llm_agent_id` | integer | no | Agent ID for retrieving agent-specific memories. Used with "agent" mode. |
+| `agent_id` | integer | no | Agent ID for retrieving agent-specific memories. Used with "agent" mode. |
 | `llm_conversation_id` | integer | no | Conversation ID for retrieving conversation-specific memories. Used with "conversation" mode. |
-| `llm_mind_id` | integer | no | Optional: Scope to specific LlmMind (organizational container). Omit for cross-mind search. |
+| `mind_id` | integer | no | Optional: Scope to specific LlmMind (organizational container). Omit for cross-mind search. |
 | `memory_types` | array of string | no | Filter by specific memory types. Can be combined with other modes. |
 | `memory_id` | integer | no | Specific memory ID to find related memories. Used with "related" mode. |
 | `limit` | integer | no | Maximum number of memories to retrieve. Defaults to 20. |
@@ -70,7 +70,7 @@ aggregate stats.
   worded queries return the same rows, it is not in memory — stop rewording.
 - **Memory is recollection, not a directory.** Ids and current facts come from
   `org_lookup_tool` (people), `list_available_agents_tool` (agents) and `general_crud_tool` (records).
-- **Scope with `llm_mind_id`** for project-specific memories; omit it to search across minds.
+- **Scope with `mind_id`** for project-specific memories; omit it to search across minds. (Agent-specific: `agent_id`.)
 
 ## Input schema
 
@@ -99,7 +99,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       "type": "string",
       "description": "Search query for content-based memory retrieval. Used with \"search\" mode."
     },
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
       "description": "Agent ID for retrieving agent-specific memories. Used with \"agent\" mode."
     },
@@ -107,7 +107,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       "type": "integer",
       "description": "Conversation ID for retrieving conversation-specific memories. Used with \"conversation\" mode."
     },
-    "llm_mind_id": {
+    "mind_id": {
       "type": "integer",
       "description": "Optional: Scope to specific LlmMind (organizational container). Omit for cross-mind search."
     },

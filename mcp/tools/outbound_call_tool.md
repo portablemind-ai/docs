@@ -32,7 +32,7 @@ The call blocks until complete — the transcript is returned synchronously so y
 | `party_id` | integer | no | Party ID to look up phone number from contacts. Required if to is not provided. |
 | `context` | string | yes | System prompt for the AI voice assistant. Include objectives, talking points, background info, and any constraints. This guides the entire conversation. |
 | `greeting` | string | yes | Opening message spoken when the customer picks up (e.g. "Hi, this is Sarah from Acme Corp calling about your support ticket.") |
-| `timeout_minutes` | integer | no | Maximum call duration in minutes. Defaults to 10. |
+| `timeout_minutes` | integer | no | Maximum call duration in minutes, 1 to 60 (larger values are capped at 60; the Hub hangs up at the limit). Defaults to 10. |
 | `dry_run` | boolean | no | When true, return the would-be call parameters (resolved phone number, context, greeting, hub payload) WITHOUT initiating the outbound call. Use for eval scenarios or to preview an agent action before letting it actually dial. Validation (E.164, party_id lookup, hub config) still runs so the preview surfaces the same errors a real call would. Defaults to false; the response sets `dry_run: true` so callers can distinguish previewed calls from real ones. |
 
 ## Input schema
@@ -61,7 +61,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "timeout_minutes": {
       "type": "integer",
-      "description": "Maximum call duration in minutes. Defaults to 10."
+      "description": "Maximum call duration in minutes, 1 to 60 (larger values are capped at 60; the Hub hangs up at the limit). Defaults to 10."
     },
     "dry_run": {
       "type": "boolean",

@@ -25,7 +25,7 @@ This tool helps discover what custom tools are available including:
 EXAMPLES:
 List all tools: {}
 List active tools: {active_only: true}
-Find tools for an agent: {llm_agent_id: 123}
+Find tools for an agent: {agent_id: 123}
 Find by name: {name: "fetch"}
 
 ## Parameters
@@ -33,7 +33,7 @@ Find by name: {name: "fetch"}
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `active_only` | boolean | no | Only show active tools. |
-| `llm_agent_id` | integer | no | Filter by tools assigned to a specific agent. |
+| `agent_id` | integer | no | Filter by tools assigned to a specific agent. |
 | `name` | string | no | Filter by tool name (partial match) |
 
 ## Input schema
@@ -48,7 +48,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       "type": "boolean",
       "description": "Only show active tools"
     },
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
       "description": "Filter by tools assigned to a specific agent"
     },

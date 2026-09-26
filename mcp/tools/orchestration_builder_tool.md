@@ -39,7 +39,6 @@ The pipeline will be immediately available for use via @mention of its coordinat
 | `pipeline.schedule.cron` | string | yes | 5-field cron in UTC, e.g. "0 13 * * 1-5" (weekdays 13:00 UTC) |
 | `pipeline.schedule.request` | string | no | The work request each scheduled run starts with. |
 | `pipeline.schedule.inputs` | object | no | Structured inputs for scheduled runs (template input_schema keys) |
-| `pipeline.schedule.initiated_by_party_id` | integer | no | Party the scheduled runs are attributed to (default: the requesting user) |
 | `pipeline.coordinator` | object | yes | The coordinator agent who manages this pipeline for the user. |
 | `pipeline.coordinator.name` | string | yes | Agent name (e.g., "Complaint-Pipeline") |
 | `pipeline.coordinator.description` | string | no | What the coordinator does. |
@@ -104,10 +103,6 @@ The JSON Schema served for `inputSchema`, verbatim.
             "inputs": {
               "type": "object",
               "description": "Structured inputs for scheduled runs (template input_schema keys)"
-            },
-            "initiated_by_party_id": {
-              "type": "integer",
-              "description": "Party the scheduled runs are attributed to (default: the requesting user)"
             }
           },
           "required": [

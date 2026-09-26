@@ -22,7 +22,7 @@ Agent Report Cards: A–F grades per agent computed nightly from the AG-UI audit
 |---|---|---|---|
 | `tenant_id` | string | yes | Tenant ID or enterprise identifier. |
 | `action` | string | no | fleet (default) \| agent \| recompute \| override. One of: `fleet`, `agent`, `recompute`, `override`. |
-| `llm_agent_id` | integer | no | Agent id — required for agent / recompute. |
+| `agent_id` | integer | no | Agent id — required for agent / recompute. |
 | `window_days` | integer | no | Card window: 30 (default) or 7. |
 | `history_limit` | integer | no | agent: how many prior cards to return (default 12) |
 | `agent_message_id` | integer | no | override: the agent message (deliverable) to relabel. |
@@ -51,7 +51,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       ],
       "description": "fleet (default) | agent | recompute | override"
     },
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
       "description": "Agent id — required for agent / recompute"
     },

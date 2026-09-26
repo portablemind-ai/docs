@@ -20,7 +20,7 @@ USE WHEN: a fact you stored is now wrong or incomplete and should be updated in 
 (rather than storing a contradicting memory).
 
 REQUIRED: memory_id
-OPTIONAL: title, content, importance_score, tags [], llm_agent_id (caller identity for ownership)
+OPTIONAL: title, content, importance_score, tags []
 
 You can only update memories you created. To retire a memory entirely, use forget_memory.
 
@@ -33,7 +33,6 @@ You can only update memories you created. To retire a memory entirely, use forge
 | `content` | string | no | New content body (optional, replaces existing content) |
 | `importance_score` | number | no | New importance 0.0-1.0 (optional) |
 | `tags` | array of string | no | New tags (optional, replaces existing) |
-| `llm_agent_id` | integer | no | Calling agent id (used to verify ownership) |
 
 ## Input schema
 
@@ -67,10 +66,6 @@ The JSON Schema served for `inputSchema`, verbatim.
         "type": "string"
       },
       "description": "New tags (optional, replaces existing)"
-    },
-    "llm_agent_id": {
-      "type": "integer",
-      "description": "Calling agent id (used to verify ownership)"
     }
   },
   "required": [

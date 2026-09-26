@@ -32,7 +32,7 @@ RELATIONS (all expressed from the AGENT's point of view):
 - escalation: the agent ESCALATES TO the target when stuck or blocked.
 
 INPUTS:
-- llm_agent_id: the agent being placed (required).
+- agent_id: the agent being placed (required).
 - relation: manager | report | escalation (required).
 - target_party_id: the other party — a human or another agent (required). Use
   org_lookup_tool action=find_person to turn a name into a party_id; do not guess ids
@@ -47,7 +47,7 @@ confirm the change landed rather than assuming it.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `llm_agent_id` | integer | yes | The agent being placed in the org chart. |
+| `agent_id` | integer | yes | The agent being placed in the org chart. |
 | `relation` | string | yes | manager (agent reports to target), report (target reports to agent), or escalation (agent escalates to target). One of: `manager`, `report`, `escalation`. |
 | `target_party_id` | integer | yes | Party id of the manager / report / escalation contact (human or agent). |
 | `action` | string | no | link (default) or unlink. One of: `link`, `unlink`. |
@@ -62,7 +62,7 @@ The JSON Schema served for `inputSchema`, verbatim.
 {
   "type": "object",
   "properties": {
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
       "description": "The agent being placed in the org chart."
     },
@@ -97,7 +97,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     }
   },
   "required": [
-    "llm_agent_id",
+    "agent_id",
     "relation",
     "target_party_id"
   ]

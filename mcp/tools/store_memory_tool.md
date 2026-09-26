@@ -23,7 +23,7 @@ MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact,
 IMPORTANCE: 0.9-1.0 (critical), 0.7-0.8 (important), 0.5-0.6 (moderate), 0.3-0.4 (low), 0.1-0.2 (background)
 
 REQUIRED: title, content
-OPTIONAL: memory_type (default: fact), importance_score (default: 0.5), tags [], llm_agent_id, llm_conversation_id, llm_mind_id, private, user_id
+OPTIONAL: memory_type (default: fact), importance_score (default: 0.5), tags [], agent_id, llm_conversation_id, mind_id, private, user_id
 
 LENGTH: store as many memories as you need, but keep each one SHORT. A memory is
 re-injected verbatim into every future conversation it matches, so a long one is paid
@@ -31,9 +31,9 @@ for again on every turn — write the fact and why it matters, not the transcrip
 came from. If you are pasting more than a few sentences, store the conclusion and
 point at the source instead.
 
-MINDS: Organizational containers grouping memories by project/context. Use llm_mind_id for project-specific memories.
+MINDS: Organizational containers grouping memories by project/context. Use mind_id for project-specific memories.
 
-CROSS-TENANT: llm_conversation_id / llm_agent_id may reference a conversation or agent
+CROSS-TENANT: llm_conversation_id / agent_id may reference a conversation or agent
 shared with you from another tenant — resolution falls back to your shared access
 automatically when the id is not in your tenant.
 
@@ -46,9 +46,9 @@ automatically when the id is not in your tenant.
 | `memory_type` | string | no | Type of memory being stored. Defaults to "fact" if not specified. One of: `code_change`, `bug_fix`, `discussion`, `learning`, `derived_insight`, `fact`, `preference`, `decision`, `insight`, `context`, `solution`, `relationship`, `goal`, `execution`. |
 | `importance_score` | number | no | Importance score from 0.0 to 1.0. Higher scores mean more important. Defaults to 0.5. |
 | `tags` | array of string | no | Optional tags to help categorize and retrieve the memory later. |
-| `llm_agent_id` | integer | no | Optional: Associate this memory with a specific agent. If not provided, will use conversation context. |
+| `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
 | `llm_conversation_id` | integer | no | Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation. |
-| `llm_mind_id` | integer | no | Optional: Associate with a LlmMind (organizational container) for project-scoped memories. Omit for general memories (uses default mind). |
+| `mind_id` | integer | no | Optional: Associate with a LlmMind (organizational container) for project-scoped memories. Omit for general memories (uses default mind). |
 | `private` | boolean | no | Whether this memory should be private (only accessible to creator or in source conversation) |
 | `user_id` | integer | no | User ID for user-private memories (optional, defaults to current user) |
 
@@ -116,15 +116,15 @@ The JSON Schema served for `inputSchema`, verbatim.
       },
       "description": "Optional tags to help categorize and retrieve the memory later"
     },
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
-      "description": "Optional: Associate this memory with a specific agent. If not provided, will use conversation context."
+      "description": "Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context."
     },
     "llm_conversation_id": {
       "type": "integer",
       "description": "Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation."
     },
-    "llm_mind_id": {
+    "mind_id": {
       "type": "integer",
       "description": "Optional: Associate with a LlmMind (organizational container) for project-scoped memories. Omit for general memories (uses default mind)."
     },

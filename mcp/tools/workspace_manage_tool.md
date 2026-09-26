@@ -62,7 +62,7 @@ Test connection:
 | `container_idle_timeout_minutes` | integer | no | Minutes of inactivity before auto-stopping Docker container (sets workspace_config.container_idle_timeout_minutes). Default: 5. |
 | `docker_companion_containers` | array of string | no | Additional containers to start/stop alongside the main container (e.g. redis, postgres). Sets workspace_config.docker_companion_containers. |
 | `project_id` | integer | no | Link to a Project record. |
-| `llm_agent_id` | integer | no | Link to an LlmAgent record. |
+| `agent_id` | integer | no | Link to an LlmAgent record (one you reach) |
 
 ## Input schema
 
@@ -138,9 +138,9 @@ The JSON Schema served for `inputSchema`, verbatim.
       "type": "integer",
       "description": "Link to a Project record"
     },
-    "llm_agent_id": {
+    "agent_id": {
       "type": "integer",
-      "description": "Link to an LlmAgent record"
+      "description": "Link to an LlmAgent record (one you reach)"
     }
   },
   "required": [

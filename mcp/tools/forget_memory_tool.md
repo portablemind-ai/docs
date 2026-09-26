@@ -19,8 +19,7 @@ Retire a memory you own (soft-archive — recoverable, not permanently deleted).
 USE WHEN: a memory is obsolete/wrong and should stop surfacing in recall.
 
 REQUIRED: memory_id
-OPTIONAL: superseded_by_memory_id (records a 'supersedes' link from the newer memory),
-          llm_agent_id (caller identity for ownership)
+OPTIONAL: superseded_by_memory_id (records a 'supersedes' link from the newer memory)
 
 You can only forget memories you created.
 
@@ -30,7 +29,6 @@ You can only forget memories you created.
 |---|---|---|---|
 | `memory_id` | integer | yes | ID of the memory to archive (required) |
 | `superseded_by_memory_id` | integer | no | Optional id of the newer memory that replaces this one. |
-| `llm_agent_id` | integer | no | Calling agent id (used to verify ownership) |
 
 ## Input schema
 
@@ -47,10 +45,6 @@ The JSON Schema served for `inputSchema`, verbatim.
     "superseded_by_memory_id": {
       "type": "integer",
       "description": "Optional id of the newer memory that replaces this one"
-    },
-    "llm_agent_id": {
-      "type": "integer",
-      "description": "Calling agent id (used to verify ownership)"
     }
   },
   "required": [
