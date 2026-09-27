@@ -52,6 +52,21 @@ If your connection drops, Meet shows **Reconnecting…** while it tries to recov
 
 If you join the same meeting from a second tab or device, the first one is closed automatically — you're only ever in a meeting once.
 
+## Live transcript
+
+When you **start** a meeting, turn on **Live transcript** in the Join dialog (or on the Meet page) to have what's said transcribed as it happens.
+
+- **Everyone is asked first.** Anyone joining a transcribed meeting sees **"This meeting is transcribed"** and joins only if they click **Join and agree**. Someone who doesn't agree can't join that meeting.
+- While it's on, a **Transcribing** badge shows at the top of the meeting, and the meeting chat notes when it started and who agreed.
+- Open the **Transcript** tab beside the chat to follow it live.
+- **Saving:** the transcript is saved by the person who turned it on, **when they leave the meeting**. It goes into the Files app under **App Data › Meetings**, in a folder named for the meeting, and a **Transcript saved** link appears in the meeting chat for its members. If that person leaves early, the file covers what was said until they left. If their browser crashes, the transcript may not be saved.
+- It can only be turned on when a meeting starts, not partway through.
+- If it can't start, Meet tells whoever turned it on, and the meeting goes ahead without it.
+
+> **Using your own Twilio account?** Live transcript needs Twilio's **Predictive and Generative AI/ML Features Addendum**, accepted once in your Twilio Console. Leave Twilio's "turn on transcription in all rooms by default" setting off; Meet turns it on per meeting.
+
+On the platform's Twilio account, a transcribed meeting also draws on your token balance for each minute it's transcribed.
+
 ## Meeting minutes and billing
 
 Meetings are measured in **participant-minutes**: one person connected for one minute. A 30-minute meeting with four people uses 120 participant-minutes.
