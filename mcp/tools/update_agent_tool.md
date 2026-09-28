@@ -24,6 +24,9 @@ RECOMMENDED WORKFLOW:
 4. Use general_crud_tool with model_name="RoleType" to find available roles
 5. Use this update_agent_tool with the agent name and updates
 
+ACCESS: editing an agent needs the update LlmAgents capability on it (as the REST door does) — being able to
+chat with or invoke an agent is not enough.
+
 REQUIRED FIELDS:
 - agent_name: The name of the agent to update (must exist)
 - updates: Object containing the fields to update
@@ -46,8 +49,8 @@ UPDATABLE FIELDS:
 - llm_system_prompt: System prompt text (defines agent personality/behavior)
 - llm_user_prompt: User prompt text (defines specific tasks)
 - roles: Array of role internal_identifiers to assign to agent
-- llm_tools: Array of custom tools (will replace existing)
-- llm_resources: Array of custom resources (will replace existing)
+- llm_tools: Array of custom tools (will replace existing; a NEW one needs the create LlmTools capability)
+- llm_resources: Array of custom resources (will replace existing; a NEW one needs create LlmResources)
 
 EXAMPLE:
 {

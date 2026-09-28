@@ -32,9 +32,10 @@ OPTIONAL FIELDS:
   needs to view/create/update StatusApplications — e.g. one that moves board cards — or it will 403 with
   "Invalid Access to view StatusApplications" on its first run. "agent_dynamic_functions" — manage/run
   Dynamic Functions — is granted automatically with any Dynamic Function tool; no need to pass it.)
-RULE: an agent can never be given more than you hold — unless you are a workspace admin, each security role
-  must carry only capabilities you have (never an *admin role), and each Dynamic Function tool the
-  capabilities it uses; anything more is refused.
+RULE: an agent can never be given more than you hold — unless you are a workspace admin, you need the
+  create LlmAgents capability, each security role must carry only capabilities you have (never an *admin
+  role), each Dynamic Function tool the capabilities it uses, and new custom tools / resources / skills /
+  skill functions their create capability (as their REST doors require); anything more is refused.
 - internal_tool_use_list: ["general_crud_tool", "model_schema_tool"] (system tools)
 - internal_resource_use_list: [] (system resources)
 - tool_configurations: {"tool_name": {config_key: "value"}}
