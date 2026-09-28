@@ -38,7 +38,8 @@ UPDATABLE FIELDS:
 - schedule: Cron schedule or null (changing it recomputes next_run_at immediately; null clears it)
 - active: Boolean to enable/disable agent
 - tool_configurations: Object with tool configurations
-- internal_tool_use_list: Array of system tool names
+- internal_tool_use_list: Array of system tool names (unless you are a workspace admin, ADDING a Dynamic
+  Function tool needs the capabilities it uses — an agent is never given more than you hold)
 - internal_resource_use_list: Array of system resource names
 - discoverable_by_other_agents: Boolean for agent discovery
 - llm_model: Object with internal_identifier to change model
