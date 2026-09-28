@@ -31,7 +31,9 @@ OPTIONAL FIELDS:
   `basic` + `agent_runtime` every agent gets automatically. Pass "agent_task_management" for an agent that
   needs to view/create/update StatusApplications — e.g. one that moves board cards — or it will 403 with
   "Invalid Access to view StatusApplications" on its first run. "agent_dynamic_functions" — manage/run
-  Dynamic Functions — is granted automatically with any Dynamic Function tool; no need to pass it.)
+  Dynamic Functions — is granted automatically with any Dynamic Function tool; no need to pass it.
+  Pass "agent_pipeline_builder" for a non-admin agent given orchestration_builder_tool — building a pipeline
+  takes create/update OrchestrationTemplates and create LlmAgents; it is never granted automatically.)
 RULE: an agent can never be given more than you hold — unless you are a workspace admin, you need the
   create LlmAgents capability, each security role must carry only capabilities you have (never an *admin
   role), each Dynamic Function tool the capabilities it uses, and new custom tools / resources / skills /
