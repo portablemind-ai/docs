@@ -30,7 +30,7 @@ Clicking a channel tile opens that channel's **setup wizard**: numbered setup st
 | Slack | Public and private channels, DMs |
 | Discord | Server text channels |
 | Twilio SMS | Inbound and outbound text messages |
-| Twilio Voice | AI-powered voice calls with context enrichment |
+| Twilio Voice | AI voice calls: call in, or have agents call out — see [Phone Calls](phone-calls.md) |
 | Twilio Video | The account your [Meet video meetings](meet.md) run on |
 
 ## Finding your tenant ID
@@ -345,9 +345,11 @@ When an SMS arrives from a phone number that isn't linked to any Portablemind co
 
 ## Twilio Voice setup
 
-Twilio Voice provides an AI-powered voice agent that answers inbound calls with real-time speech recognition and text-to-speech. The agent can look up caller context from Portablemind (who is calling, their history, open projects) and perform mid-call data lookups triggered by natural language.
+Twilio Voice gives your workspace an AI voice assistant on a phone number. People can call it and ask about their work, your [AI agents](agents.md) can place calls, every call an agent places opens with a notice that it's an AI call and is transcribed, and every call is transcribed and saved as a private record under **Team Chat → Calls**. The [Phone Calls](phone-calls.md) guide covers the whole feature: consent, calling in, having an agent call, and reviewing calls.
 
-Voice uses the same Twilio account and phone number as SMS. If you've already set up SMS, you just need to add the voice webhook and a few extra configuration values.
+> **Voice setup is completed with Portablemind support.** The **Voice** tile's setup wizard (**Administration → Communications Hub → Manage** → **Voice**) stores your Twilio account and the voice assistant's settings, but it can't finish a working voice setup on its own. Connecting the voice assistant to your workspace (so it recognises callers and can look up their work), turning on outbound calling, and setting call limits are done by support. Contact support to set up voice; the steps below are the part you can prepare yourself.
+
+Voice uses the same Twilio account and phone number as SMS. If you've already set up SMS, the wizard fills in the account details for you.
 
 ### Step 1: Configure the voice webhook
 
@@ -360,37 +362,41 @@ Voice uses the same Twilio account and phone number as SMS. If you've already se
 
 3. Click **Save**
 
-### Step 2: Get an OpenAI API key
+The wizard shows this URL, and the **Voice Status Callback URL**, ready to copy for your workspace.
 
-The voice agent uses a fast OpenAI model (GPT-4o-mini by default) for real-time responses during calls. This is separate from the LLM models used in Portablemind conversations.
+### Step 2: Get an OpenAI API key (optional)
+
+The voice assistant uses a fast OpenAI model (GPT-4o-mini by default) for real-time responses during calls. This is separate from the AI models used in Portablemind conversations. You can use your own OpenAI key; without one, the platform's is used, and outbound calls then draw on your workspace's [token balance](plans-and-limits.md#ai-tokens).
 
 1. Go to [OpenAI API Keys](https://platform.openai.com/api-keys)
 2. Create a new key and copy it
 
-### Step 3: Store credentials in Portablemind
+### Step 3: Enter your details in the Voice wizard
 
-Save the following in the **Voice** channel's setup wizard (**Administration → Communications Hub → Manage** → Voice tile), then click **Save & Enable**:
+In **Administration → Communications Hub → Manage**, click the **Voice** tile and fill in:
 
 | Field | Value | Notes |
 |-------|-------|-------|
-| `twilio_account_sid` | Account SID | Same as SMS |
-| `twilio_auth_token` | Auth Token | Same as SMS |
-| `twilio_phone_number` | Phone number | Same as SMS (E.164 format) |
-| `domain` | `hub.portablemind.ai` | Hostname only |
-| `openai_api_key` | Your OpenAI API key | For fast voice responses |
-| `openai_model` | `gpt-4o-mini` | Default — fast and cost-effective |
-| `tts_provider` | `ElevenLabs` | Text-to-speech provider |
-| `tts_voice_id` | ElevenLabs voice ID | Optional — uses default voice if empty |
-| `welcome_greeting` | Your greeting message | What the bot says when answering |
-| `context_provider` | `portablemind` | Enables caller context enrichment |
+| **Account SID** | Your Twilio Account SID | Same as SMS |
+| **Auth Token** | Your Twilio Auth Token | Same as SMS |
+| **Phone Number** | Your Twilio number | Same as SMS, E.164 format (`+1...`) |
+| **Domain** | `hub.portablemind.ai` | Hostname only |
+| **OpenAI API Key** | Your OpenAI API key | Optional (see step 2) |
+| **OpenAI Model** | `gpt-4o-mini` | Default: fast and cost-effective |
+| **TTS Provider** | `ElevenLabs` | Text-to-speech provider |
+| **TTS Voice ID** | An ElevenLabs voice ID | Optional; uses the default voice if empty |
+| **Welcome Greeting** | What the assistant says when it answers | Say that it's an AI assistant and that the call is transcribed. This greeting is the only notice people calling in hear, and the platform doesn't add one |
+| **Context Provider** | Leave as it is | Support sets this up when they connect the assistant to your workspace |
 
-### Voice + SMS shared conversations
+Then contact support to finish the setup.
 
-Voice and SMS share the same conversation for a given phone number. When a caller's phone number is mapped to an SMS conversation, voice calls from that number will load the same conversation context and post transcripts to the same thread.
+### Where calls go
 
-### Caller context enrichment
+Each call, inbound or outbound, gets its own private record under **Team Chat → Calls**, with the full transcript. It's never posted into an SMS thread or any other conversation. Workspace administrators see every call; other members see only the calls they were part of. See [Reviewing calls](phone-calls.md#reviewing-calls).
 
-When the context provider is enabled, the voice agent automatically looks up the caller's phone number in Portablemind to find who they are, what projects they're associated with, and any relevant history. This context is injected into the AI prompt so the agent can greet the caller by name and have informed conversations.
+### Caller recognition
+
+Once support has connected the assistant to your workspace, it looks up the caller's number in Portablemind. If exactly one person in your workspace has that number on their profile or contact record, the assistant knows who's calling and has their assigned tasks and projects to hand, plus their latest texts if they've texted your number before. A number that's on nobody's record, or on more than one, isn't recognised. See [Calling in](phone-calls.md#calling-in).
 
 ## Twilio Video setup
 
