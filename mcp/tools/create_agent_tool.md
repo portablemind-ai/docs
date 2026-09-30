@@ -37,7 +37,8 @@ OPTIONAL FIELDS:
 RULE: an agent can never be given more than you hold — unless you are a workspace admin, you need the
   create LlmAgents capability, each security role must carry only capabilities you have (never an *admin
   role), each Dynamic Function tool the capabilities it uses, and new custom tools / resources / skills /
-  skill functions their create capability (as their REST doors require); anything more is refused.
+  skill functions their create capability (as their REST doors require); anything more is refused. Only a
+  workspace admin may give an agent outbound_call_tool.
 - internal_tool_use_list: ["general_crud_tool", "model_schema_tool"] (system tools)
 - internal_resource_use_list: [] (system resources)
 - tool_configurations: {"tool_name": {config_key: "value"}}
