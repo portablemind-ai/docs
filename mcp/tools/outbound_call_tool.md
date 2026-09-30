@@ -24,6 +24,10 @@ to look up the phone number from contacts.
 The call blocks until complete — the transcript is returned synchronously so you can act on results immediately
 (update tickets, post summaries, etc.).
 
+Every call opens with the workspace's fixed disclosure (that you are an AI assistant calling on behalf of the
+workspace, and that the call is transcribed) before your greeting — do not repeat it in the greeting. Only
+numbers whose owner has consented to AI calls can be dialled; a call without consent on file is refused.
+
 ## Parameters
 
 | Name | Type | Required | Description |
@@ -31,7 +35,7 @@ The call blocks until complete — the transcript is returned synchronously so y
 | `to` | string | no | Phone number in E.164 format (e.g. +15551234567). Required if party_id is not provided. |
 | `party_id` | integer | no | Party ID to look up phone number from contacts. Required if to is not provided. |
 | `context` | string | yes | System prompt for the AI voice assistant. Include objectives, talking points, background info, and any constraints. This guides the entire conversation. |
-| `greeting` | string | yes | Opening message spoken when the customer picks up (e.g. "Hi, this is Sarah from Acme Corp calling about your support ticket.") |
+| `greeting` | string | yes | Your opening line, spoken right after the fixed AI/transcription disclosure (e.g. "I am calling about your support ticket from Monday. Do you have a moment?"). |
 | `timeout_minutes` | integer | no | Maximum call duration in minutes. Capped at the workspace's own limit (outbound_call_max_minutes, default 15, never above 60); the Hub hangs up at the limit. Defaults to 10. |
 | `dry_run` | boolean | no | When true, return the would-be call parameters (resolved phone number, context, greeting, hub payload) WITHOUT initiating the outbound call. Use for eval scenarios or to preview an agent action before letting it actually dial. Validation (E.164, party_id lookup, hub config) still runs so the preview surfaces the same errors a real call would. Defaults to false; the response sets `dry_run: true` so callers can distinguish previewed calls from real ones. |
 
@@ -57,7 +61,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "greeting": {
       "type": "string",
-      "description": "Opening message spoken when the customer picks up (e.g. \"Hi, this is Sarah from Acme Corp calling about your support ticket.\")"
+      "description": "Your opening line, spoken right after the fixed AI/transcription disclosure (e.g. \"I am calling about your support ticket from Monday. Do you have a moment?\")."
     },
     "timeout_minutes": {
       "type": "integer",
