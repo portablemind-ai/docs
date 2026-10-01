@@ -38,7 +38,7 @@ readable via read_llm_file_tool by id even when no directory is shared.
 | `directory_path` | string | no | Directory path to list contents of (defaults to "/"). Example: "/projects/docs". |
 | `recursive` | boolean | no | Include files from all subdirectories recursively (default: false) |
 | `file_type` | string | no | Filter by file type: LlmDocument, LlmImage, LlmAudioFile, LlmVideoFile, LlmSpreadsheet, LlmPresentationFile. |
-| `title_search` | string | no | Find files by title (case-insensitive partial match). With NO directory_path, searches ALL files in the tenant; pass a directory_path to constrain the search to that folder. |
+| `title_search` | string | no | Find files by title (case-insensitive; every word must appear in the title, in any order). With NO directory_path, searches ALL files in the tenant; pass a directory_path to constrain the search to that folder. |
 | `show_tree` | boolean | no | Return hierarchical directory tree structure instead of flat file listing (default: false) |
 | `entity_type` | string | no | List files ATTACHED TO a record rather than browsing a folder, e.g. "BizTxnEvent" for a support ticket or "LlmConversation" for a channel. Requires entity_id. Ignores directory_path. Includes attachments a partner posted from another tenant. |
 | `entity_id` | integer | no | Id of the record named by entity_type, e.g. the ticket id. |
@@ -92,7 +92,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "title_search": {
       "type": "string",
-      "description": "Find files by title (case-insensitive partial match). With NO directory_path, searches ALL files in the tenant; pass a directory_path to constrain the search to that folder."
+      "description": "Find files by title (case-insensitive; every word must appear in the title, in any order). With NO directory_path, searches ALL files in the tenant; pass a directory_path to constrain the search to that folder."
     },
     "show_tree": {
       "type": "boolean",

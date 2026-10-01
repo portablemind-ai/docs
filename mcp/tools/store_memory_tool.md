@@ -49,7 +49,7 @@ automatically when the id is not in your tenant.
 | `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
 | `llm_conversation_id` | integer | no | Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation. |
 | `mind_id` | integer | no | Optional: Associate with a LlmMind (organizational container) for project-scoped memories. Omit for general memories (uses default mind). |
-| `private` | boolean | no | Whether this memory should be private (only accessible to creator or in source conversation) |
+| `private` | boolean | no | true keeps this memory private (only its owner or source conversation can recall it). Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team. |
 | `user_id` | integer | no | User ID for user-private memories (optional, defaults to current user) |
 
 ## Example
@@ -130,7 +130,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "private": {
       "type": "boolean",
-      "description": "Whether this memory should be private (only accessible to creator or in source conversation)"
+      "description": "true keeps this memory private (only its owner or source conversation can recall it). Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team."
     },
     "user_id": {
       "type": "integer",
