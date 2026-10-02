@@ -83,7 +83,7 @@
 - [run_python_skill_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/run_python_skill_tool.md): Run an approved, server-side Python skill by name and (if it generates a file) attach the result to the conversation.
 - [search_conversation_history_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/search_conversation_history_tool.md): Search the message history of a conversation for a keyword or phrase.
 - [send_conversation_invitation_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/send_conversation_invitation_tool.md): Send an email invitation to a user to join and respond to an LLM conversation.
-- [send_email_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/send_email_tool.md): Send an email based on a email body, subject, sender and reciever make sure to send all required fields, email_body can not be empty.
+- [send_email_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/send_email_tool.md): Send an email: subject, HTML email_body and to_email are required.
 - [send_guest_invitation_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/send_guest_invitation_tool.md): Send a guest invitation email to join an LLM conversation.
 - [set_agent_state_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/set_agent_state_tool.md): Flip a state flag on your own custom_fields.
 - [show_user_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/show_user_tool.md): Point out a UI element to the user with an on-screen callout ("show me where X is", "where do I…", "how do I find…").

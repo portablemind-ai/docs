@@ -2,7 +2,7 @@
 
 # send_email_tool
 
-> Send an email based on a email body, subject, sender and reciever make sure to send all required fields, email_body can not be empty.
+> Send an email: subject, HTML email_body and to_email are required.
 
 | | |
 |---|---|
@@ -14,7 +14,9 @@
 
 This is the description the server sends to the model, verbatim.
 
-Send an email based on a email body, subject, sender and reciever make sure to send all required fields, email_body can not be empty. Before calling the tool the email_body should be generated and passed to it.
+Send an email: subject, HTML email_body and to_email are required. Optionally attach files from Files &
+Artifacts (attachment_llm_file_ids) and/or route the reply back into a conversation (reply_to_conversation_id)
+so it is posted there and, when you are an agent, wakes you to handle it.
 
 ## Parameters
 
@@ -24,6 +26,8 @@ Send an email based on a email body, subject, sender and reciever make sure to s
 | `email_body` | string | yes | Body of email should be in HTML and should always be passed. |
 | `to_email` | string | yes | To email address, for multiple email addresses they should be separated by ;. |
 | `from_email` | string | no | Optional from email address. |
+| `reply_to_conversation_id` | integer | no | Optional. Route the recipient's reply back into this PortableMind conversation (normally the one you are working in): the reply is posted there as a message and, when you are an agent, you are invoked to handle it. Leave out for a one-way email. |
+| `attachment_llm_file_ids` | array of integer | no | Optional. IDs of files from Files & Artifacts to attach (PDFs, documents, images). Up to 5 files, 20 MB total; each must be a file you can read. |
 
 ## Input schema
 
@@ -48,6 +52,17 @@ The JSON Schema served for `inputSchema`, verbatim.
     "from_email": {
       "type": "string",
       "description": "Optional from email address"
+    },
+    "reply_to_conversation_id": {
+      "type": "integer",
+      "description": "Optional. Route the recipient's reply back into this PortableMind conversation (normally the one you are working in): the reply is posted there as a message and, when you are an agent, you are invoked to handle it. Leave out for a one-way email."
+    },
+    "attachment_llm_file_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Optional. IDs of files from Files & Artifacts to attach (PDFs, documents, images). Up to 5 files, 20 MB total; each must be a file you can read."
     }
   },
   "required": [

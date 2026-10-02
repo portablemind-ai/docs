@@ -42,7 +42,7 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=communication`
 
 | Tool | What it does |
 |---|---|
-| [`send_email_tool`](tools/send_email_tool.md) | Send an email based on a email body, subject, sender and reciever make sure to send all required fields, email_body can not be empty. |
+| [`send_email_tool`](tools/send_email_tool.md) | Send an email: subject, HTML email_body and to_email are required. |
 | [`reply_to_customer_tool`](tools/reply_to_customer_tool.md) | Reply to the CUSTOMER on a support ticket. |
 | [`send_conversation_invitation_tool`](tools/send_conversation_invitation_tool.md) | Send an email invitation to a user to join and respond to an LLM conversation. |
 | [`send_guest_invitation_tool`](tools/send_guest_invitation_tool.md) | Send a guest invitation email to join an LLM conversation. |
