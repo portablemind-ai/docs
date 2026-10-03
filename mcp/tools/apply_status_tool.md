@@ -19,7 +19,9 @@ Apply a tracked status to a record that uses the HasTrackedStatus concern.
 Creates a StatusApplication record with timestamps and preserves status history —
 NOT a plain attribute update. Use this rather than general_crud_tool for status.
 
-SUPPORTED MODELS: Task, Project, BizTxnEvent, BizTxnAccount, LlmFile, Timesheet
+SUPPORTED MODELS: Task, Project, BizTxnEvent, BizTxnAccount, LlmFile, Timesheet, DynamicModel
+(custom objects — the record id from custom_object_tool; its describe_type lists the statuses the
+type takes, e.g. dynamic_model_draft / dynamic_model_active / dynamic_model_archived by default).
 
 STATUS IDENTIFIERS ARE ENTITY-PREFIXED. A Task takes task_completed, NOT completed.
 Both exist as separate TrackedStatusTypes and lookup matches the identifier ALONE, so
@@ -35,7 +37,7 @@ EXAMPLE: {model_name: "Task", id: 123, status: "task_completed"}
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `model_name` | string | yes | Model name (Task, Project, BizTxnEvent, BizTxnAccount, LlmFile, Timesheet) |
+| `model_name` | string | yes | Model name (Task, Project, BizTxnEvent, BizTxnAccount, LlmFile, Timesheet, DynamicModel) |
 | `id` | integer | yes | Record ID to apply status to. |
 | `status` | string | yes | Status internal_identifier — ENTITY-PREFIXED (e.g., task_completed, task_in_progress, task_blocked). An unprefixed name like "completed" matches a separate status type and silently attaches the wrong one. List TrackedStatusType via general_crud_tool if unsure. |
 | `start_at` | string | no | Optional start date for the status (YYYY-MM-DD or ISO8601 format). Defaults to current time. |
@@ -58,6 +60,10 @@ Returns the record with its new `current_status`. The change is recorded as a
 - **Other models use their own prefix.** List `TrackedStatusType` with `general_crud_tool`
   (`{"model_name": "TrackedStatusType", "action": "list", "limit": -1}`) to see the real set.
 - **Never update a status through `general_crud_tool`.** It is rejected there by design.
+- **Custom objects (`DynamicModel`) take the statuses their TYPE declares.** `custom_object_tool`
+  `describe_type` lists them (`dynamic_model_draft` / `dynamic_model_active` / `dynamic_model_archived`
+  unless the type declares its own tree); a status from another tree is refused. The call needs the
+  `update DynamicModels` capability, the same as editing the record.
 
 ## Input schema
 
@@ -69,7 +75,7 @@ The JSON Schema served for `inputSchema`, verbatim.
   "properties": {
     "model_name": {
       "type": "string",
-      "description": "Model name (Task, Project, BizTxnEvent, BizTxnAccount, LlmFile, Timesheet)"
+      "description": "Model name (Task, Project, BizTxnEvent, BizTxnAccount, LlmFile, Timesheet, DynamicModel)"
     },
     "id": {
       "type": "integer",

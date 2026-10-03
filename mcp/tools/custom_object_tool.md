@@ -30,6 +30,11 @@ ACTIONS:
 - create_record / update_record: a record of a type, with `values` keyed by field key.
 - list_records: records of one type, newest first.
 
+STATUS: every record read (create_record, update_record, list_records) carries current_status
+({status_iid, status_description}, or null — the REST shape).
+describe_type names the type's status tree (status_taxonomy) and the statuses it takes. To SET a
+status use apply_status_tool with model_name "DynamicModel" and the record id — never update_record.
+
 STRICT BY DEFAULT: a value whose key the type does not define is REJECTED, and the
 error names the valid keys. This is deliberate — it stops a typo'd key from being
 silently stored where nothing will ever read it. Pass strict_fields: false on
