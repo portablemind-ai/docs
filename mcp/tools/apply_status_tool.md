@@ -48,8 +48,10 @@ EXAMPLE: {model_name: "Task", id: 123, status: "task_completed"}
 {"name": "apply_status_tool", "arguments": {"model_name": "Task", "id": 3717, "status": "task_in_progress"}}
 ```
 
-Returns the record with its new `current_status`. The change is recorded as a
-`StatusApplication` row, so status history is preserved.
+Returns `record_id`, `model_name`, `status_applied` (`internal_identifier`, `description`,
+`start_at`) and `status_application_id`. The change is recorded as a `StatusApplication` row, so
+status history is preserved. The record's `current_status` (read back via `general_crud_tool` /
+`custom_object_tool`) is `{ status_iid, status_description, status_category, status_resolution }`.
 
 ## Gotchas
 
@@ -57,6 +59,10 @@ Returns the record with its new `current_status`. The change is recorded as a
   unprefixed name matches a different status type and silently attaches the wrong one.
   Task statuses: `task_not_started`, `task_in_progress`, `task_review`, `task_blocked`,
   `task_on_hold`, `task_completed`, `task_cancelled`, `task_failed`, `task_backlog`.
+- **Resolved is not the same as completed.** `task_completed`, `task_cancelled` and `task_failed` are all
+  `done`-category (resolved): each wakes a `wait_for_tool` `task_completed` wait. Only `task_completed`
+  (resolution `done`) sets progress to 100% and counts for burndown / velocity; cancelled / failed are
+  resolution `wont_do`. See [Status categories](../03-status-tracking.md#status-categories-jira-style).
 - **Other models use their own prefix.** List `TrackedStatusType` with `general_crud_tool`
   (`{"model_name": "TrackedStatusType", "action": "list", "limit": -1}`) to see the real set.
 - **Never update a status through `general_crud_tool`.** It is rejected there by design.

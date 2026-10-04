@@ -103,6 +103,14 @@ one record; `create` and `update` return the saved record.
 
 - **Status is not an attribute.** "Mark done", "set to in progress", "close it" all go
   through [`apply_status_tool`](apply_status_tool.md). Passing `current_status` here is rejected.
+- **Status filters are identifier-based here.** `filters` accepts `with_current_status` /
+  `without_current_status` (identifiers, comma-separated) on status-tracked models. The status-category
+  keys (`status_category`, `status_resolution`, …) are not in this tool's filter registry and come back
+  as ignored filters; to work by category, list the statuses first
+  (`TrackedStatusType` with `search_query: {"where": {"status_category": "done"}}`) and pass their
+  identifiers. See [Status categories](../03-status-tracking.md#status-categories-jira-style).
+- **Runs awaiting approval.** On `OrchestrationExecution`, `filters: {"awaiting_approval": true}` lists
+  running runs parked on a pending gate; `approver_party_id` narrows to gates that party may approve.
 - **`limit` defaults to 10.** Pass `limit: -1` for every row, or page with `offset`.
 - **Messages are a JSON object.** An `LlmMessage` row's body is `message: {"role": "user", "content": "..."}`
   (not a top-level `content`). To post into a conversation prefer
