@@ -24,7 +24,8 @@ LIST MODE: call WITHOUT orchestration_execution_id to list recent executions for
 this tenant (optionally filtered by template_name and/or status). Use this to find
 a run when you don't know its execution ID — e.g. to diagnose "my run failed":
 list, find the run by name/time, then call again with its ID for full detail
-(failed runs include failure_reason).
+(failed runs include failure_reason). awaiting_approval: true lists EVERY run parked
+on a pending approval gate (each entry carries the gate's started_at and wait in hours).
 
 ## Parameters
 
@@ -34,6 +35,8 @@ list, find the run by name/time, then call again with its ID for full detail
 | `orchestration_stage_execution_id` | integer | no | Optional: specific stage execution ID to get details for. |
 | `template_name` | string | no | List mode: only executions of the template with this exact name. |
 | `status` | string | no | List mode: only executions with this current status (e.g. orch_running, orch_failed, orch_completed) |
+| `awaiting_approval` | boolean | no | List mode: true = only running executions whose current stage is parked on a pending approval gate. |
+| `approver_party_id` | integer | no | List mode: only executions awaiting approval that this Party may approve (no designated approver, or a designated one). Implies awaiting_approval. |
 | `limit` | integer | no | List mode: max executions to return (default 10, max 50) |
 
 ## Input schema
@@ -59,6 +62,14 @@ The JSON Schema served for `inputSchema`, verbatim.
     "status": {
       "type": "string",
       "description": "List mode: only executions with this current status (e.g. orch_running, orch_failed, orch_completed)"
+    },
+    "awaiting_approval": {
+      "type": "boolean",
+      "description": "List mode: true = only running executions whose current stage is parked on a pending approval gate"
+    },
+    "approver_party_id": {
+      "type": "integer",
+      "description": "List mode: only executions awaiting approval that this Party may approve (no designated approver, or a designated one). Implies awaiting_approval"
     },
     "limit": {
       "type": "integer",
