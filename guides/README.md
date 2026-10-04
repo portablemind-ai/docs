@@ -20,6 +20,7 @@
 
 - [File Management](files.md): Organize, share, and let AI work with your files.
 - [Tickets, Partners & Support Portal](tickets-and-partners.md): Track work with tickets, share them with partner organizations, or take support requests from customers who do not use Portablemind.
+- [Custom Statuses](statuses.md): Add your own project, task and ticket statuses, and record whether each one is to do, in progress or done.
 - [Guest Users](guest-users.md): Invite contractors and clients with scoped access to your workspace.
 - [Workspace Sharing](workspace-sharing.md): Give users from other organizations access to your workspace.
 - [Video Meetings (Meet)](meet.md): Meet with your team on video, share your screen, and keep the meeting chat with your work.

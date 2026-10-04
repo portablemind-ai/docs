@@ -2,6 +2,19 @@
 
 Tickets are Portablemind's way of tracking work requests — support issues, change requests, feature asks, or anything else your organization needs to log, prioritize, and resolve. You'll find them in the **Tickets** area of the app, where each ticket carries its own status, discussion, and history from open to close.
 
+## Ticket statuses
+
+A ticket's status comes from your workspace's own list of ticket statuses: the standard set (such as *Ticket Open - Awaiting Triage*, *Ticket In Progress*, *Waiting on Customer*, *Ticket Resolved* and *Ticket Closed*) plus any your administrators have added, such as *Targeted* or *Delivered*. Your custom statuses appear everywhere a ticket status does, under the names you gave them:
+
+- the **Status** field when you create or edit a ticket (a new ticket starts as *Ticket Open - Awaiting Triage*),
+- the **Status** filter in the Tickets list,
+- each ticket's status badge,
+- dashboard ticket widgets that filter by status.
+
+Administrators add and edit ticket statuses in **Administration → System Defaults → Status Management**, on the **Ticket Statuses** tab. See [Custom Statuses](statuses.md).
+
+> **Note:** the **Active** view in the Tickets sidebar hides tickets that are *Ticket Resolved* or *Ticket Closed*. A ticket in one of your custom statuses still shows there, even if that status is in the Done category.
+
 If you provide support to other people, there are **two ways to let them raise tickets with you**, and which one fits depends on whether they already use Portablemind.
 
 ## Choosing a path

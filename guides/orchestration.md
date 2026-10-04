@@ -39,7 +39,7 @@ Pipelines keep a clear separation between the AI that does the work and the peop
 - **Who can approve a gate.** Each human approval gate is open to *anyone authorized* (the default), restricted to a *specific person or role* (for example, a "Dev Manager"), or restricted to a *team's lead*.
 - **Choose approvers when you start a run.** If a pipeline's gate is restricted, the start dialog shows a picker — choose the people (shown by name and email) or the team that should sign off before the run begins. Assign approvers before the gate opens; assigning afterward only affects the next gate.
 - **The right person gets notified.** When a stage reaches its gate, the designated approver is notified — not just whoever started the run. Only a designated approver can approve; everyone else sees the gate as read-only.
-- **Requirements traceability** (some pipelines). A run can track numbered requirements as tasks and show a traceability matrix — which requirement was satisfied and verified — so nothing slips through review.
+- **Requirements traceability** (some pipelines). A run can track numbered requirements as tasks and show a traceability matrix — which requirement was satisfied and verified — so nothing slips through review. In the run's **Traceability Matrix**, a bar shows how many requirements are verified, and each row has a **Verified** column (a green check, or an empty circle if not yet verified) and a **Status** of *Verified*, *In Review* or *Open*. A verified requirement's status also carries a check badge, so verified rows stand out at a glance.
 
 ### Approving and rejecting
 
@@ -50,6 +50,15 @@ When a gate opens, the coordinator posts a summary of the stage's output in the 
 - **Cancel** — you can also cancel a run entirely if it's no longer needed.
 
 Gates can also be worked from the run's detail view in **AI Studio → Operate → Orchestrations**, which has explicit **Approve** and **Reject** buttons and lets you assign the gate's approver.
+
+### On your phone
+
+On a phone, AI Studio opens as **Operations**, and its **Orchestrations** tab lists your runs with the ones awaiting approval first. Tap the **Awaiting approval** chip to show only runs that are stopped at an approval gate, across all of them, not just the ones already loaded. Each of those runs shows how long ago its gate opened (for example, *Gate opened 3h ago*), so you can see what has been waiting longest. Tap the chip again to see every run. Tap a run to open it and approve or reject the gate.
+
+### Reminders and gates that close themselves
+
+- **Reminders.** If a gate is still waiting a few hours after it opened, the people who were told about it get a reminder, and another each day it stays open. This covers every kind of gate, including stages where an agent finished its work and is waiting for a person to sign off. The waiting time is counted from when the gate opened, not from when the stage started.
+- **Approved once the merge request is merged** (pipelines that opt in). Some code pipelines end with a gate whose real decision is merging the run's merge request. If the pipeline is set up for it, merging that merge request closes the gate for you: the platform checks with your git provider that the merge request was actually merged, then approves the gate within the hour, with the merge request number and merge commit noted on the approval. A merge request that's still open, or was closed without merging, leaves the gate open as usual.
 
 ```recording
 title: Approve a gate

@@ -46,6 +46,16 @@ Your app's server proves who someone is by signing a short-lived pass with a **s
 - Keep it on the server. Never put it in a web page or a mobile app.
 - **Replace the sign-on key** makes a new one. The old key stops working immediately, so sign-in from your app fails until its server has the new one.
 
+### Getting back to your app
+
+When your app signs someone in, it can pass the address to return them to. If that address is on one of the hosts you allow people to return to, a slim bar across the top of the workspace reads **◀ Back to** followed by your app's name (or **Back to app** if your branding doesn't give one). It appears on phones too.
+
+- Selecting it takes them back to your app **in the same tab**. They stay signed in to the workspace, so the next time your app sends them over they go straight in.
+- **Logging out** of the workspace also returns them to that address, and ends their session there.
+- The bar only appears while white-label is on, in the tab your app signed them into, and only for an address on your allowed hosts. Anyone else, and any address that isn't allowed, sees no bar.
+
+Have your app send a fresh return address each time it signs someone in, to control where they land.
+
 ### What people from your app can open
 
 Arriving signed in is one thing; what they may **use** is another. Each section of the app — Team
