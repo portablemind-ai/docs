@@ -26,6 +26,7 @@ SUPPORTED MODELS: Party, Individual, Organization, PartyRole, RoleType, PartyRel
 
 FILTERS: Use model_schema_tool first to discover available filters for each model.
 Pass filters via the filters parameter: {filters: {filter_name: value}}
+Status models also take status_category / without_status_category / status_resolution / without_status_resolution.
 
 SEARCH_QUERY: For complex queries with joins, operators, aggregates.
 - where: {"field": "value"} or {"field": {"gt": 5}}
@@ -103,12 +104,15 @@ one record; `create` and `update` return the saved record.
 
 - **Status is not an attribute.** "Mark done", "set to in progress", "close it" all go
   through [`apply_status_tool`](apply_status_tool.md). Passing `current_status` here is rejected.
-- **Status filters are identifier-based here.** `filters` accepts `with_current_status` /
-  `without_current_status` (identifiers, comma-separated) on status-tracked models. The status-category
-  keys (`status_category`, `status_resolution`, …) are not in this tool's filter registry and come back
-  as ignored filters; to work by category, list the statuses first
-  (`TrackedStatusType` with `search_query: {"where": {"status_category": "done"}}`) and pass their
-  identifiers. See [Status categories](../03-status-tracking.md#status-categories-jira-style).
+- **Status filters.** On status-tracked models (Task, Project, BizTxnEvent, LlmFile, … — every model
+  including `HasStatusAPIFiltering`) `filters` accepts `with_current_status` / `without_current_status`
+  (identifiers) and the category filters `status_category`, `without_status_category`,
+  `status_resolution`, `without_status_resolution` (comma-separated; categories `todo | in_progress |
+  done`, resolutions `done | wont_do`), e.g. `{"model_name": "Task", "action": "list", "filters":
+  {"project_id": 21, "without_status_category": "done"}}` = open work. An unknown value is an error
+  (`Invalid status_category 'x'. Valid: …` — the same message REST returns as a 400). On any other model
+  the category keys are reported back as ignored filters. `model_schema_tool` lists them under
+  `special_filters`. See [Status categories](../03-status-tracking.md#status-categories-jira-style).
 - **Runs awaiting approval.** On `OrchestrationExecution`, `filters: {"awaiting_approval": true}` lists
   running runs parked on a pending gate; `approver_party_id` narrows to gates that party may approve.
 - **`limit` defaults to 10.** Pass `limit: -1` for every row, or page with `offset`.
