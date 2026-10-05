@@ -14,7 +14,7 @@
 
 This is the description the server sends to the model, verbatim.
 
-Agent Report Cards: A–F grades per agent computed nightly from the AG-UI audit log (tool failures, run errors, wasted calls, silent runs) and from what the humans said next (rework rate). fleet = grade table for every active agent; agent = one agent's full card, history and evidence pack (worst tools, correction excerpts); recompute = rebuild one agent's cards now; override = a human overrules a deliverable's label. Grades are per prompt version too (by_prompt_digest), so a prompt edit reads as an experiment. Platform errors and cost-cap halts never count against an agent.
+Agent Report Cards: A–F grades per agent computed nightly from the AG-UI audit log (tool failures, run errors, wasted calls, silent runs) and from what the humans said next (rework rate). fleet = grade table for every active agent; agent = one agent's full card, history and evidence pack (worst tools, correction excerpts, silent_run_ids: the newest runs Responsiveness counted silent, with run/conversation ids and the total); recompute = rebuild one agent's cards now; override = a human overrules a deliverable's label. Grades are per prompt version too (by_prompt_digest), so a prompt edit reads as an experiment. Platform errors and cost-cap halts never count against an agent.
 
 ## Parameters
 
