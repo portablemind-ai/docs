@@ -74,9 +74,9 @@ An invitation can reach three kinds of organizations, and the shape affects bill
 |---|---|---|
 | **Peer** | An existing, independent Portablemind organization | Each pays its own |
 | **Independent new** | Created fresh when the invitee signs up | Invitee sets up its own billing |
-| **Sponsored** | Created fresh at signup, sponsored by the inviter | Inviter picks a plan tier; billed to the inviter |
+| **Sponsored** | Created fresh at signup, sponsored by the inviter | Inviter picks a plan tier; the organization runs on that tier, billed to the inviter, until it takes over its own billing |
 
-Sponsoring is useful when you want to bring a client or sub-organization onto the platform at your expense — you choose their plan tier when you send the invite.
+Sponsoring is useful when you want to bring a client or sub-organization onto the platform at your expense — you choose their plan tier when you send the invite, they get that tier's limits from the moment their workspace is ready, and the charge lands on your own invoice. When they are ready to pay for themselves they take the subscription over from their own Billing page (see [Taking over a sponsored subscription](#taking-over-a-sponsored-subscription)); the partnership continues either way.
 
 > **Note:** A free-tier organization can *invite* partners but cannot *sponsor* one, since sponsoring requires billing of its own.
 
@@ -138,13 +138,25 @@ With an active partnership you can **publish an Application to chosen partner or
 
 > **Note:** the **Publish for ticket intake** toggle on its own covers your *own* organization's external reporters (the Support Portal below). The partner list extends the same publication to partner organizations — you can use either or both.
 
+## Taking over a sponsored subscription
+
+A sponsored organization is its own workspace with its own admins; only who pays is different. When it is ready to pay for itself, one of **its own admins** opens **Administration → Billing**, chooses a plan and enters the organization's own card. From that moment:
+
+- The organization pays for its plan on its own card, and the inviter's subscription for it is cancelled — the inviter is never charged for it again.
+- The partnership itself is untouched: ticket sharing and any workspace sharing continue exactly as before. On the inviter's Partners page the partnership simply stops showing as *Sponsored*.
+- White-label and other features come from the organization's own plan, as they always did for a sponsored account.
+
+Choosing the **free plan** counts as taking over too: the organization then pays for nothing, and the inviter stops paying. There is no going back to being sponsored — a new sponsorship would need a new invitation to a new organization.
+
+> **Note:** Only the sponsored organization's own admins can do this. The inviter cannot end its own sponsorship from the sponsored organization's Billing page; its options are to keep paying or to end the partnership (below), which drops the organization to the free plan.
+
 ## Ending a partnership
 
 Revoking a partnership (from the partnership's **Manage** dialog) is a hard unshare:
 
 - **Every** ticket grant the partnership created is withdrawn.
 - Every link between the Owner's tickets and the Manager's tasks is removed — the Manager can no longer work them.
-- For a **sponsored** partner, the sub-organization is soft-landed: its sponsored subscription is cancelled, it becomes independent, and it drops to the **free plan**. It is **never locked out** — it keeps full access to its own data and receives an email letting it know it can upgrade at any time.
+- For a **sponsored** partner, the sub-organization is soft-landed: its sponsored subscription is cancelled, it becomes independent, and it drops to the **free plan**. It is **never locked out** — it keeps full access to its own data and receives an email letting it know it can upgrade at any time. If you want the organization to keep its paid tier and only stop paying for it, don't revoke: ask its admin to take the subscription over (above) instead.
 
 > **Tip:** Because revocation removes all cross-organization ticket-task links automatically, neither side needs to clean up manually — but the Manager should capture any in-flight notes before the partnership ends.
 
