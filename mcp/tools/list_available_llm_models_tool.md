@@ -26,6 +26,8 @@ Returns detailed information about each model including:
 - Provider name (resolved from the associated LlmModelProductType — e.g.
   'OpenAI', 'Anthropic', 'Google', 'Ollama')
 - Agent usage count
+- shutdown_pending_models: models hidden from new agents because the provider
+  announced a shutdown (shutdown_on, successor); agents already on them keep working
 
 Optional filter:
 - provider_name: case-insensitive match against the provider's display
