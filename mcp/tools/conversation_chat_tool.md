@@ -29,6 +29,8 @@ Cross-tenant: conversations shared with you from other tenants resolve
 automatically — if the id isn't found in your tenant, it falls back to
 your shared access (no parameter needed).
 
+Threads: pass thread_root_id to reply inside the thread started by that message.
+
 ## Parameters
 
 | Name | Type | Required | Description |
@@ -37,6 +39,8 @@ your shared access (no parameter needed).
 | `message` | string | yes | The message content to send to the conversation. |
 | `llm_model_id` | integer | no | LLM model ID to generate a response. If provided, triggers LLM response. If not provided, only adds the user message. |
 | `include_shared` | boolean | no | DEPRECATED (accepted for back-compat, no longer needed): cross-tenant shared conversations now resolve automatically when the id is not found in your tenant. |
+| `thread_root_id` | integer | no | Optional: post as a reply in the thread started by this message id (Slack-style thread). Omit to post in the main conversation. |
+| `also_send_to_conversation` | boolean | no | With thread_root_id: also show the reply in the main conversation (default false). |
 
 ## Example
 
@@ -86,6 +90,14 @@ The JSON Schema served for `inputSchema`, verbatim.
     "include_shared": {
       "type": "boolean",
       "description": "DEPRECATED (accepted for back-compat, no longer needed): cross-tenant shared conversations now resolve automatically when the id is not found in your tenant."
+    },
+    "thread_root_id": {
+      "type": "integer",
+      "description": "Optional: post as a reply in the thread started by this message id (Slack-style thread). Omit to post in the main conversation."
+    },
+    "also_send_to_conversation": {
+      "type": "boolean",
+      "description": "With thread_root_id: also show the reply in the main conversation (default false)."
     }
   },
   "required": [
