@@ -182,7 +182,7 @@ Portal tickets are ordinary tickets. They appear in the **Tickets** app with the
 
 Two things behave differently, both deliberately:
 
-- **Your internal notes stay internal.** Anything your team writes on a portal ticket is invisible to the customer. Only the AI agent's published replies reach them.
+- **Your internal notes stay internal.** Anything your team writes on a portal ticket is invisible to the customer. Only the AI agent's published replies reach them. [Threads](threads.md) are always internal too, even under a message the customer can see.
 - **Replying to a customer means email.** Because internal notes are hidden, a team member picking up an escalated ticket should reply by email to the reporter's address — the portal thread is not a staff reply channel.
 
 ## What the customer can and cannot see

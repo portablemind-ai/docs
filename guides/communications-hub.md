@@ -460,6 +460,10 @@ title: Link an external channel to a conversation
 src: https://www.dsiloed.com/api/v1/public/llm_files/2172/raw?key=1b81e85dd4dddb240c78e72192712d83
 ```
 
+### Threads
+
+[Threads](threads.md) carry across linked channels. A Portablemind thread is a Slack thread or a Teams channel reply chain, in both directions, and "Also send to #channel" in Slack matches **Also send to conversation**. Teams 1:1 and group chats have no threads, so a thread reply arrives there as a normal message quoting the original.
+
 ### Cross-channel bridging
 
 A single Portablemind conversation can be linked to **multiple external channels** across different platforms. When a message arrives on any linked channel, it is **fanned out to all other linked channels** on the same conversation. This means a Discord message will appear in Teams and Slack, and vice versa.

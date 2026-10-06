@@ -49,6 +49,10 @@ Conversations aren't limited to you and one AI. A single conversation can includ
 
 This makes chat the natural home for human-AI teamwork: a project channel might hold a design discussion between three people, an `@ai` request to summarize the thread, and a task handed to an agent — all in one place. Everyone (human and AI) sees the same conversation history, and the AI's contributions are visible to the whole group.
 
+## Threads
+
+To follow up on one message without interrupting the conversation, hover over it and choose **Reply in thread**. An `@ai` mention or an agent mention inside a thread is answered in that thread, using that thread as its context. See [Threads](threads.md).
+
 ## File attachments
 
 You can attach files directly to conversations, and the AI can read them. Supported formats include PDFs, Word documents (DOCX), Markdown and plain text, images (PNG, JPG), PowerPoint presentations, and video files (MP4, WebM, MOV). Attach a contract and ask `@ai` to summarize it, drop in a screenshot for analysis, or share a deck and ask for feedback on it.
