@@ -74,7 +74,10 @@ keep it for your own staff. People outside your organization work with AI agents
 with them in a conversation they're part of.
 
 A private conversation is visible only to its members, so a channel per customer team is the simplest
-way to keep each of them to their own. Your developers have the details in the API guide.
+way to keep each of them to their own. Build that role of your own once, export it, and import it
+into each workspace your app runs in — see
+[Shipping a role with your app](developers.md#shipping-a-role-with-your-app). Your developers have
+the details in the API guide.
 
 Creating and replacing a key are both recorded in the workspace's audit log — if the record can't be written, the key isn't changed. While a new key is on screen the dialog stays open until you confirm you've stored it. The API guide listed in [Developer Resources](developers.md) has the technical details for your developers.
 

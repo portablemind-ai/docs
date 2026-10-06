@@ -54,6 +54,42 @@ your plan with me.
 
 Swap in whichever repo is closest to what you're building: the support-desk shape (`pm-ticket-portal`), the form-and-workflow shape (`pm-payer-portal`), or the orchestration-pipeline shape (`pm-agentic-accelerator`).
 
+## Shipping a role with your app
+
+The people who use your app need a security role in each workspace it runs in: the role decides what
+they can see and do. That role belongs to your app, not to the platform — so it isn't something we
+seed or migrate for you. You build it once, export it to a file, keep the file in your app's repo,
+and import it into each workspace as part of your release.
+
+**Build it once.** In your development workspace, open Administration → Roles, create the role and
+give it the capabilities your app needs. Prefer **scoped** grants: a capability with no scope applies
+to every record of that kind in the workspace, so "delete Tasks" unscoped lets your users delete
+anyone's tasks, not just your app's. Scope it to the records your app owns — a custom-field tag, the
+person's own team, the conversations they are in.
+
+**Export it.** The Export button on the role downloads `<role>.role.export.json`. It lists the
+capabilities by what they are (action, resource, scope), never by id, so the same file works in any
+workspace. One thing to remove before you commit it: if specific records have been shared with the
+role, those shares come out as entries pointing at record ids that only exist in your workspace.
+Delete them from the file — it should carry the app's grants, nothing workspace-specific. Then
+review changes to it the way you review code.
+
+**Import it on every release.** Administration → Roles → Import Role takes the file (paste or
+upload); developers can do the same with `POST /api/v1/security_roles/import` as a workspace admin.
+An import is exact and repeatable: it creates the role if the workspace lacks it, then replaces the
+role's capabilities with the file's — anything granted by hand since the last import is removed,
+which is what keeps the file the truth. Records shared with the role are removed too, so re-share
+them afterwards if your app relies on that. The description is only overwritten when you tick
+"overwrite" or the role had none. A role marked external stays external; an import never un-flags one.
+
+**Who holds the role is separate.** The file says what the role *can do*. Assigning it to people is
+workspace membership — User Management, or the role list on a user when your app creates them — and
+isn't part of the export. When your app creates users with something other than an admin's
+credentials, it can only hand out roles marked external; an internal role is assigned by an admin.
+
+Need a capability that doesn't exist yet? That is the one case that is a platform change rather than
+an app change; tell us what action on what resource.
+
 ## Interactive API reference
 
 A browsable Swagger/OpenAPI reference is available at
@@ -72,6 +108,7 @@ Some Portablemind features have both a user-facing side (documented here) and a 
 | Agents | [Building AI Agents](agents.md) | Agent and model configuration APIs |
 | Dynamic functions | [Dynamic Functions](dynamic-functions.md) | Function management and execution APIs |
 | White-label & single sign-on | [White-label Branding & Single Sign-on](white-label.md) | White-label setup and sign-on key APIs, the signed sign-on assertion and its exchange for a session |
+| App roles | [Shipping a role with your app](#shipping-a-role-with-your-app) | Security role export and import endpoints, scoped capabilities |
 | Sub-workspaces | [Enterprise Sub-workspaces](sub-workspaces.md) | Creating sub-workspaces, agent template publishing and install, sharing a model with a spend cap, and the per-sub-workspace metrics a parent can read (names and numbers, never content) |
 
 > **Tip:** If you're building AI agents that act on the platform, start with the MCP tools reference — it's usually a faster path than the raw REST API.
