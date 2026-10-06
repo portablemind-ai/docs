@@ -67,21 +67,40 @@ Custom statuses start in **To Do**. Set the right category when you create one, 
 
 ## What a category changes
 
-**System statuses behave as they always have.** *Task Completed* counts as finished work, *Ticket Resolved* and *Ticket Closed* close a ticket, and so on, whatever category they show. The one exception is agent waits (below), which now also wake on other Done statuses such as *Cancelled*.
+### Lists, counts and filters go by category
+
+These views decide what is open, finished or completed from the **category** (and, for "completed", the **resolution**) of each status. That applies to every status, system or custom:
+
+| Where | What it does |
+|---|---|
+| **Tickets: Active view and its sidebar count** | Hides tickets in **any Done** status: *Ticket Resolved*, *Ticket Closed*, and your own Done statuses such as *Delivered* |
+| **Tickets: status badges** | System statuses keep their usual colours. Your own ticket statuses in **In Progress** or **Done** are coloured by category, so a custom Done status looks like *Ticket Resolved*. Your own statuses still in **To Do** stay grey. Desktop and mobile use the same colours |
+| **Tickets on mobile** | The badge shows the ticket's status by name, in the same colour as on desktop. The menu shows counts for **Active**, **My Tickets**, **All Tickets** and **Starred**, which match the desktop sidebar |
+| **Dashboard Tickets widget** (*Open*, *Assigned to me*, *High priority*) | Hides tickets in any Done status |
+| **Dashboard Tasks widget** (*My open tasks*, *Overdue*, *Due this week*) | Hides tasks in any Done status: *Completed*, *Cancelled*, *Failed*, and your own Done statuses |
+| **Tasks page: Show Completed** (unticked) | Hides **completed** tasks, meaning **Done / Done** (*Task Completed* and your own Done / Done statuses). *Cancelled* and *Failed* tasks stay visible: they're finished, not completed |
+| **Gantt: Show Completed** (unticked) | Same rule as the Tasks page: hides Done / Done tasks and keeps *Cancelled* and *Failed* ones |
+| **Project pickers** (Tasks page, Gantt, Kanban board, the task dialog) | Leave out completed (Done / Done) projects. *Cancelled* and *Rejected* projects are still offered |
+| **Projects: Active Projects view and its sidebar count**, and the project picker when you start a pipeline | Hide projects in **any Done** status: *Completed*, *Cancelled*, *Rejected*, and your own Done statuses |
+| **Kanban board checklists and predecessor warnings** | A checklist item is ticked, and a predecessor counts as complete, when its status is **completed** (**Done / Done**), including your own Done / Done statuses. A *Cancelled* item isn't ticked, and a *Cancelled* predecessor still triggers the warning. A status no longer counts as complete just because its name contains "completed", "done" or "approved" |
+| **Roadmap summary on a ticket** (from its linked task) | **Shipped** when the task is **Done / Done**. **In Progress** when the task's status is In Progress, which now includes *Blocked* and *On Hold*. **Planned** for To Do and for **Done / Won't Do** (*Cancelled*, *Failed*). A custom status whose category was never set is still read by its name, as before |
+
+Records with no status at all are never hidden by these filters.
+
+### Everything else keeps its built-in meaning
+
+For the rest, **system statuses behave as they always have**: *Task Completed* counts as finished work, *Ticket Resolved* and *Ticket Closed* close a ticket, and so on, whatever category they show. The one exception is agent waits (below), which also wake on other Done statuses such as *Cancelled*.
 
 **A custom status is treated like its system equivalent once you set its category.** While a custom status is in **To Do** (where every new one starts), nothing below applies to it.
 
 | Your custom status | What happens |
 |---|---|
-| **Task status set to Done / Done** | It counts as completed work, the same as *Task Completed*: the task's progress goes to 100%, and it counts towards sprint velocity (story points) and burndown. A ticket linked to the task shows **Shipped** in its roadmap summary |
-| **Task status set to In Progress** | A ticket linked to the task shows **In Progress** in its roadmap summary |
+| **Task status set to Done / Done** | It counts as completed work, the same as *Task Completed*: the task's progress goes to 100%, and it counts towards sprint velocity (story points) and burndown |
 | **Task status set to Done / Won't Do** | The task is finished but **not** completed. It doesn't count as completed work, and the task keeps the progress it had |
 | **Ticket status set to Done** (either resolution) | The ticket is closed, the same as *Ticket Resolved* or *Ticket Closed*: a customer can no longer reply on it from the support portal and opens a new ticket instead. Your own team can still write on it |
 | **Project status set to Done** (either resolution) | The project is treated as finished, the same as *Completed* or *Cancelled*. It's no longer offered as an Application to file tickets against |
 
-**Agents waiting for a task.** An AI agent told to wait until a task is completed now also wakes up when the task reaches **any** Done status, system or custom, including *Cancelled*. In that case the agent is told the task was resolved without being completed.
-
-> **Note:** the app's lists, boards and filters, including the Tickets **Active** view, don't sort or filter by category yet. The **Active** view still hides only *Ticket Resolved* and *Ticket Closed*.
+**Agents waiting for a task.** An AI agent told to wait until a task is completed also wakes up when the task reaches **any** Done status, system or custom, including *Cancelled*. In that case the agent is told the task was resolved without being completed.
 
 ## Where your statuses appear
 

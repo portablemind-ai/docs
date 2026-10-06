@@ -13,7 +13,7 @@ A ticket's status comes from your workspace's own list of ticket statuses: the s
 
 Administrators add and edit ticket statuses in **Administration → System Defaults → Status Management**, on the **Ticket Statuses** tab. See [Custom Statuses](statuses.md).
 
-> **Note:** the **Active** view in the Tickets sidebar hides tickets that are *Ticket Resolved* or *Ticket Closed*. A ticket in one of your custom statuses still shows there, even if that status is in the Done category.
+> **Note:** the **Active** view in the Tickets sidebar, and its count, hide tickets whose status is in the **Done** category. That covers *Ticket Resolved*, *Ticket Closed*, and any custom status your administrators put in Done, such as *Delivered*. A custom status left in To Do or In Progress still shows there. System statuses keep their usual badge colours. Your own statuses are coloured by category once they're In Progress or Done, and stay grey while in To Do. See [Custom Statuses](statuses.md#what-a-category-changes).
 
 If you provide support to other people, there are **two ways to let them raise tickets with you**, and which one fits depends on whether they already use Portablemind.
 
