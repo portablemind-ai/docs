@@ -87,6 +87,17 @@ workspace membership — User Management, or the role list on a user when your a
 isn't part of the export. When your app creates users with something other than an admin's
 credentials, it can only hand out roles marked external; an internal role is assigned by an admin.
 
+**App users: with or without the Basic role.** Every ordinary member holds Basic, and Basic is broad
+on purpose: members can create, change and delete everyday tasks, boards, channels and tickets, so a
+new workspace works on day one. A person's access is everything their roles allow together, so your
+role's scopes only narrow people who *don't* also hold Basic. If your users are ordinary members,
+your role adds what they need on your app's own records, and its limits on everyday records make no
+difference. If a workspace wants "app-only" people (say, staff who should only work inside your
+app), the workspace gives them your role, plus External Member if they're outside the organisation,
+and *not* Basic; then your scopes are the real boundary. That choice is the workspace's to make when
+it assigns roles. Your job is a role that is correctly scoped on its own; don't try to restrict Basic
+from your app.
+
 Need a capability that doesn't exist yet? That is the one case that is a platform change rather than
 an app change; tell us what action on what resource.
 
