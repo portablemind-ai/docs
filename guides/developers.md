@@ -16,13 +16,12 @@ The [API guide](https://www.dsiloed.com/apps/apiguide/index.html) is the home fo
 
 ## Template apps: fork a working example
 
-Three complete open-source applications built on Portablemind are published as public repos. Each is a real, deployed product — and each is deliberately structured as a **template you can fork** to build your own custom app. All three share the same minimal architecture: a single-page HTML + vanilla JavaScript frontend and a tiny zero-dependency Node proxy that injects runtime configuration and forwards authenticated requests to the platform. No framework, no build step.
+Two complete open-source applications built on Portablemind are published as public repos. Each is a real, deployed product — and each is deliberately structured as a **template you can fork** to build your own custom app. Both share the same minimal architecture: a single-page HTML + vanilla JavaScript frontend and a tiny zero-dependency Node proxy that injects runtime configuration and forwards authenticated requests to the platform. No framework, no build step.
 
 | Repo | What it is |
 | --- | --- |
 | [pm-ticket-portal](https://gitlab.com/russonrails/pm-ticket-portal) | White-label customer support portal: clients register with an access key, submit tickets, and chat with an AI support agent that responds autonomously — with human staff able to step in at any time. |
 | [pm-payer-portal](https://gitlab.com/russonrails/pm-payer-portal) | White-label healthcare payer portal: prior-authorization workflows driven by UM intake agents, with turnaround-time tracking and clinician-controlled denials. |
-| [pm-agentic-accelerator](https://gitlab.com/russonrails/pm-agentic-accelerator) | Participant portal for agent-driven orchestration pipelines: users register, launch multi-stage pipelines, approve milestones, and view deliverables — scoped so each team sees only its own activity. |
 
 These are the same kind of apps showcased on the [Apps](/apps) page — working examples of what you can build on the platform. In fact, `pm-ticket-portal` is the code behind our own live support site at [support.portablemind.ai](https://support.portablemind.ai), so you can see exactly what the template produces in production.
 
@@ -52,7 +51,7 @@ Before writing code, read the repo's README and integration guide and confirm
 your plan with me.
 ```
 
-Swap in whichever repo is closest to what you're building: the support-desk shape (`pm-ticket-portal`), the form-and-workflow shape (`pm-payer-portal`), or the orchestration-pipeline shape (`pm-agentic-accelerator`).
+Swap in whichever repo is closest to what you're building: the support-desk shape (`pm-ticket-portal`) or the form-and-workflow shape (`pm-payer-portal`).
 
 ## Shipping a role with your app
 
