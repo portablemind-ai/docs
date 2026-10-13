@@ -26,7 +26,7 @@ Agent Report Cards: A–F grades per agent computed nightly from the AG-UI audit
 | `window_days` | integer | no | Card window: 30 (default) or 7. |
 | `history_limit` | integer | no | agent: how many prior cards to return (default 12) |
 | `agent_message_id` | integer | no | override: the agent message (deliverable) to relabel. |
-| `label` | string | no | override: accepted \| correction \| clarification \| new_request \| unrelated \| none. One of: `accepted`, `correction`, `refinement`, `clarification`, `new_request`, `unrelated`, `none`. |
+| `label` | string | no | override: accepted \| correction \| refinement \| clarification \| new_request \| unrelated \| none. correction counts against the agent; accepted, refinement and new_request count for it (landed); the rest are neutral. One of: `accepted`, `correction`, `refinement`, `clarification`, `new_request`, `unrelated`, `none`. |
 | `note` | string | no | override: why (stored as rationale) |
 
 ## Input schema
@@ -78,7 +78,7 @@ The JSON Schema served for `inputSchema`, verbatim.
         "unrelated",
         "none"
       ],
-      "description": "override: accepted | correction | clarification | new_request | unrelated | none"
+      "description": "override: accepted | correction | refinement | clarification | new_request | unrelated | none. correction counts against the agent; accepted, refinement and new_request count for it (landed); the rest are neutral."
     },
     "note": {
       "type": "string",
