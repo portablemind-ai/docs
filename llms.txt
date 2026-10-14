@@ -10,6 +10,7 @@
 - [PortableMind MCP tool reference](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/README.md)
 - [agent_scorecard_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/agent_scorecard_tool.md): Agent Report Cards: A–F grades per agent computed nightly from the AG-UI audit log (tool failures, run errors, wasted calls, silent runs) and from what the h...
 - [apply_status_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/apply_status_tool.md): Apply a tracked status to a record that uses the HasTrackedStatus concern.
+- [automind_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/automind_tool.md): Work as the person's Automind: their stand-in while they are away.
 - [check_agent_status_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/check_agent_status_tool.md): Check the status of an agent run by passing its LlmAgentRun ID as `run_id` (the "runner id" returned by execute_agent_tool).
 - [complete_agent_run_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/complete_agent_run_tool.md): Complete an LLM agent run that was waiting for user feedback.
 - [connect_oauth_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/connect_oauth_tool.md): Get a link the USER clicks to connect a dynamic function's OAuth integration (Google, Microsoft, GitHub, ...), or check whether it is already connected.

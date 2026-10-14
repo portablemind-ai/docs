@@ -14,7 +14,7 @@ acting as the connected user, in that user's workspace, with that user's permiss
 - **Never send `tenant_id`.** The server resolves the workspace from your credential.
 - **Recipes** for the calls agents most often get wrong: [recipes.md](../recipes.md).
 
-93 tools in 18 categories.
+94 tools in 19 categories.
 
 ## agents
 
@@ -234,3 +234,11 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=ui`
 | [`navigate_user_tool`](tools/navigate_user_tool.md) | Navigate the user's app to an entity or surface. |
 | [`show_user_tool`](tools/show_user_tool.md) | Point out a UI element to the user with an on-screen callout ("show me where X is", "where do I…", "how do I find…"). |
 | [`walk_user_tool`](tools/walk_user_tool.md) | Walk the user through a MULTI-STEP task with guided on-screen callouts. |
+
+## other
+
+Filter: `https://www.dsiloed.com/api/v1/mcp?categories=other`
+
+| Tool | What it does |
+|---|---|
+| [`automind_tool`](tools/automind_tool.md) | Work as the person's Automind: their stand-in while they are away. |
