@@ -14,6 +14,7 @@
 - [Connecting Google Vertex AI](vertex-setup.md): Run Claude and Gemini through your own Google Cloud project and billing.
 - [Building AI Agents](agents.md): Create agents with their own instructions, tools, and identity.
 - [Chat & the AI Assistant](ai-assistant.md): Work with AI in conversations — @ai mentions, files, and more.
+- [Automind](automind.md): Let Automind answer your messages and @mentions as you while you're away, and check with you on the rest.
 - [AI Memory](memory.md): How Portablemind agents remember context across conversations.
 
 ## Collaboration
