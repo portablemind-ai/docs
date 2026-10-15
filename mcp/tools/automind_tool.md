@@ -30,8 +30,9 @@ ACTIONS:
     {"model_name": "ResourceAssignment", "filters": {"assignable_type": "Task", "assignable_id": 223}}
   People: {"model_name": "Party", "id": [party ids]} returns names only.
 - send_coding_task: give coding work to the person's SiloLink session (a Claude Code session on
-  their machine) — only in work the person gave you. Params: message (the full task: repo, branch,
-  what to change, how to verify, and to report back in that channel when done).
+  their machine): work the person gave you, or a teammate's request (review an MR, fix a bug or gap) —
+  never production for a teammate. Params: message (the full task: repo, branch or MR, what to do, how
+  to verify, and to report back in that channel when done).
 
 ## Parameters
 
