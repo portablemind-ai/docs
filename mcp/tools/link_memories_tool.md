@@ -19,7 +19,12 @@ Create a relationship edge between two memories in the same tenant.
 REQUIRED: source_memory_id, target_memory_id, relationship_type
 OPTIONAL: strength (0.0-1.0, default 0.8)
 
-relationship_type one of: caused_by, depends_on, leads_to, references, spawns, supersedes, validates, related_to, exemplifies
+RECOMMENDED relationship_type:
+  related_to  — the two memories are about the same thing (the default choice)
+  supersedes  — source replaces target (target is outdated); to correct a fact you
+                own, prefer update_memory, which also records the version chain
+  exemplifies — source is a general insight, target is an example of it
+Also accepted when the link really is that specific: caused_by, depends_on, leads_to, references, spawns, validates
 
 ## Parameters
 
@@ -27,7 +32,7 @@ relationship_type one of: caused_by, depends_on, leads_to, references, spawns, s
 |---|---|---|---|
 | `source_memory_id` | integer | yes | ID of the source memory (required) |
 | `target_memory_id` | integer | yes | ID of the target memory (required) |
-| `relationship_type` | string | yes | Type of relationship (required) One of: `caused_by`, `depends_on`, `leads_to`, `references`, `spawns`, `supersedes`, `validates`, `related_to`, `exemplifies`. |
+| `relationship_type` | string | yes | Type of relationship (required); related_to, supersedes or exemplifies unless a more specific type truly applies. One of: `caused_by`, `depends_on`, `leads_to`, `references`, `spawns`, `supersedes`, `validates`, `related_to`, `exemplifies`. |
 | `strength` | number | no | Edge strength 0.0-1.0 (default 0.8) |
 
 ## Input schema
@@ -59,7 +64,7 @@ The JSON Schema served for `inputSchema`, verbatim.
         "related_to",
         "exemplifies"
       ],
-      "description": "Type of relationship (required)"
+      "description": "Type of relationship (required); related_to, supersedes or exemplifies unless a more specific type truly applies"
     },
     "strength": {
       "type": "number",

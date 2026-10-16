@@ -18,7 +18,13 @@ Store persistent memories for future AI sessions.
 
 USE WHEN: User requests to remember something, important decisions/preferences emerge, solutions discovered.
 
-MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact, preference, decision, insight, context, solution, relationship, goal, execution
+MEMORY TYPES — pick one of these five:
+  fact (default) — something true about the work, the people or the world
+  preference     — how someone likes things done
+  decision       — a choice that was made, and why
+  learning       — a lesson, pattern or fix worth reusing
+  context        — background that explains a situation
+Also accepted: code_change, bug_fix, discussion, derived_insight, insight, solution, relationship, goal, execution
 
 IMPORTANCE: 0.9-1.0 (critical), 0.7-0.8 (important), 0.5-0.6 (moderate), 0.3-0.4 (low), 0.1-0.2 (background)
 
@@ -41,7 +47,7 @@ automatically when the id is not in your tenant.
 |---|---|---|---|
 | `title` | string | yes | Concise title that clearly identifies what is being remembered (required) |
 | `content` | string | yes | The fact to remember, stated as briefly as it can be stated and still stand on its own. A short paragraph is almost always enough. Recall injects this verbatim into future conversations, so length here is paid for on every turn that matches — prefer the fact and its "why" over a transcript, and link or reference detail that lives elsewhere rather than copying it in. |
-| `memory_type` | string | no | Type of memory being stored. Defaults to "fact" if not specified. One of: `code_change`, `bug_fix`, `discussion`, `learning`, `derived_insight`, `fact`, `preference`, `decision`, `insight`, `context`, `solution`, `relationship`, `goal`, `execution`. |
+| `memory_type` | string | no | Type of memory being stored: fact (default), preference, decision, learning or context. The other listed types are accepted but rarely needed. One of: `code_change`, `bug_fix`, `discussion`, `learning`, `derived_insight`, `fact`, `preference`, `decision`, `insight`, `context`, `solution`, `relationship`, `goal`, `execution`. |
 | `importance_score` | number | no | Importance score from 0.0 to 1.0. Higher scores mean more important. Defaults to 0.5. |
 | `tags` | array of string | no | Optional tags to help categorize and retrieve the memory later. |
 | `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
@@ -99,7 +105,7 @@ The JSON Schema served for `inputSchema`, verbatim.
         "goal",
         "execution"
       ],
-      "description": "Type of memory being stored. Defaults to \"fact\" if not specified."
+      "description": "Type of memory being stored: fact (default), preference, decision, learning or context. The other listed types are accepted but rarely needed."
     },
     "importance_score": {
       "type": "number",
