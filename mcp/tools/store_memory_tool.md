@@ -31,8 +31,6 @@ for again on every turn — write the fact and why it matters, not the transcrip
 came from. If you are pasting more than a few sentences, store the conclusion and
 point at the source instead.
 
-MINDS: Organizational containers grouping memories by project/context. Use mind_id for project-specific memories.
-
 CROSS-TENANT: llm_conversation_id / agent_id may reference a conversation or agent
 shared with you from another tenant — resolution falls back to your shared access
 automatically when the id is not in your tenant.
@@ -48,7 +46,7 @@ automatically when the id is not in your tenant.
 | `tags` | array of string | no | Optional tags to help categorize and retrieve the memory later. |
 | `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
 | `llm_conversation_id` | integer | no | Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation. |
-| `mind_id` | integer | no | Optional: Associate with a LlmMind (organizational container) for project-scoped memories. Omit for general memories (uses default mind). |
+| `mind_id` | integer | no | Optional: id of an existing LlmMind to scope the memory to. Omit it — memories land in the tenant default Mind. |
 | `private` | boolean | no | true keeps this memory private (only its owner or source conversation can recall it). Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team. |
 | `user_id` | integer | no | User ID for user-private memories (optional, defaults to current user) |
 
@@ -126,7 +124,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "mind_id": {
       "type": "integer",
-      "description": "Optional: Associate with a LlmMind (organizational container) for project-scoped memories. Omit for general memories (uses default mind)."
+      "description": "Optional: id of an existing LlmMind to scope the memory to. Omit it — memories land in the tenant default Mind."
     },
     "private": {
       "type": "boolean",

@@ -59,7 +59,7 @@ automatically when the id is not in your tenant.
 | `query` | string | no | A few distinctive plain words (or a short phrase) for "search" / "semantic" mode. |
 | `agent_id` | integer | no | Agent ID for retrieving agent-specific memories. Used with "agent" mode. |
 | `llm_conversation_id` | integer | no | Conversation ID for retrieving conversation-specific memories. Used with "conversation" mode. |
-| `mind_id` | integer | no | Optional: Scope to specific LlmMind (organizational container). Omit for cross-mind search. |
+| `mind_id` | integer | no | Optional: id of an existing LlmMind to restrict results to. Omit to search the whole tenant. |
 | `memory_types` | array of string | no | Filter by specific memory types. Can be combined with other modes. |
 | `memory_id` | integer | no | Specific memory ID to find related memories. Used with "related" mode. |
 | `limit` | integer | no | Maximum number of memories to retrieve. Defaults to 20. |
@@ -125,7 +125,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "mind_id": {
       "type": "integer",
-      "description": "Optional: Scope to specific LlmMind (organizational container). Omit for cross-mind search."
+      "description": "Optional: id of an existing LlmMind to restrict results to. Omit to search the whole tenant."
     },
     "memory_types": {
       "type": "array",
