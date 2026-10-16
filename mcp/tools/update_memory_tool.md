@@ -22,8 +22,8 @@ USE WHEN: a fact you stored is now wrong or incomplete and should be updated
 REQUIRED: memory_id
 OPTIONAL: title, content, importance_score, tags []
 
-A new `content` creates a NEW VERSION: the response carries the new memory_id (use it from now on);
-the old version is kept as history and no longer recalled. Title / importance / tags alone are
+A new `content` or `title` creates a NEW VERSION: the response carries the new memory_id (use it from
+now on); the old version is kept as history and no longer recalled. Importance / tags alone are
 edited in place and the id does not change.
 
 You can only update memories you created. To retire a memory entirely, use forget_memory.
