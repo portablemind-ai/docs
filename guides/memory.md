@@ -62,7 +62,14 @@ Each note is limited to 1,500 characters and is versioned: every change keeps th
 
 **Editing and erasing.** The edit and delete buttons appear only on memories that are yours to change: your own, and those learnt in a conversation you read alone. Workspace memories you didn't write are read-only here — ask an administrator if one is wrong. Editing the title or text creates a **new version**: the old one is kept as history and is no longer recalled. Changing only importance or tags edits the memory in place. A forgotten memory can't be edited, only erased. Deleting from this page erases the memory for good.
 
-**Sharing a private memory.** Workspace administrators can turn a private memory — one about them, or one an agent they manage keeps to itself — into a shared one. In **Settings → Memory**, or in an agent's **Memories** dialog in AI Studio, **Share with workspace** appears only on a private memory you are allowed to change and to read. You are shown who will see it and must confirm. Once shared, every member of the workspace and every agent that reads shared memory can recall it; an agent's private memory becomes part of the workspace's shared memory rather than staying that agent's alone. The shared copy is a new version, the private one is kept as history, and the share is recorded on the workspace's audit trail. Anything that looks like a password, key or other secret is refused, and so is a memory that has already been replaced or forgotten. A shared memory can't be made private again, and editing a private memory never makes it shared — to take a shared memory back, erase it.
+This page only ever shows memories you can already read. You never see another person's private memories here — not even as an administrator.
+
+**Sharing a private memory.** Only workspace administrators can share; members never see the button. There are two places to do it:
+
+- **Settings → Memory** — your own private memories, such as one about you or one learnt in your DM with an agent.
+- **AI Studio → Agents → an agent's Memories** — the private memories that agent keeps to itself. Only administrators who manage that agent see this.
+
+**Share with workspace** appears only on a private memory you are allowed to change and to read. You are shown who will see it and must confirm. Once shared, every member of the workspace and every agent that reads shared memory can recall it; an agent's private memory becomes part of the workspace's shared memory rather than staying that agent's alone. The shared copy is a new version, the private one is kept as history, and the share is recorded on the workspace's audit trail. Anything that looks like a password, key or other secret is refused, and so is a memory that has already been replaced or forgotten. A shared memory can't be made private again, and editing a private memory never makes it shared — to take a shared memory back, erase it.
 
 An agent's memories can also be reviewed and corrected from its **Memories** dialog in AI Studio's agent list.
 
