@@ -81,7 +81,7 @@ Per-message token usage and cost are tracked for every model, so you can see thi
 
 ## Memory across conversations
 
-Conversations feed the platform's persistent [AI memory](memory.md). Preferences you express, decisions your team makes, and solutions the AI discovers are remembered and recalled in future conversations — so the AI you talk to next week knows what you told it this week. Nothing is required from you; capture and recall are automatic.
+Conversations feed the platform's persistent [AI memory](memory.md). When you ask the AI to remember something — or it judges a preference, decision or solution worth keeping — it saves a memory, and relevant memories are recalled automatically in future conversations, so the AI you talk to next week knows what you told it this week. Your workspace administrator can also turn on background capture from conversations (off by default). You can see and correct what is kept about you under **Settings → Memory**.
 
 ## Connecting external systems
 

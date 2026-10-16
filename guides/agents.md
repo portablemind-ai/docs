@@ -64,7 +64,7 @@ Agents participate in conversations like any other member of your workspace. The
 
 ### Memory
 
-Beyond conversation history, agents use Portablemind's persistent memory system to store decisions, solutions, and insights long-term, and to learn patterns from their own execution history. See [Memory](memory.md) for how memories are stored, consolidated, and shared.
+Beyond conversation history, agents use Portablemind's persistent memory system to store decisions, solutions, and lessons long-term and recall them when they are relevant. Every agent always has the memory tools, and keeps a short always-on "About me" note about its own job. See [Memory](memory.md) for how memories are stored, shared, kept private, and corrected.
 
 ### Security roles
 
