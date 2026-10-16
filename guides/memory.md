@@ -63,6 +63,12 @@ Every memory is classified by type, which helps the AI weigh and retrieve it app
 
 Memory is secure by design. Each workspace's memories are completely isolated — there is no cross-tenant access, and retrieval is governed by the same capability-based access control that protects the rest of your data. This isolation is strong enough to support regulated use cases such as healthcare applications that must maintain compliance while remembering patient context.
 
+### Sharing a private memory
+
+A private memory — one about you, or one an agent keeps to itself — can be shared with the whole workspace. In **Settings → Memory**, or in an agent's memories in AI Studio, choose **Share with workspace** on a private memory you're allowed to change, read who will see it, and confirm. Once shared, every member of the workspace and every agent that reads shared memory can see and recall it; an agent's private memory becomes part of the workspace's shared memory rather than staying that agent's alone.
+
+Anything that looks like a password, key or other secret is refused, and so is a memory that has already been shared or forgotten. A shared memory can't be made private again from these pages — to take it back, erase it.
+
 ## What memory unlocks
 
 - **Personalized assistants** — the AI remembers your preferences, work patterns, and communication style across sessions, so interactions feel natural rather than repetitive.
