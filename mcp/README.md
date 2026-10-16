@@ -14,7 +14,7 @@ acting as the connected user, in that user's workspace, with that user's permiss
 - **Never send `tenant_id`.** The server resolves the workspace from your credential.
 - **Recipes** for the calls agents most often get wrong: [recipes.md](../recipes.md).
 
-94 tools in 19 categories.
+95 tools in 19 categories.
 
 ## agents
 
@@ -101,6 +101,7 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=memory`
 | [`update_memory_tool`](tools/update_memory_tool.md) | Correct or refine an existing memory you own (title / content / importance / tags). |
 | [`forget_memory_tool`](tools/forget_memory_tool.md) | Retire a memory you own (soft-archive — recoverable, not permanently deleted). |
 | [`link_memories_tool`](tools/link_memories_tool.md) | Create a relationship edge between two memories in the same tenant. |
+| [`update_memory_profile_tool`](tools/update_memory_profile_tool.md) | Rewrite your own always-on memory block — the short "About me" notes injected into EVERY prompt you run with, ahead of recalled memories. |
 
 ## conversation
 

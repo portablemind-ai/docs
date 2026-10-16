@@ -33,7 +33,13 @@ MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact,
 
 PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [], memory_id (for related),
         limit (1-100, default 20), min_importance (0.0-1.0), include_related (default true), include_content (default true),
-        max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags []
+        max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags [], as_of (ISO-8601)
+
+AS OF A DATE: as_of: "2026-07-01" answers "what did we know on 2026-07-01" — memories believed at that
+moment, including versions since corrected (each carries valid_to and superseded_by_id when it has been
+replaced). Works with every browse/search mode; in "related" mode it applies to the selection of the base
+memory only, the graph traversal itself is always over live memories. Without as_of you get what is
+believed NOW, which already excludes superseded versions.
 
 Returns: memories array with id, title, type, importance, content, relationships, and aggregated stats.
 
@@ -63,6 +69,7 @@ automatically when the id is not in your tenant.
 | `max_relationships` | integer | no | Maximum number of relationships to include per memory. Defaults to 5. Set to 0 to exclude all relationships. |
 | `relationship_strength_threshold` | number | no | Minimum relationship strength to include. Defaults to 0.70. Only relationships with strength >= this value will be included. |
 | `tags` | array of string | no | Filter memories by specific tags. |
+| `as_of` | string | no | Optional ISO-8601 date/time ("2026-07-01", "2026-07-01T09:00:00Z"): return what was believed at that moment (superseded versions included) instead of what is believed now. |
 
 ## Example
 
@@ -185,6 +192,10 @@ The JSON Schema served for `inputSchema`, verbatim.
         "type": "string"
       },
       "description": "Filter memories by specific tags"
+    },
+    "as_of": {
+      "type": "string",
+      "description": "Optional ISO-8601 date/time (\"2026-07-01\", \"2026-07-01T09:00:00Z\"): return what was believed at that moment (superseded versions included) instead of what is believed now."
     }
   },
   "required": []

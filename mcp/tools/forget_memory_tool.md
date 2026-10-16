@@ -19,7 +19,9 @@ Retire a memory you own (soft-archive — recoverable, not permanently deleted).
 USE WHEN: a memory is obsolete/wrong and should stop surfacing in recall.
 
 REQUIRED: memory_id
-OPTIONAL: superseded_by_memory_id (records a 'supersedes' link from the newer memory)
+OPTIONAL: superseded_by_memory_id — the newer memory that REPLACES this one. The old memory is then
+closed as of now (valid_to), linked to its replacement and kept as history (load_memories with
+as_of still finds it); without it the memory is just forgotten.
 
 You can only forget memories you created.
 
