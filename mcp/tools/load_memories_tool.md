@@ -16,10 +16,20 @@ This is the description the server sends to the model, verbatim.
 
 Load memories to provide context for AI conversations.
 
-MODES: conversation, agent, search, semantic, recent, important, type, related, all
-Auto-selects: search (if query), conversation (if llm_conversation_id), agent (if agent_id), recent (default)
+MODES (pick by what you have):
+- search (default when a query is given): the words of your query, stemmed, matched anywhere in
+  title/description/body — most of them must appear — fused with semantic similarity when the
+  tenant has embeddings. Plain words, 2-5 of them, the distinctive ones; AND/OR/quotes do nothing.
+  "memory deep dive" finds "Memory-system deep dive". Drop generic words before retrying once.
+- semantic: similarity of MEANING only (no word matching). Needs embeddings; otherwise behaves
+  like search. Use for paraphrases when search found nothing.
+- recent / important / all: browse by date / by importance >= 0.7 / by importance, no query.
+- type: browse memory_types (required). conversation / agent: browse by llm_conversation_id /
+  agent_id. related: the graph neighbours of memory_id.
+Auto-selects: search (if query), conversation (if llm_conversation_id), agent (if agent_id),
+related (if memory_id), recent (default).
 
-MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact, preference, decision, insight, context, solution, relationship, goal, execution
+MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact, preference, decision, insight, context, solution, relationship, goal, execution — memory_types filters every mode the same way (except related).
 
 PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [], memory_id (for related),
         limit (1-100, default 20), min_importance (0.0-1.0), include_related (default true), include_content (default true),
@@ -27,8 +37,7 @@ PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memor
 
 Returns: memories array with id, title, type, importance, content, relationships, and aggregated stats.
 
-QUERY IS SEMANTIC: matched by meaning, so AND/OR/quotes do nothing. Plain words.
-If two differently-worded queries return the same rows, it is not in memory — stop rewording.
+If search and semantic both return nothing for two wordings, it is not in memory — stop rewording.
 RECOLLECTION, NOT A DIRECTORY: ids and current facts come from org_lookup_tool (people),
 list_available_agents_tool (agents), general_crud_tool (records).
 
@@ -40,8 +49,8 @@ automatically when the id is not in your tenant.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `mode` | string | no | Retrieval mode determining how to find memories. Use "semantic" for vector similarity search. Defaults to "search" if query provided, "all" otherwise. One of: `conversation`, `agent`, `search`, `semantic`, `recent`, `important`, `type`, `related`, `all`. |
-| `query` | string | no | Search query for content-based memory retrieval. Used with "search" mode. |
+| `mode` | string | no | How to find memories. "search" (default with a query) = stemmed word match on title/description/body, fused with semantic similarity when embeddings are on; "semantic" = meaning only (falls back to search without embeddings); the rest browse. Defaults to "recent" with no query. One of: `conversation`, `agent`, `search`, `semantic`, `recent`, `important`, `type`, `related`, `all`. |
+| `query` | string | no | A few distinctive plain words (or a short phrase) for "search" / "semantic" mode. |
 | `agent_id` | integer | no | Agent ID for retrieving agent-specific memories. Used with "agent" mode. |
 | `llm_conversation_id` | integer | no | Conversation ID for retrieving conversation-specific memories. Used with "conversation" mode. |
 | `mind_id` | integer | no | Optional: Scope to specific LlmMind (organizational container). Omit for cross-mind search. |
@@ -93,11 +102,11 @@ The JSON Schema served for `inputSchema`, verbatim.
         "related",
         "all"
       ],
-      "description": "Retrieval mode determining how to find memories. Use \"semantic\" for vector similarity search. Defaults to \"search\" if query provided, \"all\" otherwise."
+      "description": "How to find memories. \"search\" (default with a query) = stemmed word match on title/description/body, fused with semantic similarity when embeddings are on; \"semantic\" = meaning only (falls back to search without embeddings); the rest browse. Defaults to \"recent\" with no query."
     },
     "query": {
       "type": "string",
-      "description": "Search query for content-based memory retrieval. Used with \"search\" mode."
+      "description": "A few distinctive plain words (or a short phrase) for \"search\" / \"semantic\" mode."
     },
     "agent_id": {
       "type": "integer",
