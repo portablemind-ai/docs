@@ -58,6 +58,10 @@ Controls when and how often the agent runs:
 - **Scheduled** — recurring runs on a schedule you set, from every few minutes to daily or weekly.
 - **Conversational** — agents also respond when @mentioned in any conversation they're a member of, whether or not they have a schedule.
 
+### Scheduled runs
+
+Anyone can also ask an agent to do something **later**, right from a conversation: "@Ralph on Oct 23 at 9am review the open tickets and tell me". That is a scheduled run, separate from the agent's own schedule above. It runs once or on a repeating schedule, posts as a message from the person who asked, and appears in the agent's **⋯ → Scheduled runs** menu and in that person's **Settings → Scheduled runs**. The agent needs the scheduled run tool granted. See [Scheduled Runs](scheduled-runs.md).
+
 ### Conversations
 
 Agents participate in conversations like any other member of your workspace. The conversation history gives the agent communication context and continuity — it can remember previous interactions across sessions.

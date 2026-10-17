@@ -15,6 +15,7 @@
 - [Building AI Agents](agents.md): Create agents with their own instructions, tools, and identity.
 - [Chat & the AI Assistant](ai-assistant.md): Work with AI in conversations — @ai mentions, files, and more.
 - [Automind](automind.md): Let Automind answer your messages and @mentions as you while you're away, and check with you on the rest.
+- [Scheduled Runs](scheduled-runs.md): Ask an agent to do something later, once or on a schedule, and see or cancel what you have asked for.
 - [AI Memory](memory.md): How Portablemind agents remember context across conversations.
 
 ## Collaboration
