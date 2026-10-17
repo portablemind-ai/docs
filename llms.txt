@@ -82,6 +82,7 @@
 - [reply_to_customer_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/reply_to_customer_tool.md): Reply to the CUSTOMER on a support ticket.
 - [report_coding_session_usage_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/report_coding_session_usage_tool.md): Report the token usage of a coding-agent CLI session you ran (Claude Code, Gemini, or Codex) so its cost is tracked under your user.
 - [run_python_skill_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/run_python_skill_tool.md): Run an approved, server-side Python skill by name and (if it generates a file) attach the result to the conversation.
+- [scheduled_run_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/scheduled_run_tool.md): Schedule an agent (you, by default) to act later in this conversation, once or on a cron, for the person who asked.
 - [search_conversation_history_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/search_conversation_history_tool.md): Search the message history of a conversation for a keyword or phrase.
 - [send_conversation_invitation_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/send_conversation_invitation_tool.md): Send an email invitation to a user to join and respond to an LLM conversation.
 - [send_email_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/send_email_tool.md): Send an email: subject, HTML email_body and to_email are required.

@@ -14,7 +14,7 @@ acting as the connected user, in that user's workspace, with that user's permiss
 - **Never send `tenant_id`.** The server resolves the workspace from your credential.
 - **Recipes** for the calls agents most often get wrong: [recipes.md](../recipes.md).
 
-95 tools in 19 categories.
+96 tools in 19 categories.
 
 ## agents
 
@@ -35,6 +35,7 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=agents`
 | [`set_agent_state_tool`](tools/set_agent_state_tool.md) | Flip a state flag on your own custom_fields. |
 | [`update_agent_tool`](tools/update_agent_tool.md) | Update an existing LLM agent by name. |
 | [`delete_agent_tool`](tools/delete_agent_tool.md) | Delete/remove an existing LLM agent by name. |
+| [`scheduled_run_tool`](tools/scheduled_run_tool.md) | Schedule an agent (you, by default) to act later in this conversation, once or on a cron, for the person who asked. |
 
 ## communication
 
