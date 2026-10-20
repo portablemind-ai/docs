@@ -74,11 +74,6 @@
 - [org_lookup_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/org_lookup_tool.md): Look up your place in the organization structure and find who to contact for help.
 - [outbound_call_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/outbound_call_tool.md): Make an outbound phone call to a customer using an AI voice assistant.
 - [read_llm_file_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/read_llm_file_tool.md): Read the contents of an existing LlmFile by ID.
-- [remote_directory_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/remote_directory_tool.md): List directory contents on a remote code workspace via SSH.
-- [remote_file_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/remote_file_tool.md): Read, write, patch, or delete files on a remote code workspace via SSH.
-- [remote_git_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/remote_git_tool.md): Perform git operations on a remote code workspace via SSH.
-- [remote_search_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/remote_search_tool.md): Search code on a remote workspace via SSH using ripgrep (rg) or grep.
-- [remote_shell_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/remote_shell_tool.md): Run allowlisted shell commands on a remote code workspace via SSH.
 - [reply_to_customer_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/reply_to_customer_tool.md): Reply to the CUSTOMER on a support ticket.
 - [report_coding_session_usage_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/report_coding_session_usage_tool.md): Report the token usage of a coding-agent CLI session you ran (Claude Code, Gemini, or Codex) so its cost is tracked under your user.
 - [run_python_skill_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/run_python_skill_tool.md): Run an approved, server-side Python skill by name and (if it generates a file) attach the result to the conversation.
@@ -102,8 +97,6 @@
 - [walk_user_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/walk_user_tool.md): Walk the user through a MULTI-STEP task with guided on-screen callouts.
 - [web_research_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/web_research_tool.md): Web research tool for researcher agents.
 - [worker_completion_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/worker_completion_tool.md): Signal that your dispatched work is COMPLETE.
-- [workspace_manage_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/workspace_manage_tool.md): Manage code workspaces for remote development via SSH.
-- [workspace_provision_tool](https://raw.githubusercontent.com/portablemind-ai/docs/main/mcp/tools/workspace_provision_tool.md): Self-provision a development workspace for an agent.
 
 ## User guides
 - [PortableMind user guides](https://raw.githubusercontent.com/portablemind-ai/docs/main/guides/README.md): The in-app guides from https://www.portablemind.ai/docs, in reading order. For the MCP tool reference see [https://github.com/portablemind-ai/docs/blob/main/mcp/README.md](https://github.com/portablemind-ai/docs/blob/main/mcp/README.md).

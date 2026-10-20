@@ -19,7 +19,8 @@ operations behind the board UI's "Add Task" picker.
 
 ACTIONS:
 - add_task: put a task on a board (idempotent; optional position for card rank).
-  Also syncs the task's custom_fields.gantt board pointer for same-tenant tasks.
+  Also syncs the task's custom_fields.gantt board pointer for same-tenant tasks
+  the caller may update.
 - remove_task: take a task off a board (idempotent; clears the gantt pointer it set).
 
 ACCESS: the caller needs UPDATE access to the board (owner, editor share, or

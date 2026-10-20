@@ -19,6 +19,10 @@ General CRUD and relationship management tool for all data models.
 NOT FOR STATUS CHANGES. "mark X complete", "set status to Y", "close this"
 -> apply_status_tool, ALWAYS. Passing current_status here is rejected.
 
+BOARDS: a KanbanBoard created here starts EMPTY. Fill it with
+kanban_board_membership_tool add_task (if you have it); link/unlink between
+Task and KanbanBoard is refused here.
+
 ACTIONS: create, update, list, details, destroy
 RELATIONSHIP_ACTIONS: link, unlink, list_linked (use relationship_action parameter)
 

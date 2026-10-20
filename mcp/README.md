@@ -14,7 +14,7 @@ acting as the connected user, in that user's workspace, with that user's permiss
 - **Never send `tenant_id`.** The server resolves the workspace from your credential.
 - **Recipes** for the calls agents most often get wrong: [recipes.md](../recipes.md).
 
-96 tools in 19 categories.
+89 tools in 19 categories.
 
 ## agents
 
@@ -190,13 +190,6 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=developer`
 
 | Tool | What it does |
 |---|---|
-| [`workspace_manage_tool`](tools/workspace_manage_tool.md) | Manage code workspaces for remote development via SSH. |
-| [`workspace_provision_tool`](tools/workspace_provision_tool.md) | Self-provision a development workspace for an agent. |
-| [`remote_file_tool`](tools/remote_file_tool.md) | Read, write, patch, or delete files on a remote code workspace via SSH. |
-| [`remote_directory_tool`](tools/remote_directory_tool.md) | List directory contents on a remote code workspace via SSH. |
-| [`remote_git_tool`](tools/remote_git_tool.md) | Perform git operations on a remote code workspace via SSH. |
-| [`remote_search_tool`](tools/remote_search_tool.md) | Search code on a remote workspace via SSH using ripgrep (rg) or grep. |
-| [`remote_shell_tool`](tools/remote_shell_tool.md) | Run allowlisted shell commands on a remote code workspace via SSH. |
 | [`git_provider_tool`](tools/git_provider_tool.md) | Interact with the tenant's configured git provider (GitLab or GitHub) to manage merge requests / pull requests. |
 | [`launch_silolink_session_tool`](tools/launch_silolink_session_tool.md) | Launch a SiloLink session to explore, review, or modify code in a repository. |
 | [`silolink_session_control_tool`](tools/silolink_session_control_tool.md) | Inspect or control an existing SiloLink (Claude Code) session. |

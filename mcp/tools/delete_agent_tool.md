@@ -14,14 +14,15 @@
 
 This is the description the server sends to the model, verbatim.
 
-Delete/remove an existing LLM agent by name. This tool permanently removes an agent 
-and all its configurations from the system.
+Delete/remove an existing LLM agent by name. An agent with no history is permanently removed with all its
+configurations; one with history (runs, memories, conversations) is ARCHIVED instead — made inactive with its
+history preserved — exactly as deleting it in the app does.
 
 IMPORTANT:
-- This action is PERMANENT and cannot be undone
+- A deletion is PERMANENT and cannot be undone
 - The agent's associated custom tools and resources are NOT deleted (they may be used by other agents)
 - The agent's conversation history is preserved
-- Any scheduled or pending runs will be cancelled
+- Any pending runs of an archived agent are cancelled
 
 RECOMMENDED WORKFLOW:
 1. Use list_available_agents_tool to confirm the agent exists

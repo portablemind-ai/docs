@@ -51,10 +51,11 @@ RETURNS (compact JSON):
 RESULT SIZE LIMIT: a tool result is capped at 15,000 characters. A result that would not fit
 is returned PAGED instead of cut: `result` is replaced by `result_truncated: true`,
 `result_total_chars`, `result_page` (the first 12,000 characters of the result as one compact
-JSON string), `result_next_offset` and `how_to_continue` (the exact
-dynamic_function_executions_tool call for the next page). Always check `result_truncated`
-before reasoning about a large result. Prefer functions that return less: compact keys, a
-cap, or a summary plus a file.
+JSON string), `result_next_offset` and `how_to_continue` (the exact call for the next page).
+Fetch the next page with THIS tool — it does not run the function again:
+Next page: {execution_id: 456, result_offset: 12000}
+Always check `result_truncated` before reasoning about a large result. Prefer functions that
+return less: compact keys, a cap, or a summary plus a file.
 
 ## Parameters
 
@@ -64,6 +65,8 @@ cap, or a summary plus a file.
 | `function_name` | string | no | Name of the function to execute (alternative to ID) |
 | `params` | object | no | Parameters to pass to the function. |
 | `async` | boolean | no | Execute asynchronously (default: false) |
+| `execution_id` | integer | no | With result_offset: fetch the next page of a paged result you ran (see RESULT SIZE LIMIT) instead of executing again. |
+| `result_offset` | integer | no | With execution_id: character offset into the result text, from result_next_offset. |
 
 ## Input schema
 
@@ -88,6 +91,14 @@ The JSON Schema served for `inputSchema`, verbatim.
     "async": {
       "type": "boolean",
       "description": "Execute asynchronously (default: false)"
+    },
+    "execution_id": {
+      "type": "integer",
+      "description": "With result_offset: fetch the next page of a paged result you ran (see RESULT SIZE LIMIT) instead of executing again"
+    },
+    "result_offset": {
+      "type": "integer",
+      "description": "With execution_id: character offset into the result text, from result_next_offset"
     }
   },
   "required": []
