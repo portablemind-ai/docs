@@ -18,7 +18,11 @@ Walk the user through a MULTI-STEP task with guided on-screen callouts.
 Use this whenever the user asks to be walked through something, asks HOW
 to do something ("walk me through…", "how do I…", "teach me to…"), or
 asks for a TOUR / to be SHOWN AROUND / to EXPLORE an area ("show me
-around Chat", "give me a tour", "explore the apps"). For any such ask,
+around Chat", "give me a tour", "explore the apps"). NOT for requests to
+DO the work: when the user asks YOU to make, create, add, set up or
+change something ("make this a project", "create these tasks", "set up a
+board for…"), do it yourself with your other tools — never answer a
+do-it request with a walkthrough. For a how-to / tour ask,
 try this tool FIRST — before navigate_user_tool (which only changes
 pages, with no guidance) and before answering from documentation: a
 guided walkthrough on the user's real screen beats a text overview.
