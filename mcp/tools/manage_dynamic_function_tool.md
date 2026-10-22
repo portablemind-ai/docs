@@ -19,7 +19,7 @@ CRUD operations for serverless JavaScript functions with scheduling and OAuth su
 ACTIONS: create, update, delete
 
 REQUIRED FOR CREATE: name (1-128 chars, alphanumeric/_/-), javascript_code
-OPTIONAL: description, active (default: true), schedule (cron), timeout_seconds (1-300, default: 30),
+OPTIONAL: description, active (default: true), schedule (cron), timeout_seconds (1-1800, default: 30, capped at the plan maximum),
           configuration (JSON), shared_configuration_id, callback_model, callback_event, callback_async, run_as_user_id
 
 IMPORTANT: run_as_user_id is REQUIRED for scheduled or callback functions. This specifies which user's
@@ -83,7 +83,7 @@ Delete: {action: "delete", name: "hello"}
 | `javascript_code` | string | no | JavaScript code to execute. |
 | `active` | boolean | no | Whether function is active. |
 | `schedule` | string | no | Cron expression for scheduling. |
-| `timeout_seconds` | integer | no | Max execution time (1-300) |
+| `timeout_seconds` | integer | no | Max execution time in seconds (1-1800, capped at the plan maximum) |
 | `configuration` | object | no | Custom configuration object. Any key that looks like a secret (api_key, *_token, password, credentials, etc.) is stored encrypted and REMOVED from the plain configuration entirely — it will not appear in a later get/manage response at all. The response's configuration_keys lists every key that was actually saved, secret or not, by name only, so a saved secret does not look like a silent failure. |
 | `shared_configuration_id` | string \| integer | no | ID or internal_identifier of a Configuration record to share across functions (set to null to remove) |
 | `callback_model` | string | no | Model to trigger callback on. Valid values: Party, Individual, Organization, Project, Task, TimeEntry, Timesheet, BizTxnEvent, BizTxnAccount, User, Tenant, TenantSignup. |
@@ -133,7 +133,9 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "timeout_seconds": {
       "type": "integer",
-      "description": "Max execution time (1-300)"
+      "minimum": 1,
+      "maximum": 1800,
+      "description": "Max execution time in seconds (1-1800, capped at the plan maximum)"
     },
     "configuration": {
       "type": "object",
