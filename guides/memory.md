@@ -38,13 +38,17 @@ Private memories are encrypted at rest. A shared memory is checked for secrets (
 
 ## "About you" and the other always-on notes
 
-On top of individual memories, Portablemind keeps three short, hand-edited notes that are always in front of the AI — no search needed:
+On top of individual memories, Portablemind keeps three short notes that are always in front of the AI — no search needed:
 
 - **About this workspace** — standing facts about your organization, kept by workspace administrators.
 - **About you** — who you are, how you like to work, what to assume. It is added only to conversations that are **private to you** (for example your DM with an agent), never to a channel other people read.
 - **About me** — each agent's own note about its job, which the agent maintains itself.
 
 Each note is limited to 1,500 characters and is versioned: every change keeps the previous text. None of these notes is added to a conversation that anyone outside your workspace (a guest, a customer, a partner organization) can read.
+
+**How "About you" stays up to date.** When background capture is on for your workspace and in write mode (see [How memories are created](#how-memories-are-created)), and it learns something about you — a preference, your role, how you like to work — in a conversation only you can read, such as your DM with an agent, Portablemind folds it into your note. It is meant to hold only lasting things about you, so it leaves out the status of projects, tasks and releases, and things about colleagues, customers or agents. A conversation that taught nothing new about you leaves the note as it is. The note is kept short rather than cut off at the limit.
+
+Once you edit the note yourself in **Settings → Memory**, your text is kept word for word: new things learnt about you are only added as short "Recently learned: …" lines, and only while there is room.
 
 ## Settings → Memory
 
