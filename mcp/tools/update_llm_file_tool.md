@@ -31,6 +31,17 @@ RULES:
 - Text content only; for binary files use the file upload API.
 - Describe what you changed when you report back.
 
+KEEPING A DOCUMENT CONSISTENT:
+- Adding a fact to an existing document? Re-read the whole document and update every
+  place the fact touches — summary/at-a-glance sections, the "Last updated" stamp,
+  status lines, decision/change logs, open-item lists, related links. Do not just append:
+  stale text that contradicts the new fact is a defect.
+- When someone reports a problem using one example, fix every instance of that problem
+  in the document, not only the one they quoted.
+- Markdown tables do not render everywhere (chat, copy/paste, some editors). For
+  documents people read outside the file preview, prefer headings and bullet lists, and
+  keep wide multi-column tables out of living documents.
+
 CROSS-TENANT: a file shared with you from another tenant resolves automatically when the
 id is not in your tenant — but only with EDITOR access or higher, and only for title/content
 updates. Viewer-level shares are read-only (use read_llm_file_tool). directory_path cannot
