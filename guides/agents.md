@@ -44,7 +44,7 @@ Context-based behavioral guidelines. Assigning a persona like "Software Engineer
 
 ### Tools
 
-The actions the agent can perform — sending emails, creating reports, updating records, or integrating with external systems. You can select from built-in system tools or add custom ones. Reusable capabilities can also be packaged as skills the agent draws on — see [Skills](skills.md).
+The actions the agent can perform — sending emails, creating reports, updating records, or integrating with external systems. You can select from built-in system tools or add custom ones. Reusable capabilities can also be packaged as skills the agent draws on — see [Skills](skills.md). An agent that works with your source code gets `git_provider_tool`, which opens, reviews and merges requests on GitLab or GitHub — see [Git Repositories & Merge Requests](git-repositories.md) for the one-time workspace setup.
 
 ### Resources
 

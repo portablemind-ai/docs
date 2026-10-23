@@ -41,6 +41,7 @@
 - [Skills](skills.md): Reusable instruction bundles that extend what your agents can do.
 - [Custom Data: Levels & Tiers](custom-data-tiers.md): Define your own object types and fields, or connect data that lives in your own systems.
 - [Dynamic Functions](dynamic-functions.md): Your own serverless JavaScript, running inside your workspace.
+- [Git Repositories & Merge Requests](git-repositories.md): Connect GitLab or GitHub, register the repositories agents may touch, and let agents open, review and merge requests.
 - [Coding Agents (SiloLink)](coding-agents.md): Launch and drive coding agents like Claude Code from Portablemind.
 - [Agent Orchestration](orchestration.md): Multi-stage agent pipelines with human approval gates.
 

@@ -35,6 +35,8 @@ If you prefer to do it by hand, full installation and configuration instructions
 
 > **Tip:** Your password is never stored on disk. The setup wizard exchanges your login for a long-lived token; if the server ever rejects it (for example after a password change), just re-run the setup wizard to refresh it.
 
+A SiloLink session commits and pushes with the git credentials already on its machine. Opening, reviewing and merging the resulting merge requests from inside Portablemind — by the agent that drove the session, or by a reviewer agent — goes through your workspace's git provider connection instead; see [Git Repositories & Merge Requests](git-repositories.md) to set it up.
+
 ## Launching a session from Portablemind
 
 Once the daemon is running, launching a coding session takes seconds and requires no terminal work:

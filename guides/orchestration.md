@@ -121,7 +121,7 @@ A pipeline often needs some workspace-specific setup before it can run — the r
 - You can edit the setup later with the pipeline's **Configure** option — the same form, pre-filled with current values, saved without reinstalling.
 - If a required value is still missing at run time, the run fails fast with an actionable message instead of an agent guessing and hanging.
 
-For code pipelines, the key field is the **repositories** list (name, checkout path, and branch for each repo the pipeline operates on). Pipelines that push branches and open merge requests against a remote also need git provider credentials, which an administrator sets in the workspace configuration; pipelines whose agents work purely on a local checkout need only the repositories.
+For code pipelines, the key field is the **repositories** list (name, checkout path, and branch for each repo the pipeline operates on). Pipelines that push branches and open merge requests against a remote also need git provider credentials and the provider-side repository ids, which an administrator sets in the workspace's `dev_team` configuration — see [Git Repositories & Merge Requests](git-repositories.md); pipelines whose agents work purely on a local checkout need only the repositories.
 
 ## Building your own template
 
