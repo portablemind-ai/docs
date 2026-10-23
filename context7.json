@@ -20,6 +20,7 @@
     "Use the file tools (list_llm_files_tool, read_llm_file_tool, create_llm_file_tool, update_llm_file_tool) for files, not general_crud_tool on LlmFile; create_llm_file_tool picks text/markdown for things to read and text/html for dashboards.",
     "execute_agent_tool takes the agent_name returned by list_available_agents_tool and, from a conversation, reply_conversation_id; poll with check_agent_status_tool using run_id.",
     "load_memories_tool queries are semantic: plain words, no AND/OR/quotes; if rewording returns the same rows the fact is not in memory. Keep store_memory_tool entries short — they are re-injected verbatim.",
-    "Narrow the tool set per client with ?categories=data,conversation or ?tools=general_crud_tool on the endpoint URL to cut tokens per turn."
+    "Narrow the tool set per client with ?categories=data,conversation or ?tools=general_crud_tool on the endpoint URL to cut tokens per turn.",
+    "git_provider_tool only works on repositories registered in the workspace's dev_team Configuration (its project_id or an entry in repos); an unregistered project_id is refused regardless of token reach. Pass project_id on every call that takes mr_id, since MR numbers are only unique within one repository."
   ]
 }

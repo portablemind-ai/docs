@@ -121,6 +121,23 @@ Queries are semantic: plain words, no AND/OR/quotes. If two wordings return the 
 it is not in memory. Memories are re-injected verbatim into future conversations — keep each
 one to a few sentences.
 
+## Open, review or merge a merge request
+
+`git_provider_tool` acts on the workspace's connected git provider (GitLab or GitHub). It only works on
+repositories the workspace has **registered**: the `project_id` of the `dev_team` Configuration or an
+entry in its `repos` list. Anything else is refused with *"not one of this workspace's registered
+repositories"*, however far the token reaches — ask a workspace admin to add the repository
+(Administration → Configuration Manager → `dev_team` → `repos`; the
+[Git Repositories & Merge Requests](https://www.portablemind.ai/docs/git-repositories) guide has the
+fields). Pass `project_id` on every call that takes `mr_id`: MR numbers are only unique within one
+repository, and a call without it falls back to the default repository and may return an unrelated
+merge request (the response then carries a `warning`).
+
+```json
+{"name": "git_provider_tool", "arguments": {"operation": "get_diff", "project_id": "acme/api", "mr_id": 42}}
+{"name": "git_provider_tool", "arguments": {"operation": "comment_mr", "project_id": "acme/api", "mr_id": 42, "body": "Looks good; one nit on the retry loop."}}
+```
+
 ## Keep the tool list small
 
 Every tool's description and schema is sent on every turn. Put a filter on the endpoint URL:
