@@ -33,7 +33,15 @@ MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact,
 
 PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [], memory_id (for related),
         limit (1-100, default 20), min_importance (0.0-1.0), include_related (default true), include_content (default true),
-        max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags [], as_of (ISO-8601)
+        max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags [], as_of (ISO-8601),
+        origin (deliberate | extraction)
+
+ORIGIN: every memory carries 'origin' — 'deliberate' (a person or an agent saved or edited it),
+'extraction' (background extraction distilled it from a conversation) or 'unknown' (before the stamps).
+origin: "extraction" / "deliberate" narrows every mode to that source — for auditing what extraction
+wrote, or for recalling only what people chose to keep (in search mode the filter applies after the
+limit, so fewer rows than limit can come back). An extraction row marked 'horizon: in_flight' is the
+progress of an effort at the time (a take accepted, a step blocked), kept briefly, not knowledge.
 
 AS OF A DATE: as_of: "2026-07-01" answers "what did we know on 2026-07-01" — memories believed at that
 moment, including versions since corrected (each carries valid_to and superseded_by_id when it has been
@@ -70,6 +78,7 @@ automatically when the id is not in your tenant.
 | `relationship_strength_threshold` | number | no | Minimum relationship strength to include. Defaults to 0.70. Only relationships with strength >= this value will be included. |
 | `tags` | array of string | no | Filter memories by specific tags. |
 | `as_of` | string | no | Optional ISO-8601 date/time ("2026-07-01", "2026-07-01T09:00:00Z"): return what was believed at that moment (superseded versions included) instead of what is believed now. |
+| `origin` | string | no | Only memories from this source: "deliberate" (saved or edited by a person or an agent) or "extraction" (background extraction). Omit for both. One of: `deliberate`, `extraction`. |
 
 ## Example
 
@@ -196,6 +205,14 @@ The JSON Schema served for `inputSchema`, verbatim.
     "as_of": {
       "type": "string",
       "description": "Optional ISO-8601 date/time (\"2026-07-01\", \"2026-07-01T09:00:00Z\"): return what was believed at that moment (superseded versions included) instead of what is believed now."
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "deliberate",
+        "extraction"
+      ],
+      "description": "Only memories from this source: \"deliberate\" (saved or edited by a person or an agent) or \"extraction\" (background extraction). Omit for both."
     }
   },
   "required": []
