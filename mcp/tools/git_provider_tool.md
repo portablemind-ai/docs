@@ -29,6 +29,9 @@ Operations:
 - get_diff: View the diff of a MR/PR
 
 Use project_id to work with a different repo than the default configured one.
+project_id must be one of the workspace's registered repositories: an entry in
+the dev_team Configuration's repos list (or its top-level project_id when that
+list is empty). Any other repo is refused; a workspace admin registers repos.
 
 IMPORTANT: For any operation that takes mr_id (get_mr, get_diff,
 approve_mr, merge_mr, comment_mr), pass project_id explicitly. MR
@@ -84,6 +87,38 @@ Approve and merge:
 | `squash` | boolean | no | Squash commits when merging (for merge_mr) |
 | `delete_branch` | boolean | no | Delete source branch after merge (for merge_mr) |
 | `dry_run` | boolean | no | When true, create_mr / merge_mr return the would-be URL and request body WITHOUT POSTing to the git provider (GitLab/GitHub). Other operations (read-only or comment) ignore this flag. Use for eval scenarios or to inspect what an agent would do before letting it mutate. Defaults to false; the response sets `dry_run: true` so callers can distinguish previewed mutations from real ones. |
+
+## Example
+
+```json
+{"name": "git_provider_tool", "arguments": {"operation": "get_diff", "project_id": "acme/api", "mr_id": 42}}
+```
+
+Returns the merge request's metadata and its diff. Every operation reads the workspace's `dev_team`
+Configuration for the provider (`gitlab` / `github`), base URL, default repository, default branch and
+the encrypted `git_token`; nothing is passed per call but the operation's own arguments.
+
+## Gotchas
+
+- **Only registered repositories.** `project_id` must be one of the entries in the `dev_team`
+  Configuration's `repos` list (or, when that list is empty, its top-level `project_id`); anything
+  else — the default repository included, if it is not listed — is refused with
+  *"not one of this workspace's registered repositories (the dev_team configuration and its repos
+  list)"*. The token usually reaches more (a GitLab group token sees every project in the group),
+  so this refusal is the allow-list, not a lookup failure. A workspace admin adds the repository
+  under **Administration → Configuration Manager → Configurations → dev_team → repos**; the setup
+  is described in the [Git Repositories & Merge Requests](https://www.portablemind.ai/docs/git-repositories)
+  guide. The change takes effect on the next call.
+- **Pass `project_id` on every call that takes `mr_id`.** MR / PR numbers are only unique within
+  one repository. Without `project_id` the call uses the default repository and may return an
+  unrelated merge request; the response then carries a `warning` field.
+- **`mr_id` is a whole number**, the MR / PR iid, not a URL or a branch name.
+- **No `dev_team` Configuration** raises *"No dev_team configuration found for tenant"*: the
+  workspace has not connected a git provider yet. Same guide.
+- **Approve and merge are for manager roles.** The tool does not stop a developer agent from
+  merging; the agent's instructions and the pipeline's human approval gates do. Give `merge_mr` to
+  the agent that is meant to have it. `dry_run: true` on `create_mr` / `merge_mr` previews the
+  request without sending it.
 
 ## Input schema
 
