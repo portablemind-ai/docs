@@ -60,6 +60,7 @@ session log out of the human-facing thread.
 | `branch` | string | no | Git branch name for workspace isolation. When provided, SiloLink creates an isolated git worktree on this branch. Example: "feature/task-101-rate-limiter". |
 | `base_branch` | string | no | Base branch to create the worktree from. Defaults to "development". Example: "main", "development". |
 | `coding_agent` | string | no | Which coding-agent CLI the SiloLink session should run: "claude" (Claude Code), "gemini" (Gemini CLI), or "codex" (OpenAI Codex CLI). Omit to use the target daemon's configured default (normally claude). Set this when you specifically want a non-default provider for this session. One of: `claude`, `gemini`, `codex`. |
+| `model` | string | no | Vendor model id the worker CLI must run, e.g. "claude-opus-5-5" or "claude-sonnet-5". Omit to use the launching user's coding-agent default (Settings), else the daemon's default. Set it only when THIS task needs more or less model than usual — a deep refactor, or a trivial fix you want run cheaply. Must fit coding_agent (claude-* for claude, gemini-* for gemini, gpt-*/o* for codex). |
 | `orchestration_execution_id` | integer | no | Orchestration execution ID — when set, the SiloLink session will be instructed to call remote_orchestration_stage_complete when done. |
 | `orchestration_stage_execution_id` | integer | no | Orchestration stage execution ID — identifies which stage this session is executing. |
 | `mcp_tool_allowlist` | array of string | no | EXTRA server tool names to make available to the spawned session, on top of the standard worker roster (data/admin/conversation/utility tools plus git_provider_tool, the orchestration tools, coordination_tool, org_lookup_tool and report_coding_session_usage_tool). This is ADDITIVE — you never need to restate the standard roster, and omitting this does not shrink it. Use it when your task instructs the session to call a tool outside that set, e.g. ["run_python_skill_tool"]. |
@@ -109,6 +110,10 @@ The JSON Schema served for `inputSchema`, verbatim.
         "codex"
       ],
       "description": "Which coding-agent CLI the SiloLink session should run: \"claude\" (Claude Code), \"gemini\" (Gemini CLI), or \"codex\" (OpenAI Codex CLI). Omit to use the target daemon's configured default (normally claude). Set this when you specifically want a non-default provider for this session."
+    },
+    "model": {
+      "type": "string",
+      "description": "Vendor model id the worker CLI must run, e.g. \"claude-opus-5-5\" or \"claude-sonnet-5\". Omit to use the launching user's coding-agent default (Settings), else the daemon's default. Set it only when THIS task needs more or less model than usual — a deep refactor, or a trivial fix you want run cheaply. Must fit coding_agent (claude-* for claude, gemini-* for gemini, gpt-*/o* for codex)."
     },
     "orchestration_execution_id": {
       "type": "integer",
