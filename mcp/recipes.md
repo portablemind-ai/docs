@@ -124,8 +124,8 @@ one to a few sentences.
 ## Open, review or merge a merge request
 
 `git_provider_tool` acts on the workspace's connected git provider (GitLab or GitHub). It only works on
-repositories the workspace has **registered**: the `project_id` of the `dev_team` Configuration or an
-entry in its `repos` list. Anything else is refused with *"not one of this workspace's registered
+repositories the workspace has **registered**: the entries of the `dev_team` Configuration's `repos`
+list (or, when that list is empty, its top-level `project_id`). Anything else is refused with *"not one of this workspace's registered
 repositories"*, however far the token reaches — ask a workspace admin to add the repository
 (Administration → Configuration Manager → `dev_team` → `repos`; the
 [Git Repositories & Merge Requests](https://www.portablemind.ai/docs/git-repositories) guide has the
