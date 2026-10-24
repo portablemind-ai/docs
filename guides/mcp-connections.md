@@ -12,7 +12,33 @@ Every method uses the same MCP endpoint:
 https://www.dsiloed.com/api/v1/mcp
 ```
 
-You can narrow which tools are exposed with the `categories` filter, e.g. `…/api/v1/mcp?categories=data,conversation`. The category picker in **Profile → MCP** builds this URL for you.
+You can narrow which tools are exposed with the `categories` filter, e.g. `…/api/v1/mcp?categories=data,conversation`. The category picker in **Profile → MCP** builds this URL for you. With no filter, every tool is exposed; a filter keeps only the categories you list (an unrecognized name is ignored, and if a filter matches nothing you still get a small core so the connection is never tool-less).
+
+The available categories are:
+
+| Category | Tools it exposes |
+|---|---|
+| `data` | CRUD, schema, files, status |
+| `conversation` | Chat messaging |
+| `communication` | Email, invitations, voice |
+| `memory` | Store and load memories |
+| `agents` | Create, execute, monitor agents |
+| `admin` | Logs, cost stats |
+| `utility` | Date/time, helpers |
+| `documentation` | API docs assistant |
+| `dynamic_functions` | Serverless JS functions |
+| `llm_tools` | Custom tool management |
+| `mdm` | External system mappings |
+| `developer` | Git provider and SiloLink coding sessions |
+| `skills` | Fetch a skill to use it locally |
+| `research` | Web search and page fetch |
+| `orchestration` | Multi-agent orchestration pipelines |
+| `silolink` | Launch and control Claude Code sessions on your machine |
+| `workflow` | Workflow artifacts |
+| `coordination` | Agent resource coordination |
+| `organization` | Agent org structure and escalation lookup |
+| `ui` | Navigate, show, or walk you through the app |
+| `support` | Ticket context for a support agent |
 
 ## Option 1 — OAuth (recommended)
 
