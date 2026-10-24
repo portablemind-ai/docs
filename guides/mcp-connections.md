@@ -12,7 +12,7 @@ Every method uses the same MCP endpoint:
 https://www.dsiloed.com/api/v1/mcp
 ```
 
-You can narrow which tools are exposed with the `categories` filter, e.g. `…/api/v1/mcp?categories=data,conversation`. The category picker in **Profile → MCP** builds this URL for you. With no filter, every tool is exposed; a filter keeps only the categories you list (an unrecognized name is ignored, and if a filter matches nothing you still get a small core so the connection is never tool-less).
+You can narrow which tools are exposed with the `categories` filter, e.g. `…/api/v1/mcp?categories=data,conversation`. The category picker in **Profile → MCP** builds this URL for you — pick individual categories, or start from a quick preset (Default, Coding, Agents & orchestration) and adjust. With no filter, every tool is exposed; a filter keeps only the categories you list (an unrecognized name is ignored, and if a filter matches nothing you still get a small core so the connection is never tool-less).
 
 The available categories are:
 
