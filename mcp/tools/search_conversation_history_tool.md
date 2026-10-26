@@ -32,8 +32,9 @@ sits on the record and in ITS OWN conversation (task chat / ticket thread).
 Pass `entity_type` ('Task' or 'BizTxnEvent') + `entity_id` to read that: the
 response carries the item's status history (each change, when, by whom) and
 its linked conversations — searched with `query`, or their newest messages
-without one. Find the id with general_crud_tool (list + search_term); a miss
-in a channel also lists matching work items as related_work_items.
+without one. Find the id with general_crud_tool (list + search_term); a channel
+search that misses or barely hits also lists matching work items as
+related_work_items.
 
 ## Parameters
 
@@ -79,9 +80,9 @@ conversation linked to the record that the caller may read) and the newest messa
 them; add `query` to search those conversations instead. Each match and preview names its
 `conversation_id`, so `message_id` follow-ups go to the right thread.
 
-A zero-hit search in a channel also returns `related_work_items`: tasks and tickets in the
-caller's reach whose name carries the query words, with ids ready for the call above. The hint
-says why — a work item's approvals, status changes and decisions live on the record, not in the
+A channel search that misses, or returns two hits or fewer (usually the question itself), also
+returns `related_work_items`: tasks and tickets in the caller's reach whose name carries the query
+words, with ids ready for the call above. The hint says why — a work item's approvals, status changes and decisions live on the record, not in the
 channel (PROD 2026-10-26: an agent searched a fresh channel four times for "who approved the
 backup verification runbook" while the approval sat in the task's chat and the change in its
 status history).
