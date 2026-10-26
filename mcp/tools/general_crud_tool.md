@@ -52,10 +52,14 @@ person an /api/ URL; that is raw JSON, not a page.
 PAGINATION: limit (default 10, -1 for all), offset
 SORTING: sort: {column: "created_at", direction: "desc"}
 
-CROSS-TENANT SHARED ACCESS: conversations, files, projects, and other shareable
-records shared with you from other tenants are reachable. DETAILS falls back to
-your shared access automatically when the id is not in your tenant; for LIST,
-pass include_shared: true.
+CROSS-TENANT SHARED ACCESS: conversations, files, projects, tickets, tasks and other
+shareable records shared with you from other tenants are reachable. DETAILS falls back
+to your shared access automatically when the id is not in your tenant; for LIST, UPDATE
+and DESTROY pass include_shared: true. LINK / UNLINK / LIST_LINKED reach shared records
+automatically, exactly like the app's link buttons: you can change the links OF a record
+from another tenant when it is shared with you at editor level or above (e.g. link your
+own Task to a customer's ticket shared with you), and you can point a link AT any record
+you can see.
 
 CUSTOM_FIELDS ON UPDATE: merged (deep) into the record's existing custom_fields —
 send only the keys you are changing; omitted keys survive and an explicit null
