@@ -26,11 +26,22 @@ Pass `message_id` instead of `query` to fetch ONE message in full. Recalled
 memories are deliberately short and carry the id of the message they came
 from — follow that pointer when the summary is not enough.
 
+A channel is NOT where a work item's record lives. Who approved a task or
+ticket, who changed its status and when, what was decided about it — that
+sits on the record and in ITS OWN conversation (task chat / ticket thread).
+Pass `entity_type` ('Task' or 'BizTxnEvent') + `entity_id` to read that: the
+response carries the item's status history (each change, when, by whom) and
+its linked conversations — searched with `query`, or their newest messages
+without one. Find the id with general_crud_tool (list + search_term); a miss
+in a channel also lists matching work items as related_work_items.
+
 ## Parameters
 
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `conversation_id` | integer | no | ID of the conversation to search (defaults to the current conversation) |
+| `entity_type` | string | no | Read a WORK ITEM instead of a channel: Task or BizTxnEvent (a ticket). Requires entity_id. Returns its status history (who changed what, when) and searches its own conversations (task chat / ticket thread); conversation_id is ignored. |
+| `entity_id` | integer | no | Id of the record named by entity_type, e.g. the task id. |
 | `query` | string | no | Keyword or phrase to search for (case-insensitive substring match) |
 | `message_id` | integer | no | Fetch this one message IN FULL instead of searching. Use the id a truncated memory or search snippet gave you. |
 | `limit` | integer | no | Maximum matches to return (default 10, max 20) |
@@ -52,6 +63,29 @@ Fetch one message in full by id (the id a memory or snippet pointed at):
 - **Searches everything,** including messages compacted out of the model's context window.
 - **`limit` caps at 20.** Refine the query rather than paging.
 
+## Work items: who approved it, who changed it
+
+A channel is not where a task's or ticket's record lives. Pass `entity_type` (`Task` or
+`BizTxnEvent`) + `entity_id` instead of `conversation_id` to read the work item itself:
+
+```json
+{"name": "search_conversation_history_tool", "arguments": {"entity_type": "Task", "entity_id": 2479}}
+```
+
+The response carries `work_item` (name, project, current status), `status_history` (every status
+the record has carried, newest first, with `changed_by` — the actor the door that applied it
+recorded — and `changed_at`), `conversations` (the task chat / ticket support thread / every
+conversation linked to the record that the caller may read) and the newest messages across
+them; add `query` to search those conversations instead. Each match and preview names its
+`conversation_id`, so `message_id` follow-ups go to the right thread.
+
+A zero-hit search in a channel also returns `related_work_items`: tasks and tickets in the
+caller's reach whose name carries the query words, with ids ready for the call above. The hint
+says why — a work item's approvals, status changes and decisions live on the record, not in the
+channel (PROD 2026-10-26: an agent searched a fresh channel four times for "who approved the
+backup verification runbook" while the approval sat in the task's chat and the change in its
+status history).
+
 ## Input schema
 
 The JSON Schema served for `inputSchema`, verbatim.
@@ -63,6 +97,14 @@ The JSON Schema served for `inputSchema`, verbatim.
     "conversation_id": {
       "type": "integer",
       "description": "ID of the conversation to search (defaults to the current conversation)"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Read a WORK ITEM instead of a channel: Task or BizTxnEvent (a ticket). Requires entity_id. Returns its status history (who changed what, when) and searches its own conversations (task chat / ticket thread); conversation_id is ignored."
+    },
+    "entity_id": {
+      "type": "integer",
+      "description": "Id of the record named by entity_type, e.g. the task id."
     },
     "query": {
       "type": "string",
