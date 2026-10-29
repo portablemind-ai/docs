@@ -40,6 +40,21 @@ The available categories are:
 | `ui` | Navigate, show, or walk you through the app |
 | `support` | Ticket context for a support agent |
 
+### Acting in a partner's workspace
+
+A connection acts in your own workspace unless its URL names another one. To have an AI app work inside a partner's workspace you've been admitted to (see [Working inside a partner's workspace](workspace-sharing.md#working-inside-a-partners-workspace)), add `workspace_tenant_id` with that workspace's identifier. It combines with the categories filter:
+
+```
+https://www.dsiloed.com/api/v1/mcp?workspace_tenant_id=<their identifier>&categories=data,conversation,memory
+```
+
+- **One connector per workspace.** Add a separate connector for each client workspace (for example "Portablemind — Acme") next to the one for your own. Claude custom connectors sync across claude.ai, Claude Desktop and Claude Code, so the same connector works in all three.
+- **You still sign in as yourself.** The OAuth consent is your normal Portablemind sign-in; the URL only chooses which workspace the connector acts in.
+- **The AI app is told where it is.** When it connects it's told the workspace it's working in — and that it isn't your home workspace — so what it reads, creates and saves lands where you intend.
+- **Clients that can send headers** (a hand-written `mcp.json`, `mcp-remote`, scripts) can send a `Workspace-Tenant-Id` header with the identifier instead; it means the same thing.
+
+If you name a workspace you haven't been admitted to (or one that doesn't exist), the connection is **refused** with *"Workspace switch refused: …"* rather than quietly working in your own workspace. Naming your own workspace is the same as leaving it out.
+
 ## Option 1 — OAuth (recommended)
 
 If your client supports OAuth for MCP servers (ChatGPT connectors, claude.ai custom connectors, Claude Code, and most modern clients do), you don't need to copy any token at all:
@@ -93,12 +108,6 @@ Start the Gemini CLI; it opens a browser for the PortableMind consent screen and
 ### Revoking access
 
 Approving the consent screen authorizes that app until you revoke it. To revoke, change your password (or use "sign out everywhere") — that invalidates every session and every connected app's token for your account, so each app has to ask for consent again. Denying the consent screen sends the app away with no access.
-
-## Working in another workspace
-
-A connection acts in your own workspace. To have the AI app work inside a partner's workspace you've been admitted to (see [Working inside a partner's workspace](workspace-sharing.md#working-inside-a-partners-workspace)), have the client send a `Workspace-Tenant-Id` header with that workspace's identifier. The AI app is told which workspace it's working in — and that it isn't your home workspace — so what it reads, creates and saves lands where you intend.
-
-If you name a workspace you haven't been admitted to (or one that doesn't exist), the connection is **refused** with *"Workspace switch refused: …"* rather than quietly working in your own workspace. Naming your own workspace is the same as not sending the header.
 
 ## Option 2 — Personal MCP token (for clients that send headers)
 

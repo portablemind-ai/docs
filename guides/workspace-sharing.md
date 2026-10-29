@@ -101,7 +101,7 @@ If you only have a channel or item shared with you (you haven't been admitted to
 
 A workspace's administrators decide this under **Administration → Partners → Partners' @ai uses this workspace** (on by default). The same panel has **Learn from partners' posts in our channels** (off by default): with it on, background memory capture may learn from your public channels that admitted partner people post in (see [How memories are created](memory.md#how-memories-are-created)). Turn it off and partners' `@ai` in your channels uses their own workspace and AI budget again.
 
-Connected AI apps work the same way — see [Working in another workspace](mcp-connections.md#working-in-another-workspace).
+Connected AI apps work the same way — see [Acting in a partner's workspace](mcp-connections.md#acting-in-a-partners-workspace).
 
 ### Which workspace your AI and memories use
 
