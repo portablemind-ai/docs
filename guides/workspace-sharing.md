@@ -9,7 +9,7 @@ This is the right model when your collaborators **already have their own Portabl
 - **A formal request/accept flow** — sharing between organizations is established deliberately, by mutual agreement, never unilaterally.
 - **Resource-level access** — you share the specific things the collaboration needs — a conversation, a project, a folder — not your whole workspace.
 - **Role-based permissions** — everything a visiting user can see or do is controlled by the access levels on each share and the security roles and capabilities the host grants.
-- **Work from your own workspace** — content shared with you appears inside your own workspace; you don't log out or move somewhere else to reach it.
+- **Work from your own login** — content shared with you appears inside your own workspace, and when a partner admits you to their workspace you switch into it from the same account. You never need a second login.
 
 ## Core concepts
 
@@ -74,9 +74,30 @@ Day to day, most cross-organization sharing happens from an item's own **share d
 
 > **Tip:** a share always grants real visibility at the level you choose — viewer and up. If what you actually want is "they can raise tickets against this, nothing more," that's intake publishing, not sharing.
 
+## Giving a partner's people working access to your apps
+
+Sharing item by item works for a handful of things. When a partner's person needs to *work* in your workspace — a consultant running an engagement, an agency producing your content — give them access to whole apps instead:
+
+1. In the top bar, click the **Share workspace apps** button (the share icon next to your notifications). It is shown to your workspace's administrators.
+2. Enter the person's email address — someone from a partner organization keeps their own account — and pick the apps they need: **Chat**, **Plan & Track**, **Files**, **Admin Apps**.
+3. Click **Send Invite**. They get those apps in your workspace, with your workspace's permissions. Removing the partnership removes the access.
+
+To review or change what a partner's person holds later:
+
+- **Administration → Users**, turn on **Include partner users**. Partner people are listed with a **Partner** tag. You can view them, **Manage Roles** (the roles they hold in *your* workspace) and set spend limits. Their profile, password and account belong to their own organization, so edit, reset password and delete aren't offered.
+- **Administration → Assignments**, turn on **Include partner users** to find them in the **Assign To** search. A partner person is given your workspace's **security roles**, never individual capabilities: roles are the reviewed bundles, and they end with the partnership.
+
+## Working inside a partner's workspace
+
+When a partner gives you app access in their workspace, a **workspace menu** appears in your top bar (it only appears once you belong to more than one workspace). It shows the workspace you're in, with an **Owner** or **Guest** badge, and lists the others you can switch to with how many roles you hold there. Pick one to switch: the app reloads in that workspace and remembers where you were in each. Everything you create, upload or save while switched belongs to that workspace.
+
+Content shared with you item by item doesn't require switching at all: it appears directly inside your own workspace, filtered by the permissions you hold on each shared resource. The workspace menu also links to **Workspace Sharing**, which opens the Partners administration page.
+
+Connected AI apps work the same way — see [Working in another workspace](mcp-connections.md#working-in-another-workspace).
+
 ## Where shared content appears
 
-Your top bar always shows which workspace you're working in, with an **Owner** or **Guest** badge indicating your role there. Content shared with you from another organization doesn't require moving anywhere: it appears directly inside your own workspace, filtered by the permissions you hold on each shared resource. The workspace menu also links to **Workspace Sharing**, which opens the Partners administration page.
+Content shared with you from another organization appears inside your own workspace — in Files under **Shared Files**, in Chat, in Plan & Track — labelled with the owning organization's name.
 
 If someone shares content with a person who doesn't have a Portablemind account yet, the share invitation email walks them through creating their own workspace — and the pending shares activate as part of signup.
 
@@ -95,7 +116,7 @@ Workspace sharing is designed so that collaboration never weakens isolation:
 
 - **Deliberate grants required** — no user can touch another organization's data unless that organization explicitly shared it with them.
 - **Role-gated access** — every action a visiting user takes is checked against the access levels, security roles, and capabilities the host granted. There is no implicit access.
-- **Resource-level granularity** — access is granted share by share, role by role — never wholesale to an entire workspace.
+- **Explicit granularity** — access is granted share by share, or app by app through roles — never silently to an entire workspace.
 - **Audit trail** — every relationship change and access grant is logged.
 - **Clean revocation** — revoking a relationship removes the access it granted in one step, so nothing lingers.
 

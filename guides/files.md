@@ -58,7 +58,9 @@ You can always override the default by flipping the toggle before uploading.
 
 ### Sharing a folder
 
-When you share a folder with someone (or a team), they can see **all the files inside that folder** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible.
+When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (Viewer, Editor, Full Access) applies to the files in it too.
+
+Sharing a single file is different: the person can open that file (and see the folder it sits in, so they can find it), but not the other files next to it.
 
 ### Private files in shared folders
 
@@ -91,7 +93,17 @@ Folders can be shared across organizations. When someone from another organizati
 
 This works the same way as Google Drive's "Shared with me" — you see the shared folder and its contents, but the files still belong to (and are stored in) the other organization.
 
+Your AI assistant and connected AI apps (see [Connecting AI Apps via MCP](mcp-connections.md)) see exactly the same files you do in a shared folder — listing, opening and reading agree.
+
 Private files in a shared folder are still hidden — the privacy rules apply across organizations too. To learn more about collaborating across organizations, see [Workspace Sharing](workspace-sharing.md).
+
+### If a file won't open
+
+If you open a file that isn't shared with you — or that has been deleted — Portablemind says **"You don't have access to this file, or it no longer exists. Ask its owner to share it with you."** Trying again won't change that; ask the file's owner to share it (or the folder it's in) with you.
+
+### What the Access dialog shows
+
+The file's **Access** dialog shows **Private** only when the file itself is private. For a file that isn't private, it shows your organization's default (for example *Workspace · workspace default*) — that is who can see it.
 
 ## AI and your files
 
@@ -125,7 +137,7 @@ This setting controls the *default* only. Individual users can always override i
 | Upload a file | Go to Files, drag & drop or click Upload. Set the title and privacy, then upload. |
 | Make a file private | Toggle the **Private** switch at upload, or click the lock icon on the file's row afterward (owner only). |
 | Share a file with someone | Use the sharing feature to grant specific people or teams access to the file. |
-| Share a whole folder | Share the folder — all current and future files inside become visible to the recipient (except private files). |
+| Share a whole folder | Share the folder — all current and future files inside it and its subfolders become visible to the recipient (except private files). |
 | Hide a file in a shared folder | Mark it as **Private**. It will be invisible to everyone the folder is shared with. |
 | Let AI read my file | Attach the file to a chat message. The AI will automatically process and understand its contents. |
 | Change the org-wide default | (Admin only) Go to Administration and update the file visibility setting under Access Defaults. |

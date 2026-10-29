@@ -46,7 +46,7 @@ If your client supports OAuth for MCP servers (ChatGPT connectors, claude.ai cus
 
 1. Add Portablemind as a custom connector / MCP server in your AI app, using the URL above. If the app asks for an authentication type, pick **OAuth**.
 2. The app discovers Portablemind's authorization server automatically and opens a browser window.
-3. Sign in to Portablemind if you aren't already, then review the consent screen — it names the app that's asking and the workspace it will act in — and click **Approve**.
+3. Sign in to Portablemind if you aren't already, then review the consent screen — it names the app that's asking, the account you're signed in as (name and email) and the workspace it will act in — and click **Approve**. If that's the wrong account (you have more than one), click **Not you? Switch account**: you're signed out, you sign in with the right one, and you land back on the same consent screen.
 4. You're returned to the AI app, connected. Behind the scenes it received a short-lived access token and refreshes it automatically; there is nothing to rotate by hand.
 
 ### ChatGPT
@@ -93,6 +93,12 @@ Start the Gemini CLI; it opens a browser for the PortableMind consent screen and
 ### Revoking access
 
 Approving the consent screen authorizes that app until you revoke it. To revoke, change your password (or use "sign out everywhere") — that invalidates every session and every connected app's token for your account, so each app has to ask for consent again. Denying the consent screen sends the app away with no access.
+
+## Working in another workspace
+
+A connection acts in your own workspace. To have the AI app work inside a partner's workspace you've been admitted to (see [Working inside a partner's workspace](workspace-sharing.md#working-inside-a-partners-workspace)), have the client send a `Workspace-Tenant-Id` header with that workspace's identifier. The AI app is told which workspace it's working in — and that it isn't your home workspace — so what it reads, creates and saves lands where you intend.
+
+If you name a workspace you haven't been admitted to (or one that doesn't exist), the connection is **refused** with *"Workspace switch refused: …"* rather than quietly working in your own workspace. Naming your own workspace is the same as not sending the header.
 
 ## Option 2 — Personal MCP token (for clients that send headers)
 
