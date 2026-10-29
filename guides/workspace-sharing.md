@@ -95,13 +95,28 @@ Content shared with you item by item doesn't require switching at all: it appear
 
 ### @ai in a partner's channels
 
-When a partner has admitted you to their workspace, `@ai` in **their channels** answers as **their** workspace: it searches their files, memories and conversations, works with their tools, and their workspace pays for the AI. A line under the message box says so. It never brings your own workspace's material into their channel. Your messages still count toward your own plan's monthly message allowance.
+When a partner has admitted you to their workspace, `@ai` in **their channels** answers as **their** workspace: it searches their files, memories and conversations, works with their tools, and their workspace pays for the AI. The chip above the message box says so (see [Which workspace your AI and memories use](#which-workspace-your-ai-and-memories-use)). It never brings your own workspace's material into their channel. Your messages still count toward your own plan's monthly message allowance.
 
 If you only have a channel or item shared with you (you haven't been admitted to the workspace), `@ai` there keeps running on your own workspace, as before. Direct messages always run on the sender's own workspace.
 
 A workspace's administrators decide this under **Administration → Partners → Partners' @ai uses this workspace** (on by default). Turn it off and partners' `@ai` in your channels uses their own workspace and AI budget again.
 
 Connected AI apps work the same way — see [Working in another workspace](mcp-connections.md#working-in-another-workspace).
+
+### Which workspace your AI and memories use
+
+Every channel shows it, so you never have to guess:
+
+- **Above the message box** — a chip such as **AI · Trustworks — their tokens, files and memories** in a partner's channel (**this workspace's** once you've switched into it), or **AI · *your workspace* — your tokens, files and memories** in your own.
+- **On AI replies** — an **AI · *workspace*** label naming the workspace that reply actually ran as, whenever it isn't your own. It's recorded when the reply is written, so it stays right if the setting changes later. Replies written before this existed carry no label.
+- **When tokens run out** — the alert names the workspace whose tokens ran out. If that is a partner's, it doesn't show their balance or offer you a purchase; their administrators top it up.
+- **Saving to memory** — the dialog says **Saves to: *workspace*** before you save. In a partner's channel it saves to their workspace by default; choose **My workspace instead** to keep it in yours.
+- **Memory lists** — Settings → Memory, the Memory Graph and an agent's memories name the workspace they show.
+- **Usage** — **AI Studio → Cost Analysis** lists, under **AI across workspaces**, what other workspaces paid for in your channels and what yours paid for in theirs.
+
+A connected AI app gets the same answer in its results: chat, memory and usage tools name the workspace they acted in.
+
+To give a partner's people working access to your apps, files and memories, use **Share workspace apps** (see [above](#giving-a-partners-people-working-access-to-your-apps)). Roles given under Users or Assignments add to that access; they don't replace it.
 
 ## Where shared content appears
 
