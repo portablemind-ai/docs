@@ -58,6 +58,7 @@ Post and ask a model to reply (asynchronous — returns `async: true` and a `job
 
 ## Gotchas
 
+- **The async result names whose AI answers:** `ai_workspace` (`tenant_id`, `enterprise_identifier`, `name`) — in a partner's channel you were admitted to, that is the partner's workspace (its tokens, files and memories).
 - **`message` is a plain string here.** Only raw `LlmMessage` rows use the `{role, content}` object.
 - **Agents only act when mentioned.** Start the message with `@AgentName` if you want an agent in
   the conversation to react; an unmentioned message is a note nobody acts on.
