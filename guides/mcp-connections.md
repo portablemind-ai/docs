@@ -51,7 +51,7 @@ https://www.dsiloed.com/api/v1/mcp?workspace_tenant_id=<their identifier>&catego
 - **One connector per workspace.** Add a separate connector for each client workspace (for example "Portablemind — Acme") next to the one for your own. Claude custom connectors sync across claude.ai, Claude Desktop and Claude Code, so the same connector works in all three.
 - **You still sign in as yourself.** The OAuth consent is your normal Portablemind sign-in; the URL only chooses which workspace the connector acts in.
 - **The AI app is told where it is.** When it connects it's told the workspace it's working in — and that it isn't your home workspace — so what it reads, creates and saves lands where you intend.
-- **Clients that can send headers** (a hand-written `mcp.json`, `mcp-remote`, scripts) can send a `Workspace-Tenant-Id` header with the identifier instead; it means the same thing.
+- **Or send it as a header.** Instead of the URL parameter, a connector can send a `Workspace-Tenant-Id` header with the identifier: in a claude.ai custom connector, under **Request Headers → Add Header**; in a hand-written `mcp.json`, `mcp-remote` or a script, as a normal header. Both mean the same switch; the URL form keeps the workspace visible in the connector's address.
 
 If you name a workspace you haven't been admitted to (or one that doesn't exist), the connection is **refused** with *"Workspace switch refused: …"* rather than quietly working in your own workspace. Naming your own workspace is the same as leaving it out.
 
