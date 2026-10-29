@@ -64,7 +64,7 @@ Once you edit the note yourself in **Settings → Memory**, your text is kept wo
 
   You can search, filter to private memories, group by conversation, agent or type, and show what was forgotten in the last 30 days. A pin marks memories saved **on request** (by you or an agent), as opposed to captured automatically.
 
-**Editing and erasing.** The edit and delete buttons appear only on memories that are yours to change: your own, and those learnt in a conversation you read alone. Workspace memories you didn't write are read-only here — ask an administrator if one is wrong. Editing the title or text creates a **new version**: the old one is kept as history and is no longer recalled. Changing only importance or tags edits the memory in place. A forgotten memory can't be edited, only erased. Deleting from this page erases the memory for good.
+**Editing and erasing.** The edit and delete buttons appear only on memories that are yours to change: your own, those learnt in a conversation you read alone, and workspace memories **you saved** (yourself, or an AI app connected as you). Other workspace memories are read-only here — ask an administrator if one is wrong. Editing the title or text creates a **new version**: the old one is kept as history and is no longer recalled. Changing only importance or tags edits the memory in place. A forgotten memory can't be edited, only erased. Deleting from this page erases the memory for good.
 
 This page only ever shows memories you can already read. You never see another person's private memories here — not even as an administrator.
 
@@ -76,6 +76,10 @@ This page only ever shows memories you can already read. You never see another p
 **Share with workspace** appears only on a private memory you are allowed to change and to read. You are shown who will see it and must confirm. Once shared, every member of the workspace and every agent that reads shared memory can recall it; an agent's private memory becomes part of the workspace's shared memory rather than staying that agent's alone. The shared copy is a new version, the private one is kept as history, and the share is recorded on the workspace's audit trail. Anything that looks like a password, key or other secret is refused, and so is a memory that has already been replaced or forgotten. A shared memory can't be made private again, and editing a private memory never makes it shared — to take a shared memory back, erase it.
 
 An agent's memories can also be reviewed and corrected from its **Memories** dialog in AI Studio's agent list.
+
+## Forgetting a memory from the Memory Graph
+
+Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button is there: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace while working there. A workspace's administrators can forget any of its shared memories.
 
 ## Corrections keep their history
 
@@ -131,6 +135,8 @@ src: https://www.dsiloed.com/api/v1/public/llm_files/2101/raw?key=ac9adc7ee20de0
 ## How memories are created
 
 **On purpose.** Most memories are saved deliberately — you ask an agent to remember something, or an agent saves a decision, fix or preference it judges worth keeping. You can always just say "remember that…".
+
+**From a chat.** Select messages in a channel and choose **Save to memory** to keep them with a note of your own. The dialog says where the memory goes — **Saves to: *workspace*** — before you save. In a partner's channel where @ai answers from the partner's workspace (see [@ai in a partner's channels](workspace-sharing.md#ai-in-a-partners-channels)), the memory goes to that workspace by default, next to the files and memories @ai reads there. Choose **My workspace instead** to keep it in your own. A memory saved to your own workspace from a partner's channel isn't linked to that channel, because the channel belongs to the partner's workspace.
 
 **Background extraction (off by default).** A workspace administrator can turn on background capture. Every so often it reads recent conversations and picks out the facts, preferences, decisions and lessons worth keeping. It:
 
