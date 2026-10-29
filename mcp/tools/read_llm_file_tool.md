@@ -43,7 +43,10 @@ image content; audio and video return metadata only.
 - **Find the id first** with [`list_llm_files_tool`](list_llm_files_tool.md) (`title_search`)
   rather than guessing.
 - **Shared files resolve automatically** — directly shared, attached to a shared
-  conversation, or inside a shared directory.
+  conversation, or a public file inside a shared directory (the folder rule,
+  [docs/26](../26-llm-file-system.md#the-folder-rule-one-rule-every-door--2026-10-29-engagement-workspace-plan-w1)).
+  A private file under a shared directory is "not found"; a public file you reached but
+  may not open is "not shared with you".
 
 ## Input schema
 
