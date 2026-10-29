@@ -53,7 +53,7 @@ automatically when the id is not in your tenant.
 | `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
 | `llm_conversation_id` | integer | no | Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation. |
 | `mind_id` | integer | no | Optional: id of an existing LlmMind to scope the memory to. Omit it — memories land in the tenant default Mind. |
-| `private` | boolean | no | true keeps this memory private (only its owner or source conversation can recall it). Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team. |
+| `private` | boolean | no | Whose memory this is. true = yours: private, only you (or its source conversation) can recall it. false (default) = the workspace's: shared with the team, and you can still correct or forget what you saved. Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team. |
 | `user_id` | integer | no | User ID for user-private memories (optional, defaults to current user) |
 
 ## Example
@@ -64,6 +64,7 @@ automatically when the id is not in your tenant.
 
 ## Gotchas
 
+- The result's data carries `workspace` (`tenant_id`, `enterprise_identifier`, `name`): the workspace the call acted in. Check it when connected to a partner's workspace (`Workspace-Tenant-Id`).
 - **Keep each memory short.** It is re-injected verbatim into every future conversation it
   matches, so a long memory is paid for again on every turn. Store the conclusion and point at
   the source.
@@ -134,7 +135,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "private": {
       "type": "boolean",
-      "description": "true keeps this memory private (only its owner or source conversation can recall it). Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team."
+      "description": "Whose memory this is. true = yours: private, only you (or its source conversation) can recall it. false (default) = the workspace's: shared with the team, and you can still correct or forget what you saved. Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team."
     },
     "user_id": {
       "type": "integer",

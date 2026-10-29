@@ -91,6 +91,7 @@ aggregate stats.
 
 ## Gotchas
 
+- The result's data carries `workspace` (`tenant_id`, `enterprise_identifier`, `name`): the workspace the call acted in. Check it when connected to a partner's workspace (`Workspace-Tenant-Id`).
 - **The query is semantic.** AND/OR/quotes do nothing; use plain words. If two differently
   worded queries return the same rows, it is not in memory — stop rewording.
 - **Memory is recollection, not a directory.** Ids and current facts come from
