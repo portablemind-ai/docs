@@ -77,9 +77,19 @@ This page only ever shows memories you can already read. You never see another p
 
 An agent's memories can also be reviewed and corrected from its **Memories** dialog in AI Studio's agent list.
 
+## A partner's memories
+
+If a partner organization has admitted you to their workspace, you can look after their memories from your own workspace — you never switch into theirs. In **AI Studio → Memory Graph** or **Settings → Memory**, pick their workspace in the **Workspace** select (it lists your own workspace and every workspace you've been admitted to). The page says whose memories it shows — for example **Memories of Trustworks · you are a guest** — and everything on it then works in that workspace:
+
+- you see their **shared** memories and the ones **you saved** there; their private memories stay private (the page shows shared memories only);
+- the graph shows how those memories are related;
+- **Forget**, edit and links work on the memories you saved there, under the same rules as in your own workspace.
+
+Pick **Your workspace (home)** to go back. "About you" and the memory controls on Settings → Memory are always your own.
+
 ## Forgetting a memory from the Memory Graph
 
-Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button is there: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace while working there. A workspace's administrators can forget any of its shared memories.
+Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button is there: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace (pick that workspace in the page's **Workspace** select first). A workspace's administrators can forget any of its shared memories.
 
 ## Corrections keep their history
 
