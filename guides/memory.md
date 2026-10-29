@@ -145,7 +145,7 @@ src: https://www.dsiloed.com/api/v1/public/llm_files/2101/raw?key=ac9adc7ee20de0
 - never touches older history when first turned on — it only reads conversations from then on (looking back at most 14 days);
 - **never rewrites or replaces a memory someone saved on purpose.** If it learns something newer, it adds a new memory and links it to the original instead;
 - skips the messages of anyone who has paused memory, and anything touching their excluded topics;
-- skips conversations that include anyone from outside your workspace;
+- skips conversations that include anyone from outside your workspace — unless an administrator turns on **Learn from partners' posts in our channels** (Administration → Partners). Then it may also read your workspace's **public channels** whose only outsiders are partner people you've **admitted** to the workspace. What it learns goes to your workspace's shared memories, never to anyone's private notes. Private conversations, channels with anyone you haven't admitted, and another workspace's agents or integrations still mean the conversation is skipped;
 - saves what it learns with the same privacy as the conversation it came from.
 
 **Upkeep.** Each day the system links related memories and may write a short derived insight from a recurring pattern. Each week it merges near-duplicates and archives old, low-value memories that were captured automatically. Memories saved on purpose are never aged out this way, and memories an always-on note draws on are never archived as low-value.

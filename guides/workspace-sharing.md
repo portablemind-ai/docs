@@ -99,7 +99,7 @@ When a partner has admitted you to their workspace, `@ai` in **their channels** 
 
 If you only have a channel or item shared with you (you haven't been admitted to the workspace), `@ai` there keeps running on your own workspace, as before. Direct messages always run on the sender's own workspace.
 
-A workspace's administrators decide this under **Administration → Partners → Partners' @ai uses this workspace** (on by default). Turn it off and partners' `@ai` in your channels uses their own workspace and AI budget again.
+A workspace's administrators decide this under **Administration → Partners → Partners' @ai uses this workspace** (on by default). The same panel has **Learn from partners' posts in our channels** (off by default): with it on, background memory capture may learn from your public channels that admitted partner people post in (see [How memories are created](memory.md#how-memories-are-created)). Turn it off and partners' `@ai` in your channels uses their own workspace and AI budget again.
 
 Connected AI apps work the same way — see [Working in another workspace](mcp-connections.md#working-in-another-workspace).
 
