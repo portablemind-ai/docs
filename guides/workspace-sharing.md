@@ -93,6 +93,14 @@ When a partner gives you app access in their workspace, a **workspace menu** app
 
 Content shared with you item by item doesn't require switching at all: it appears directly inside your own workspace, filtered by the permissions you hold on each shared resource. The workspace menu also links to **Workspace Sharing**, which opens the Partners administration page.
 
+### @ai in a partner's channels
+
+When a partner has admitted you to their workspace, `@ai` in **their channels** answers as **their** workspace: it searches their files, memories and conversations, works with their tools, and their workspace pays for the AI. A line under the message box says so. It never brings your own workspace's material into their channel. Your messages still count toward your own plan's monthly message allowance.
+
+If you only have a channel or item shared with you (you haven't been admitted to the workspace), `@ai` there keeps running on your own workspace, as before. Direct messages always run on the sender's own workspace.
+
+A workspace's administrators decide this under **Administration → Partners → Partners' @ai uses this workspace** (on by default). Turn it off and partners' `@ai` in your channels uses their own workspace and AI budget again.
+
 Connected AI apps work the same way — see [Working in another workspace](mcp-connections.md#working-in-another-workspace).
 
 ## Where shared content appears
