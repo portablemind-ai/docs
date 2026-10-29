@@ -42,18 +42,20 @@ The available categories are:
 
 ### Acting in a partner's workspace
 
-A connection acts in your own workspace unless its URL names another one. To have an AI app work inside a partner's workspace you've been admitted to (see [Working inside a partner's workspace](workspace-sharing.md#working-inside-a-partners-workspace)), add `workspace_tenant_id` with that workspace's identifier. It combines with the categories filter:
+A connection acts in your own workspace unless its URL names another one. To have an AI app work inside a partner's workspace you've been admitted to (see [Working inside a partner's workspace](workspace-sharing.md#working-inside-a-partners-workspace)), give it that workspace's own URL — the identifier goes in the **path**, and the categories filter still works:
 
 ```
-https://www.dsiloed.com/api/v1/mcp?workspace_tenant_id=<their identifier>&categories=data,conversation,memory
+https://www.dsiloed.com/api/v1/mcp/<their identifier>?categories=data,conversation,memory
 ```
 
-- **One connector per workspace.** Add a separate connector for each client workspace (for example "Portablemind — Acme") next to the one for your own. Claude custom connectors sync across claude.ai, Claude Desktop and Claude Code, so the same connector works in all three.
-- **You still sign in as yourself.** The OAuth consent is your normal Portablemind sign-in; the URL only chooses which workspace the connector acts in.
+**Profile → MCP builds it for you:** pick the workspace in **Workspace** (it lists your own and every partner workspace you've been admitted to), and the URL and the line beside it — *"This connection acts in …"* — change to match.
+
+- **One connector per workspace.** Add a separate connector for each client workspace (for example "Portablemind — Acme") next to the one for your own. Each has its own URL, so claude.ai, Claude Desktop and Claude Code keep them apart — Claude custom connectors sync across all three.
+- **You still sign in as yourself.** The OAuth consent is your normal Portablemind sign-in; the consent screen says which workspace the connector will act in. If you haven't been admitted to that workspace, the consent screen tells you so instead of approving a connection that couldn't work.
 - **The AI app is told where it is.** When it connects it's told the workspace it's working in — and that it isn't your home workspace — so what it reads, creates and saves lands where you intend.
-- **Or send it as a header.** Clients that send headers freely — a hand-written `mcp.json`, `mcp-remote`, scripts, or Claude Code's `claude mcp add --header` — can send a `Workspace-Tenant-Id` header with the identifier instead; it is the same switch. For claude.ai custom connectors use the URL form: the connector dialog has a **Request Headers** option, but custom headers there need Anthropic's approval for your account.
+- **Other ways to name the workspace.** `?workspace_tenant_id=<their identifier>` on the plain URL, or a `Workspace-Tenant-Id` header (for clients that send headers freely — a hand-written `mcp.json`, `mcp-remote`, scripts, `claude mcp add --header`), mean the same thing. Prefer the path form for connectors: Claude Code keeps connectors apart by URL **without** the query string, so two connectors that differ only in `?workspace_tenant_id=` show up there as one; and claude.ai's connector **Request Headers** need Anthropic's approval for your account.
 
-If you name a workspace you haven't been admitted to (or one that doesn't exist), the connection is **refused** with *"Workspace switch refused: …"* rather than quietly working in your own workspace. Naming your own workspace is the same as leaving it out.
+If you name a workspace you haven't been admitted to (or one that doesn't exist), the connection is **refused** with *"Workspace switch refused: …"* rather than quietly working in your own workspace. If the URL names one workspace and a header or `?workspace_tenant_id=` names a different one, it is refused as *"Conflicting workspace"*. Naming your own workspace is the same as leaving it out. A connection made with an API key can't switch workspaces.
 
 ## Option 1 — OAuth (recommended)
 
