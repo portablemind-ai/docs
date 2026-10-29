@@ -1,4 +1,4 @@
-# portablemind-docs — validate on MRs, refresh Context7 on every push to main.
+# portablemind-docs — validate on MRs, refresh Context7 on every push to main (with backoff on 429).
 #
 # The repo is push-mirrored to github.com/portablemind-ai/docs (GitLab → Settings →
 # Repository → Mirroring repositories). Context7 indexes the GitHub copy, so the
@@ -53,9 +53,34 @@ context7_refresh:
         echo "GitHub mirror never caught up — refresh would index a stale commit; failing so it is visible."
         exit 1
       fi
-      curl -fsS -X POST https://context7.com/api/v1/refresh \
-        -H "Authorization: Bearer ${CONTEXT7_API_KEY}" \
-        -H "Content-Type: application/json" \
-        -d "{\"libraryName\": \"${CONTEXT7_LIBRARY}\"}"
-      echo
-      echo "Context7 refresh requested for ${CONTEXT7_LIBRARY} at ${CI_COMMIT_SHORT_SHA}."
+      # Context7 rate-limits refreshes (HTTP 429; context7.com/docs/api-guide recommends backoff). Six docs
+      # syncs in one evening (2026-10-29) turned main red twice on a single 429 each. Back off and retry;
+      # a refresh still throttled after that is NOT a docs failure — the mirror carries this commit,
+      # Context7 re-indexes main on its own schedule, and the next push asks again — so say so loudly
+      # and exit green. Any other non-2xx answer stays red.
+      attempt=0
+      while :; do
+        attempt=$((attempt + 1))
+        code=$(curl -sS -o /tmp/refresh.json -w '%{http_code}' -X POST https://context7.com/api/v1/refresh \
+          -H "Authorization: Bearer ${CONTEXT7_API_KEY}" \
+          -H "Content-Type: application/json" \
+          -d "{\"libraryName\": \"${CONTEXT7_LIBRARY}\"}") || code=000
+        cat /tmp/refresh.json 2>/dev/null; echo
+        case "$code" in
+          2*)
+            echo "Context7 refresh requested for ${CONTEXT7_LIBRARY} at ${CI_COMMIT_SHORT_SHA}."
+            exit 0 ;;
+          429)
+            if [ "$attempt" -ge 4 ]; then
+              echo "WARNING: Context7 still rate-limits the refresh after ${attempt} attempts (HTTP 429)."
+              echo "The GitHub mirror carries ${CI_COMMIT_SHORT_SHA}; Context7 re-indexes on its own schedule and the next push asks again."
+              exit 0
+            fi
+            wait=$((attempt * 120))
+            echo "Context7 rate-limited (HTTP 429); retrying in ${wait}s (attempt ${attempt}/4)"
+            sleep "$wait" ;;
+          *)
+            echo "Context7 refresh failed with HTTP ${code}."
+            exit 1 ;;
+        esac
+      done
