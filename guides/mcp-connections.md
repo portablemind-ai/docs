@@ -12,7 +12,7 @@ Every method uses the same MCP endpoint:
 https://www.dsiloed.com/api/v1/mcp
 ```
 
-You can narrow which tools are exposed with the `categories` filter, e.g. `…/api/v1/mcp?categories=data,conversation`. The category picker in **Profile → MCP** builds this URL for you — pick individual categories, or start from a quick preset (Default, Coding, Agents & orchestration) and adjust. With no filter, every tool is exposed; a filter keeps only the categories you list (an unrecognized name is ignored, and if a filter matches nothing you still get a small core so the connection is never tool-less).
+You can narrow which tools are exposed with the `categories` filter, e.g. `…/api/v1/mcp?categories=data,conversation`. The category picker in **Profile → Integrations → Connect an AI app (MCP)** builds this URL for you — pick individual categories, or start from a quick preset (Default, Coding, Agents & orchestration) and adjust. With no filter, every tool is exposed; a filter keeps only the categories you list (an unrecognized name is ignored, and if a filter matches nothing you still get a small core so the connection is never tool-less).
 
 The available categories are:
 
@@ -48,9 +48,9 @@ A connection acts in your own workspace unless its URL names another one. To hav
 https://www.dsiloed.com/api/v1/mcp/<their identifier>?categories=data,conversation,memory
 ```
 
-**Profile → MCP builds it for you:** pick the workspace in **Workspace** (it lists your own and every partner workspace you've been admitted to), and the URL and the line beside it — *"This connection acts in …"* — change to match.
+**Profile → Integrations → Connect an AI app (MCP) builds it for you:** pick the workspace in **Workspace** (it lists your own and every partner workspace you've been admitted to), and the URL and the line beside it — *"This connection acts in …"* — change to match.
 
-- **One connector per workspace.** Add a separate connector for each client workspace (for example "Portablemind — Acme") next to the one for your own. Each has its own URL, so claude.ai, Claude Desktop and Claude Code keep them apart — Claude custom connectors sync across all three.
+- **One connector per workspace.** Add a separate connector for each client workspace (for example "Portablemind — Acme") next to the one for your own. The copied Claude Code, Codex and Gemini commands name it `portablemind-<their identifier>` (your own stays `portablemind`), so adding a client's workspace adds a second server instead of replacing the first. Each has its own URL, so claude.ai, Claude Desktop and Claude Code keep them apart — Claude custom connectors sync across all three.
 - **You still sign in as yourself.** The OAuth consent is your normal Portablemind sign-in; the consent screen says which workspace the connector will act in. If you haven't been admitted to that workspace, the consent screen tells you so instead of approving a connection that couldn't work.
 - **The AI app is told where it is.** When it connects it's told the workspace it's working in — and that it isn't your home workspace — so what it reads, creates and saves lands where you intend.
 - **Other ways to name the workspace.** `?workspace_tenant_id=<their identifier>` on the plain URL, or a `Workspace-Tenant-Id` header (for clients that send headers freely — a hand-written `mcp.json`, `mcp-remote`, scripts, `claude mcp add --header`), mean the same thing. Prefer the path form for connectors: Claude Code keeps connectors apart by URL **without** the query string, so two connectors that differ only in `?workspace_tenant_id=` show up there as one; and claude.ai's connector **Request Headers** need Anthropic's approval for your account.
@@ -113,7 +113,7 @@ Approving the consent screen authorizes that app until you revoke it. To revoke,
 
 ## Option 2 — Personal MCP token (for clients that send headers)
 
-For static configurations — a hand-written `mcp.json`, `mcp-remote`, scripts — mint a long-lived personal token in **Profile → MCP** and send it as a header:
+For static configurations — a hand-written `mcp.json`, `mcp-remote`, scripts — mint a long-lived personal token in **Profile → Integrations → Connect an AI app (MCP)** and send it as a header:
 
 ```
 Authorization: Bearer <your MCP token>
