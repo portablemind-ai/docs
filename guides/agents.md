@@ -131,6 +131,10 @@ Behavioral roles shape *how* the agent thinks; security roles bound *what* it ca
 
 For API-level details, see the [API guide](https://www.dsiloed.com/apps/apiguide/index.html).
 
+## Sharing an agent
+
+In AI Studio → Agents, use the share icon on the agent's card to let people or teams use it (**Can use**). You can share an agent you own or hold full access to. Your workspace's administrators can share any agent in the workspace too — built-in agents with no owner, such as Mindy, included — except an agent someone has marked **private**. Sharing never lets anyone act as the agent: only its owner, or someone with full access, can issue it a SiloLink token.
+
 ## Next steps
 
 - Give your agents durable knowledge with [Memory](memory.md).
