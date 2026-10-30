@@ -80,7 +80,7 @@ Sharing item by item works for a handful of things. When a partner's person need
 
 1. In the top bar, click the **Share workspace apps** button (the share icon next to your notifications). It is shown to your workspace's administrators.
 2. Enter the person's email address — someone from a partner organization keeps their own account — and pick the apps they need: **Chat**, **Plan & Track**, **Files**, **Admin Apps**.
-3. Click **Send Invite**. They get those apps in your workspace, with your workspace's permissions. Removing the partnership removes the access.
+3. Click **Send Invite**. They get those apps in your workspace. In Files they reach only what you share with them — whole folders or single files — at the level you choose. Removing the partnership removes the access.
 
 To review or change what a partner's person holds later:
 
