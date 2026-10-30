@@ -95,7 +95,7 @@ Pick **Your workspace (home)** to go back. **Settings → Memory** is personal a
 
 ## Forgetting a memory from the Memory Graph
 
-Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button is there: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace (pick that workspace in the page's **Workspace** select first). A workspace's administrators can forget any of its shared memories. Your own memories can also be forgotten from the list in **Settings → Memory**.
+Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button sits next to its title: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace (pick that workspace in the page's **Workspace** select first). A workspace's administrators can forget any of its shared memories. Your own memories can also be forgotten from the list in **Settings → Memory**.
 
 ## Corrections keep their history
 
@@ -141,7 +141,7 @@ Memories are linked into a graph. The system writes three kinds of link on its o
 
 When an agent links two memories on purpose, it can also use a more specific type: `caused_by`, `leads_to`, `depends_on`, `references`, `spawns` or `validates`.
 
-You can explore the graph under **AI Studio → Knowledge & Resources → Memories**, where each memory is a node colored by type and connected by its links, with a search that highlights matching memories. The **Memory Graph** widget shows your most recent memories on the home dashboard.
+You can explore the graph under **AI Studio → Knowledge & Resources → Memories**, where each memory is a node colored by type and connected by its links, with a search that highlights matching memories. Every member can search the graph. The **My Memories** and **All** views include private memories, so they work for people allowed to see private memories in that workspace; anyone else is told so and stays on the public view. The **Memory Graph** widget shows your most recent memories on the home dashboard.
 
 ```recording
 title: Explore your AI's memory
