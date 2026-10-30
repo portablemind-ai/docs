@@ -59,6 +59,8 @@ A brand-new workspace is therefore never told it has used up something it never 
 
 If you reach the monthly message guardrail, every message says exactly that — and offers an upgrade. It will never tell you that you're out of AI tokens, and never try to sell you tokens. The two are separate things: a message guardrail is about volume, while **Out of AI tokens** means an actual empty balance. See [AI Memory](memory.md) and [Setting Up AI Models](ai-setup.md) for how AI usage is metered.
 
+**Your message is never lost.** When the AI can't answer because the workspace is out of AI tokens, at its message guardrail, or over your own spend limit, your message is still posted in the conversation and the reason shows with it. If the workspace's subscription is **paused**, nothing can be posted: your message stays on screen marked **Not sent**, and its words go back into the message box so you can send it again once the subscription is active. If every AI request in a conversation fails, the activity line says **The AI couldn't respond** instead of reporting a finished response.
+
 ## Traffic: what's metered and what never is
 
 **Using Portablemind is never rate-limited or metered.** Signing in through the web or mobile app gives you an ordinary session, and nothing you do in it counts against an API quota or a per-minute request limit — including the pages that refresh in the background.
