@@ -91,7 +91,7 @@ To review or change what a partner's person holds later:
 
 You always stay in your own workspace — there is no switching. When a partner admits you to their workspace (gives you app access with **Share workspace apps**), what they share shows up where you already work:
 
-- **Channels, files and tasks** shared with you appear in your own Chat, Files (under **Shared Files**) and Plan & Track, labelled with the partner's name. Folders you see are the ones shared with you, or that hold files you can open — never the rest of their folder tree.
+- **Channels, files and tasks** shared with you appear in your own Chat, Files (under **Shared Files**) and Plan & Track, labelled with the partner's name. Folders you see are the ones shared with you, or that hold files you can open — never the rest of their folder tree. A folder shared with you gives you the same access to the files in it — Viewer, Editor or Full Access — except their private files, which stay private.
 - **Their memories** — pick their workspace in the **Workspace** select on **AI Studio → Memory Graph**. The graph then shows that workspace's memories you can access (its shared memories and the ones you saved there), says **Memories of *workspace* · you are a guest**, and Forget, edit and links act there. Pick **Your workspace (home)** to go back. See [Memory](memory.md#a-partners-memories).
 - **Saving to memory** from a partner's channel asks which workspace it goes to (see below).
 - **A connected AI app** acts in a partner's workspace through that workspace's own connection URL — see [Acting in a partner's workspace](mcp-connections.md#acting-in-a-partners-workspace).

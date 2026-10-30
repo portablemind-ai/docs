@@ -58,7 +58,7 @@ You can always override the default by flipping the toggle before uploading.
 
 ### Sharing a folder
 
-When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (Viewer, Editor, Full Access) applies to the files in it too.
+When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (Viewer, Editor, Full Access) applies to every file in it too, including files added later, and stops applying the moment you unshare the folder. Sharing one of those files on its own can give someone more access to it than the folder does, never less. Sharing a folder at Viewer with someone who could already edit limits them to viewing inside it, as a per-file Viewer share does.
 
 Sharing a single file is different: the person can open that file (and see the folder it sits in, so they can find it), but not the other files next to it.
 
@@ -67,7 +67,7 @@ Sharing a single file is different: the person can open that file (and see the f
 The actions on a file or folder row follow the access you hold on it, and actions you can't take aren't shown:
 
 - **Viewer**: open, preview, download, and see who has access.
-- **Editor**: everything a viewer can, plus edit and move it.
+- **Editor**: everything a viewer can, plus edit it, and move it within your own workspace. Files shared with you from another workspace stay where their owners filed them.
 - **Full Access**: everything an editor can, plus delete it and change who it's shared with.
 
 The share icon is on every row. With Full Access it opens **Share**. Without it, the icon is labelled **Who has access** and shows who can open the item, but doesn't let you change that.
