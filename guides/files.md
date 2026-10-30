@@ -62,6 +62,16 @@ When you share a folder with someone (or a team), they can see **all the files i
 
 Sharing a single file is different: the person can open that file (and see the folder it sits in, so they can find it), but not the other files next to it.
 
+### What you can do with something shared with you
+
+The actions on a file or folder row follow the access you hold on it, and actions you can't take aren't shown:
+
+- **Viewer**: open, preview, download, and see who has access.
+- **Editor**: everything a viewer can, plus edit and move it.
+- **Full Access**: everything an editor can, plus delete it and change who it's shared with.
+
+The share icon is on every row. With Full Access it opens **Share**. Without it, the icon is labelled **Who has access** and shows who can open the item, but doesn't let you change that.
+
 ### Private files in shared folders
 
 Here's where it gets interesting. If you mark a file as **Private** and place it in a shared folder, the file stays hidden from everyone the folder is shared with. **Privacy always wins over folder sharing.**

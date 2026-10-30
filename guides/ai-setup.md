@@ -113,6 +113,8 @@ This matters most in a [sub-workspace](sub-workspaces.md), which can see all thr
 
 **AI Studio → Cost Analysis** shows what your workspace spent on AI. The presets are **Today**, **Last 7 days** and **Last 30 days**, each counting today; **Custom Range…** picks any dates. Days are counted in your own time zone, so a request you make late in the evening shows on that day, not the next. The daily chart and the totals use the same days. Usage on a model with no price set still shows, at $0 with its tokens, under **Unpriced model**.
 
+If you work with partner workspaces, Cost Analysis also shows AI that crossed a workspace line, both who paid and who asked. See [Which workspace your AI and memories use](workspace-sharing.md#which-workspace-your-ai-and-memories-use).
+
 ## Keeping AI spend down
 
 Most of what you pay a provider is for **input** — the conversation the model has to read before it can answer. Two things reduce that, and Portablemind does both for you:

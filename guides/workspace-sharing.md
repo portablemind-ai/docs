@@ -118,7 +118,10 @@ Every channel shows it, so you never have to guess:
 - **When a partner's subscription is paused** — working in their workspace (the Memory Graph, saving to their memory) shows a notice such as *Trustworks's subscription is paused — its administrators can reactivate it*. It never locks your own app.
 - **Saving to memory** — the dialog says **Saves to: *workspace*** before you save. In a partner's channel it saves to their workspace by default; choose **My workspace instead** to keep it in yours.
 - **Memory lists** — the Memory Graph names the workspace it shows (**Memories of *workspace***), and its **Workspace** select picks another one you were admitted to. Settings → Memory is always your own workspace's.
-- **Usage** — **AI Studio → Cost Analysis** lists, under **AI across workspaces**, what other workspaces paid for in your channels and what yours paid for in theirs.
+- **Usage** — **AI Studio → Cost Analysis** answers two questions:
+  - **AI across workspaces** — *who paid*: what other workspaces paid for in your channels, and what yours paid for in theirs. A partner's @ai in your channel is normally paid by you, so it isn't listed here.
+  - **Partners' AI in this workspace** — *who asked*: AI that people from each partner workspace asked for in your channels, with its requests, tokens and cost.
+  - **AI you ran in partner workspaces** — how many AI requests your people made in each partner's channels. It shows the count only, because that cost is on the partner's workspace and is theirs to see.
 
 A connected AI app gets the same answer in its results: chat, memory and usage tools name the workspace they acted in.
 
