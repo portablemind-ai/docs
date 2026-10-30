@@ -92,7 +92,7 @@ To review or change what a partner's person holds later:
 You always stay in your own workspace — there is no switching. When a partner admits you to their workspace (gives you app access with **Share workspace apps**), what they share shows up where you already work:
 
 - **Channels, files and tasks** shared with you appear in your own Chat, Files (under **Shared Files**) and Plan & Track, labelled with the partner's name. Folders you see are the ones shared with you, or that hold files you can open — never the rest of their folder tree.
-- **Their memories** — pick their workspace in the **Workspace** select on **AI Studio → Memory Graph** or **Settings → Memory**. The page then shows that workspace's memories you can access (its shared memories and the ones you saved there), says **Memories of *workspace* · you are a guest**, and Forget, edit and links act there. Pick **Your workspace (home)** to go back. See [Memory](memory.md#a-partners-memories).
+- **Their memories** — pick their workspace in the **Workspace** select on **AI Studio → Memory Graph**. The graph then shows that workspace's memories you can access (its shared memories and the ones you saved there), says **Memories of *workspace* · you are a guest**, and Forget, edit and links act there. Pick **Your workspace (home)** to go back. See [Memory](memory.md#a-partners-memories).
 - **Saving to memory** from a partner's channel asks which workspace it goes to (see below).
 - **A connected AI app** acts in a partner's workspace through that workspace's own connection URL — see [Acting in a partner's workspace](mcp-connections.md#acting-in-a-partners-workspace).
 
@@ -116,7 +116,7 @@ Every channel shows it, so you never have to guess:
 - **On AI replies** — an **AI · *workspace*** label naming the workspace that reply actually ran as, whenever it isn't your own. It's recorded when the reply is written, so it stays right if the setting changes later. Replies written before this existed carry no label.
 - **When tokens run out** — the alert names the workspace whose tokens ran out. If that is a partner's, it doesn't show their balance or offer you a purchase; their administrators top it up.
 - **Saving to memory** — the dialog says **Saves to: *workspace*** before you save. In a partner's channel it saves to their workspace by default; choose **My workspace instead** to keep it in yours.
-- **Memory lists** — Settings → Memory and the Memory Graph name the workspace they show (**Memories of *workspace***), and their **Workspace** select picks another one you were admitted to.
+- **Memory lists** — the Memory Graph names the workspace it shows (**Memories of *workspace***), and its **Workspace** select picks another one you were admitted to. Settings → Memory is always your own workspace's.
 - **Usage** — **AI Studio → Cost Analysis** lists, under **AI across workspaces**, what other workspaces paid for in your channels and what yours paid for in theirs.
 
 A connected AI app gets the same answer in its results: chat, memory and usage tools name the workspace they acted in.

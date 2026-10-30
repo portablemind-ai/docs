@@ -64,7 +64,13 @@ Once you edit the note yourself in **Settings → Memory**, your text is kept wo
 
   You can search, filter to private memories, group by conversation, agent or type, and show what was forgotten in the last 30 days. A pin marks memories saved **on request** (by you or an agent), as opposed to captured automatically.
 
-**Editing and erasing.** The edit and delete buttons appear only on memories that are yours to change: your own, those learnt in a conversation you read alone, and workspace memories **you saved** (yourself, or an AI app connected as you). Other workspace memories are read-only here — ask an administrator if one is wrong. Editing the title or text creates a **new version**: the old one is kept as history and is no longer recalled. Changing only importance or tags edits the memory in place. A forgotten memory can't be edited, only erased. Deleting from this page erases the memory for good.
+**Editing, forgetting and erasing.** These buttons appear only on memories that are yours to change: your own, those learnt in a conversation you read alone, and workspace memories **you saved** (yourself, or an AI app connected as you). Other workspace memories are read-only here — ask an administrator if one is wrong.
+
+- **Edit** — changing the title or text creates a **new version**: the old one is kept as history and is no longer recalled. Changing only importance or tags edits the memory in place.
+- **Forget** — retires the memory so no agent recalls it again, and keeps it in history (the same as **Forget** on the Memory Graph). This is what members see.
+- **Delete** — erases the memory for good. Only people allowed to erase memories (usually workspace administrators) see it, in place of Forget.
+
+A forgotten memory can't be edited or forgotten again; someone allowed to erase can still delete it. If a change is refused, the reason is shown right on the page.
 
 This page only ever shows memories you can already read. You never see another person's private memories here — not even as an administrator.
 
@@ -79,17 +85,17 @@ An agent's memories can also be reviewed and corrected from its **Memories** dia
 
 ## A partner's memories
 
-If a partner organization has admitted you to their workspace, you can look after their memories from your own workspace — you never switch into theirs. In **AI Studio → Memory Graph** or **Settings → Memory**, pick their workspace in the **Workspace** select (it lists your own workspace and every workspace you've been admitted to). The page says whose memories it shows — for example **Memories of Trustworks · you are a guest** — and everything on it then works in that workspace:
+If a partner organization has admitted you to their workspace, you can look after their memories from your own workspace — you never switch into theirs. In **AI Studio → Memory Graph**, pick their workspace in the **Workspace** select (it lists your own workspace and every workspace you've been admitted to). The graph says whose memories it shows — for example **Memories of Trustworks · you are a guest** — and everything on it then works in that workspace:
 
 - you see their **shared** memories and the ones **you saved** there; their private memories stay private (the page shows shared memories only);
 - the graph shows how those memories are related;
 - **Forget**, edit and links work on the memories you saved there, under the same rules as in your own workspace.
 
-Pick **Your workspace (home)** to go back. "About you" and the memory controls on Settings → Memory are always your own.
+Pick **Your workspace (home)** to go back. **Settings → Memory** is personal and always about your own workspace: your memories, "About you" and your memory controls.
 
 ## Forgetting a memory from the Memory Graph
 
-Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button is there: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace (pick that workspace in the page's **Workspace** select first). A workspace's administrators can forget any of its shared memories.
+Select a memory in **AI Studio → Memory Graph** and open **Detail**. If it's yours to tidy, a **Forget** button is there: it retires the memory so nobody's AI recalls it again, and keeps it in history. You can forget memories you wrote or saved, including workspace memories you saved into a partner's workspace (pick that workspace in the page's **Workspace** select first). A workspace's administrators can forget any of its shared memories. Your own memories can also be forgotten from the list in **Settings → Memory**.
 
 ## Corrections keep their history
 
