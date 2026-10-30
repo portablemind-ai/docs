@@ -84,7 +84,7 @@ Sharing item by item works for a handful of things. When a partner's person need
 
 To review or change what a partner's person holds later:
 
-- **Administration → Users**, turn on **Include partner users**. Partner people are listed with a **Partner** tag. You can view them, **Manage Roles** (the roles they hold in *your* workspace) and set spend limits. Their profile, password and account belong to their own organization, so edit, reset password and delete aren't offered.
+- **Administration → Users**, turn on **Include partner users**. Partner people are listed with a **Partner** tag. You can view them and **Manage Roles** (the roles they hold in *your* workspace). Their profile, password, admin status, spend limits and account belong to their own organization, so edit, reset password, the admin switch, spend limits and delete aren't offered, and a partner is never shown as an admin of your workspace because they're an admin of theirs.
 - **Administration → Assignments**, turn on **Include partner users** to find them in the **Assign To** search. A partner person is given your workspace's **security roles**, never individual capabilities: roles are the reviewed bundles, and they end with the partnership.
 
 ## Working inside a partner's workspace
