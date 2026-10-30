@@ -109,6 +109,10 @@ Your model list can hold models paid for in three different ways, and the **Who 
 
 This matters most in a [sub-workspace](sub-workspaces.md), which can see all three at once. Your AI token balance — including any tokens a parent workspace transferred to you — is only ever spent by models labelled **Uses your AI tokens**. If you work entirely on a model your parent shared down, or on your own provider key, your token balance will not move at all. That is expected, not a fault.
 
+## Reading Cost Analysis
+
+**AI Studio → Cost Analysis** shows what your workspace spent on AI. The presets are **Today**, **Last 7 days** and **Last 30 days**, each counting today; **Custom Range…** picks any dates. Days are counted in your own time zone, so a request you make late in the evening shows on that day, not the next. The daily chart and the totals use the same days. Usage on a model with no price set still shows, at $0 with its tokens, under **Unpriced model**.
+
 ## Keeping AI spend down
 
 Most of what you pay a provider is for **input** — the conversation the model has to read before it can answer. Two things reduce that, and Portablemind does both for you:

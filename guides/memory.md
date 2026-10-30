@@ -64,7 +64,7 @@ Once you edit the note yourself in **Settings → Memory**, your text is kept wo
 
   You can search, filter to private memories, group by conversation, agent or type, and show what was forgotten in the last 30 days. A pin marks memories saved **on request** (by you or an agent), as opposed to captured automatically.
 
-**Editing, forgetting and erasing.** These buttons appear only on memories that are yours to change: your own, those learnt in a conversation you read alone, and workspace memories **you saved** (yourself, or an AI app connected as you). Other workspace memories are read-only here — ask an administrator if one is wrong.
+**Editing, forgetting and erasing.** These buttons appear only on memories that are yours to change: your own, those learnt in a conversation you read alone, and workspace memories **you saved** (yourself, or an AI app connected as you). Other workspace memories belong to the workspace: members can't edit them here — ask an administrator if one is wrong — and a workspace administrator can **Forget** one so no agent recalls it (it stays in history). The note above the list says which applies to you.
 
 - **Edit** — changing the title or text creates a **new version**: the old one is kept as history and is no longer recalled. Changing only importance or tags edits the memory in place.
 - **Forget** — retires the memory so no agent recalls it again, and keeps it in history (the same as **Forget** on the Memory Graph). This is what members see.
