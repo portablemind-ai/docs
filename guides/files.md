@@ -103,7 +103,7 @@ If you open a file that isn't shared with you — or that has been deleted — P
 
 ### What the Access dialog shows
 
-The file's **Access** dialog shows **Private** only when the file itself is private. For a file that isn't private, it shows your organization's default (for example *Workspace · workspace default*) — that is who can see it.
+The file's **Access** dialog shows **Private** only when the file itself is private. A file that isn't private shows **All Tenant Members** — every member of the workspace can open it — marked *workspace default* when that is also your organization's default for new files. The line at the bottom says who can open it: **Everyone in *workspace*** (plus any guests or partners it's shared with) for a file that isn't private, or the number of people — the owner, the people and the members of teams it's shared with, and anyone holding the folder it's in — for a private one.
 
 ## AI and your files
 
