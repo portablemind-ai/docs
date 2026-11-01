@@ -28,6 +28,14 @@ Also accepted: code_change, bug_fix, discussion, derived_insight, insight, solut
 
 IMPORTANCE: 0.9-1.0 (critical), 0.7-0.8 (important), 0.5-0.6 (moderate), 0.3-0.4 (low), 0.1-0.2 (background)
 
+WHOSE MEMORY (private):
+  A fact about the PERSON ASKING — their preferences, habits, working style or personal
+  details ("I prefer short updates", "remind me…", "I like dogs") — is theirs: leave
+  private out (or pass true) and it is saved privately to them, under Settings → Memory →
+  Your memories. Pass private: false only when they say to share it with the team or
+  workspace. Facts about the work, the client, decisions and who owns what are the
+  workspace's: pass private: false (or leave it out for a fact or decision about the work).
+
 REQUIRED: title, content
 OPTIONAL: memory_type (default: fact), importance_score (default: 0.5), tags [], agent_id, llm_conversation_id, mind_id, private, user_id
 
@@ -53,7 +61,7 @@ automatically when the id is not in your tenant.
 | `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
 | `llm_conversation_id` | integer | no | Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation. |
 | `mind_id` | integer | no | Optional: id of an existing LlmMind to scope the memory to. Omit it — memories land in the tenant default Mind. |
-| `private` | boolean | no | Whose memory this is. true = yours: private, only you (or its source conversation) can recall it. false (default) = the workspace's: shared with the team, and you can still correct or forget what you saved. Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team. |
+| `private` | boolean | no | Whose memory this is. true = the person's: private, only they (or its source conversation) can recall it. false = the workspace's: shared with the team, and you can still correct or forget what you saved. Left out: a preference, or a fact the person states about themselves ("I prefer…", "my…"), is private to them; anything else is shared unless the agent or conversation is private (except a group DM). Pass false only when the person asks to share something about themselves with the team. |
 | `user_id` | integer | no | User ID for user-private memories (optional, defaults to current user) |
 
 ## Example
@@ -135,7 +143,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "private": {
       "type": "boolean",
-      "description": "Whose memory this is. true = yours: private, only you (or its source conversation) can recall it. false (default) = the workspace's: shared with the team, and you can still correct or forget what you saved. Saves are private automatically when the agent is private or the conversation is private (except a group DM); otherwise they are shared with the team."
+      "description": "Whose memory this is. true = the person's: private, only they (or its source conversation) can recall it. false = the workspace's: shared with the team, and you can still correct or forget what you saved. Left out: a preference, or a fact the person states about themselves (\"I prefer…\", \"my…\"), is private to them; anything else is shared unless the agent or conversation is private (except a group DM). Pass false only when the person asks to share something about themselves with the team."
     },
     "user_id": {
       "type": "integer",
