@@ -58,7 +58,7 @@ You can always override the default by flipping the toggle before uploading.
 
 ### Sharing a folder
 
-When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (Viewer, Editor, Full Access) applies to every file in it too, including files added later, and stops applying the moment you unshare the folder. Sharing one of those files on its own can give someone more access to it than the folder does, never less. Sharing a folder at Viewer with someone who could already edit limits them to viewing inside it, as a per-file Viewer share does.
+When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (Viewer, Editor, Full Access) applies to every file in it too, including files added later, and stops applying the moment you unshare the folder. Sharing one of those files on its own can give someone more access to it than the folder does, never less. Sharing a folder at Viewer with someone who could already edit limits them to viewing inside it, as a per-file Viewer share does. Changing the folder's level later changes it for those files too, up or down — lower a folder from Editor to Viewer and its files go to Viewer — while a file shared with someone on its own keeps that share.
 
 Sharing a single file is different: the person can open that file (and see the folder it sits in, so they can find it), but not the other files next to it.
 
@@ -70,7 +70,7 @@ The actions on a file or folder row follow the access you hold on it, and action
 - **Editor**: everything a viewer can, plus edit it, and move it within your own workspace. Files shared with you from another workspace stay where their owners filed them.
 - **Full Access**: everything an editor can, plus delete it and change who it's shared with.
 
-The share icon is on every row. With Full Access it opens **Share**. Without it, the icon is labelled **Who has access** and shows who can open the item, but doesn't let you change that.
+The share icon is on every row. With Full Access it opens **Share**. Without it, the icon is labelled **Who has access** and shows who can open the item, but doesn't let you change that. With Full Access you can also lower your own level (to Editor, say) or remove yourself, but not raise it; if a change is refused, nothing changes and you keep the access you had.
 
 ### Private files in shared folders
 
