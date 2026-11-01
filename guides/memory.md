@@ -34,6 +34,8 @@ Every memory is either **shared** with your workspace or **private**.
 
 A save is private automatically when you ask for it, when the agent is private, or when it happens in a private conversation. The exception is a group DM (three or more members): it is a shared working space, so what is saved there is shared with the workspace. Everything else is shared.
 
+**Something about you stays yours.** When you ask the AI to remember something about yourself — a preference, a habit, how you like to work ("@ai remember that I prefer short updates") — it is saved privately to you in **your own workspace**, wherever you asked, and listed under **Your memories**. That includes a partner's channel: what you ask it to remember about yourself there goes to your own memory, not theirs. Say so if you want the team to know it too ("…and share that with the team"). Facts about the work — the client, decisions, who owns what — go to the workspace you are working in, as before.
+
 Private memories are encrypted at rest. A shared memory is checked for secrets (passwords, keys and similar) before it is saved, and refused if it contains one.
 
 ## "About you" and the other always-on notes
