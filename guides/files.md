@@ -113,7 +113,9 @@ If you open a file that isn't shared with you — or that has been deleted — P
 
 ### What the Access dialog shows
 
-The file's **Access** dialog shows **Private** only when the file itself is private. A file that isn't private shows **All Tenant Members** — every member of the workspace can open it — marked *workspace default* when that is also your organization's default for new files. The line at the bottom says who can open it: **Everyone in *workspace*** (plus any guests or partners it's shared with) for a file that isn't private, or the number of people — the owner, the people and the members of teams it's shared with, and anyone holding the folder it's in — for a private one.
+The file's **Access** dialog shows **Private** only when the file itself is private. A file that isn't private shows **All Tenant Members** — every member of the workspace can open it — marked *workspace default* when that is also your organization's default for new files. If you can change who the file is shared with and you administer the workspace's access settings, a **Change workspace default** link there opens them; on a dialog you can only view, it isn't shown. The line at the bottom says who can open it: **Everyone in *workspace*** (plus any guests or partners it's shared with) for a file that isn't private, or the number of people — the owner, the people and the members of teams it's shared with, and anyone holding the folder it's in — for a private one.
+
+Everyone who has access to a file through the folder it's in is listed too, marked **Inherited from *folder name***, with the level the folder gives them — including someone the folder was shared with before the file was added. Those rows are read-only in the file's dialog: you can't change their level or remove them there. To change or remove that access, open **Share** on the folder.
 
 ## AI and your files
 

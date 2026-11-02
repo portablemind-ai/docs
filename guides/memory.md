@@ -72,7 +72,7 @@ Once you edit the note yourself in **Settings → Memory**, your text is kept wo
 - **Forget** — retires the memory so no agent recalls it again, and keeps it in history (the same as **Forget** on the Memory Graph). This is what members see.
 - **Delete** — erases the memory for good. Only people allowed to erase memories (usually workspace administrators) see it, in place of Forget.
 
-A forgotten memory can't be edited or forgotten again; someone allowed to erase can still delete it. If a change is refused, the reason is shown right on the page.
+A forgotten memory can't be edited or forgotten again; someone allowed to erase can still delete it. A short notice at the bottom of the page confirms each change — **Memory saved.**, **Memory forgotten.** or **Shared with your workspace.** If a change is refused, the reason is shown right on the page instead.
 
 This page only ever shows memories you can already read. You never see another person's private memories here — not even as an administrator.
 
@@ -152,7 +152,7 @@ src: https://www.dsiloed.com/api/v1/public/llm_files/2101/raw?key=ac9adc7ee20de0
 
 ## How memories are created
 
-**On purpose.** Most memories are saved deliberately — you ask an agent to remember something, or an agent saves a decision, fix or preference it judges worth keeping. You can always just say "remember that…".
+**On purpose.** Most memories are saved deliberately — you ask an agent to remember something, or an agent saves a decision, fix or preference it judges worth keeping. You can always just say "remember that…". The AI saves what that message asks — one memory, unless you list several things — and leaves the rest of the channel's history to background extraction. If it already remembers it, it tells you so and saves nothing new.
 
 **From a chat.** Select messages in a channel and choose **Save to memory** to keep them with a note of your own. The dialog says where the memory goes — **Saves to: *workspace*** — before you save. In a partner's channel where @ai answers from the partner's workspace (see [@ai in a partner's channels](workspace-sharing.md#ai-in-a-partners-channels)), the memory goes to that workspace by default, next to the files and memories @ai reads there. Choose **My workspace instead** to keep it in your own. A memory saved to your own workspace from a partner's channel isn't linked to that channel, because the channel belongs to the partner's workspace. Once saved, a notice says **Saved to *workspace*'s memory** — **View** opens that workspace's Memory Graph. In the saved transcript each message keeps its real speaker: an @ai answer reads as **AI · *workspace* (*model*)** and an agent's as the agent, never as the person who asked.
 
@@ -163,8 +163,8 @@ src: https://www.dsiloed.com/api/v1/public/llm_files/2101/raw?key=ac9adc7ee20de0
 - never touches older history when first turned on — it only reads conversations from then on (looking back at most 14 days);
 - **never rewrites or replaces a memory someone saved on purpose.** If it learns something newer, it adds a new memory and links it to the original instead;
 - skips the messages of anyone who has paused memory, and anything touching their excluded topics;
-- skips conversations that include anyone from outside your workspace — unless an administrator turns on **Learn from partners' posts in our channels** (Administration → Partners). Then it may also read your workspace's **public channels** whose only outsiders are partner people you've **admitted** to the workspace. What it learns goes to your workspace's shared memories, never to anyone's private notes. Private conversations, channels with anyone you haven't admitted, and another workspace's agents or integrations still mean the conversation is skipped;
-- saves what it learns with the same privacy as the conversation it came from.
+- skips conversations that include anyone from outside your workspace — unless an administrator turns on **Learn from partners' posts in our channels** (Administration → Partners). Then it may also read your workspace's **public channels** whose only outsiders are partner people you've **admitted** to the workspace. What it learns about the work goes to your workspace's shared memories. Private conversations, channels with anyone you haven't admitted, and another workspace's agents or integrations still mean the conversation is skipped;
+- saves what it learns with the same privacy as the conversation it came from — except something a person says **about themselves** (a preference, a habit, how they like to work). That is saved privately to that person, in their own workspace, just as if they had asked the AI to remember it. It isn't saved if several people said it, or if the person already has that memory.
 
 **Upkeep.** Each day the system links related memories and may write a short derived insight from a recurring pattern. Each week it merges near-duplicates and archives old, low-value memories that were captured automatically. Memories saved on purpose are never aged out this way, and memories an always-on note draws on are never archived as low-value.
 
