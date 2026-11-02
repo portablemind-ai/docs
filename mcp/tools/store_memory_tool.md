@@ -16,7 +16,12 @@ This is the description the server sends to the model, verbatim.
 
 Store persistent memories for future AI sessions.
 
-USE WHEN: User requests to remember something, important decisions/preferences emerge, solutions discovered.
+USE WHEN: someone asks you to remember something, or you reach a decision, preference or solution worth keeping.
+
+ONE REQUEST = ONE MEMORY: store what THIS message asks you to remember — one memory, unless the
+person lists several things. In a channel, do NOT store other facts from the conversation history:
+background extraction records those. Saving something already remembered stores nothing new and
+answers with the existing memory's id.
 
 MEMORY TYPES — pick one of these five:
   fact (default) — something true about the work, the people or the world
