@@ -17,9 +17,14 @@ This is the description the server sends to the model, verbatim.
 List available agents and what they can do, it will return a JSON array of Objects containing the name: (name of the agent to be used when calling it)
 and description: (what the agent specializes in and should be used for)'
 
+Only agents marked discoverable_by_other_agents are listed. search_term narrows the list to agents whose name
+or description contains it (case-insensitive) — the same filter as GET /api/v1/llm_agents?search_term=.
+
 ## Parameters
 
-This tool takes no parameters.
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `search_term` | string | no | Optional: only agents whose name or description contains this text (case-insensitive) |
 
 ## Input schema
 
@@ -28,7 +33,12 @@ The JSON Schema served for `inputSchema`, verbatim.
 ```json
 {
   "type": "object",
-  "properties": {},
+  "properties": {
+    "search_term": {
+      "type": "string",
+      "description": "Optional: only agents whose name or description contains this text (case-insensitive)"
+    }
+  },
   "required": []
 }
 ```

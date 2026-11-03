@@ -109,6 +109,10 @@ the encrypted `git_token`; nothing is passed per call but the operation's own ar
   under **Administration → Configuration Manager → Configurations → dev_team → repos**; the setup
   is described in the [Git Repositories & Merge Requests](https://www.portablemind.ai/docs/git-repositories)
   guide. The change takes effect on the next call.
+- **An engagement has its own registry.** When the call is made for a run bound to a Project that has a
+  dev_team-shaped Configuration attached (`dev_team_<client>`, the per-project registry), that registry is the one read — provider,
+  token, default repository and the registered-repositories allow-list alike; the workspace's `dev_team` is
+  the fallback. Each entry of a `repos` list may carry its own `git_token` (and host) too.
 - **Pass `project_id` on every call that takes `mr_id`.** MR / PR numbers are only unique within
   one repository. Without `project_id` the call uses the default repository and may return an
   unrelated merge request; the response then carries a `warning` field.

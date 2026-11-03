@@ -23,15 +23,28 @@ This tool atomically creates:
 Call this after you have designed a pipeline through conversation with the user.
 The pipeline will be immediately available for use via @mention of its coordinator agent.
 
+Two modes — pass exactly one of:
+- `pipeline`: CREATE a pipeline (or REBUILD an existing one by the same name: every stage and transition is
+  recreated from the definition; past runs keep their history).
+- `patch`: EDIT an existing pipeline in place — patch named stages and/or replace its transitions, validated
+  the same way; stages are matched by name and must exist. Use it to fix a transition, a limit, a stage's
+  instructions or agent without rebuilding.
+
 ## Parameters
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `pipeline` | object | yes | Complete pipeline definition. |
+| `pipeline` | object | no | Complete pipeline definition. |
 | `pipeline.name` | string | yes | Pipeline template name (e.g., "Customer Complaint Pipeline") |
 | `pipeline.description` | string | no | What this pipeline does. |
 | `pipeline.domain` | string | no | Domain identifier (e.g., "complaints", "onboarding", "rfp") |
 | `pipeline.cost_limit` | number | no | Maximum cost in DOLLARS for a single execution (default: 25.0). Pass dollars — the tool converts to the engine's internal cents unit on write. |
+| `pipeline.input_schema` | array of object | no | Structured inputs a run asks for at start (the Start dialog form): field descriptors { key, label, type, required, default, options }. The engine fills defaults and refuses a start missing a required field; values land in context.inputs. |
+| `pipeline.gate_policies` | object | no | Timer policies for the pipeline's approval gates (all optional): gate_auto_approve_after_hours (report-only pipelines: a gate open this long auto-approves), gate_expire_after_days (a gate open this long cancels the run as expired), gate_auto_approve_when_clean (bool), gate_approve_when_merged (bool). |
+| `pipeline.gate_policies.gate_auto_approve_after_hours` | number | no |  |
+| `pipeline.gate_policies.gate_expire_after_days` | number | no |  |
+| `pipeline.gate_policies.gate_auto_approve_when_clean` | boolean | no |  |
+| `pipeline.gate_policies.gate_approve_when_merged` | boolean | no |  |
 | `pipeline.capabilities` | object | no | Engine capabilities this pipeline needs. IMPORTANT for non-code pipelines: when omitted, vcs is DERIVED from the stage types (true only if the pipeline has silolink/parallel_agents stages). A pipeline with vcs true cannot start unless the tenant has a code repository configured, so data-only pipelines (triage, document review, intake, …) must NOT claim vcs. |
 | `pipeline.capabilities.vcs` | boolean | no | Pipeline cuts git branches / opens MRs (code pipelines only) |
 | `pipeline.capabilities.multi_repo` | boolean | no | Unscoped runs expand to the whole repo catalog. |
@@ -45,6 +58,14 @@ The pipeline will be immediately available for use via @mention of its coordinat
 | `pipeline.coordinator.persona` | string | no | System prompt for the coordinator. |
 | `pipeline.stages` | array of object | yes | Pipeline stages in execution order. |
 | `pipeline.transitions` | array of object | no | Stage transitions. If omitted, auto-generates linear approval_granted transitions with rejection loops. |
+| `patch` | object | no | EDIT an existing pipeline in place (instead of `pipeline`). Stages are matched by name and must exist; `transitions`, when given, replaces the whole list. Every applied patch bumps the template version. |
+| `patch.name` | string | yes | The existing pipeline template name (required) |
+| `patch.description` | string | no |  |
+| `patch.cost_limit` | number | no | DOLLARS per run. |
+| `patch.input_schema` | array of object | no |  |
+| `patch.gate_policies` | object | no |  |
+| `patch.stages` | array of object | no | Patches of existing stages: { name (required), label, requires_approval, timeout_minutes, max_retries, cost_limit_cents, retry_backoff_seconds, max_cost, required_inputs, expected_outputs, agent_config (merged), agent_name, agent_model_hint, instructions }. |
+| `patch.transitions` | array of object | no | The COMPLETE new transition list: { from, to, condition, condition_config, priority }. |
 
 ## Input schema
 
@@ -73,6 +94,31 @@ The JSON Schema served for `inputSchema`, verbatim.
         "cost_limit": {
           "type": "number",
           "description": "Maximum cost in DOLLARS for a single execution (default: 25.0). Pass dollars — the tool converts to the engine's internal cents unit on write."
+        },
+        "input_schema": {
+          "type": "array",
+          "description": "Structured inputs a run asks for at start (the Start dialog form): field descriptors { key, label, type, required, default, options }. The engine fills defaults and refuses a start missing a required field; values land in context.inputs.",
+          "items": {
+            "type": "object"
+          }
+        },
+        "gate_policies": {
+          "type": "object",
+          "description": "Timer policies for the pipeline's approval gates (all optional): gate_auto_approve_after_hours (report-only pipelines: a gate open this long auto-approves), gate_expire_after_days (a gate open this long cancels the run as expired), gate_auto_approve_when_clean (bool), gate_approve_when_merged (bool).",
+          "properties": {
+            "gate_auto_approve_after_hours": {
+              "type": "number"
+            },
+            "gate_expire_after_days": {
+              "type": "number"
+            },
+            "gate_auto_approve_when_clean": {
+              "type": "boolean"
+            },
+            "gate_approve_when_merged": {
+              "type": "boolean"
+            }
+          }
         },
         "capabilities": {
           "type": "object",
@@ -170,6 +216,25 @@ The JSON Schema served for `inputSchema`, verbatim.
                 "type": "integer",
                 "description": "Stage timeout (default: 15)"
               },
+              "max_retries": {
+                "type": "integer",
+                "description": "Automatic retries of this stage after a failure (default 0). When set (> 0) it is ALSO the budget for filing retries and watchdog auto-recoveries, which otherwise use the engine defaults (2 and 3)."
+              },
+              "retry_backoff_seconds": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "Backoff before each automatic retry, in seconds (default [60, 300, 900]; the last entry repeats)."
+              },
+              "cost_limit_cents": {
+                "type": "number",
+                "description": "Per-stage cap on the in-platform agent spend, in CENTS; the stage is failed when its agent cost reaches it. Unset: only the run's cost_limit applies."
+              },
+              "max_cost": {
+                "type": "number",
+                "description": "Pre-invocation per-stage budget in CENTS: a retry/re-entry of the stage is refused once its agent cost has reached it."
+              },
               "required_inputs": {
                 "type": "array",
                 "items": {
@@ -258,11 +323,52 @@ The JSON Schema served for `inputSchema`, verbatim.
         "stages",
         "coordinator"
       ]
+    },
+    "patch": {
+      "type": "object",
+      "description": "EDIT an existing pipeline in place (instead of `pipeline`). Stages are matched by name and must exist; `transitions`, when given, replaces the whole list. Every applied patch bumps the template version.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The existing pipeline template name (required)"
+        },
+        "description": {
+          "type": "string"
+        },
+        "cost_limit": {
+          "type": "number",
+          "description": "DOLLARS per run"
+        },
+        "input_schema": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "gate_policies": {
+          "type": "object"
+        },
+        "stages": {
+          "type": "array",
+          "description": "Patches of existing stages: { name (required), label, requires_approval, timeout_minutes, max_retries, cost_limit_cents, retry_backoff_seconds, max_cost, required_inputs, expected_outputs, agent_config (merged), agent_name, agent_model_hint, instructions }",
+          "items": {
+            "type": "object"
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "description": "The COMPLETE new transition list: { from, to, condition, condition_config, priority }",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
-  "required": [
-    "pipeline"
-  ]
+  "required": []
 }
 ```
 

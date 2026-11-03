@@ -23,11 +23,22 @@ CROSS-TENANT: a file shared with you from another tenant — directly, via a sha
 conversation's attachments, or via a shared directory — resolves automatically when
 the id is not in your own tenant.
 
+LONG FILES ARE PAGED. Text content comes back at most 12000 characters per
+read (what fits under the tool-result cap). Every text read returns total_chars, offset, next_offset and
+truncated; when truncated is true, call again with offset: next_offset (how_to_continue spells it out) until
+next_offset is null. Pages are consecutive slices of the one content string — no gaps, no overlaps. To read
+by LINE instead, pass line_start (1-based) and optionally line_count: the response adds total_lines, line_end
+and next_line_start. An offset past the end returns empty content with next_offset: null.
+
 ## Parameters
 
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `llm_file_id` | integer | yes | The ID of the LlmFile to read (required) |
+| `offset` | integer | no | Character position to start the text content at (0-based; default 0). Use next_offset from the previous read to continue. |
+| `limit` | integer | no | Most characters of text content to return (1-12000; default 12000, the most that fits under the tool-result cap). |
+| `line_start` | integer | no | Read text content by line: the 1-based line to start at. Overrides offset. |
+| `line_count` | integer | no | With line_start: how many lines to return (default: as many as fit under limit). |
 
 ## Example
 
@@ -59,6 +70,22 @@ The JSON Schema served for `inputSchema`, verbatim.
     "llm_file_id": {
       "type": "integer",
       "description": "The ID of the LlmFile to read (required)"
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Character position to start the text content at (0-based; default 0). Use next_offset from the previous read to continue."
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Most characters of text content to return (1-12000; default 12000, the most that fits under the tool-result cap)."
+    },
+    "line_start": {
+      "type": "integer",
+      "description": "Read text content by line: the 1-based line to start at. Overrides offset."
+    },
+    "line_count": {
+      "type": "integer",
+      "description": "With line_start: how many lines to return (default: as many as fit under limit)."
     }
   },
   "required": [

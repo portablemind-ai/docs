@@ -41,6 +41,7 @@ as stages progress.
 | `approver_party_ids` | array of integer | no | Optional. Party ids designated to APPROVE this run's human gate(s) (Pillar P2 — explicit gate holders). Each is assigned the `approver` role on the execution at start, so they are in place before the first gate fires. It binds only the gates whose template stage declares `approver_role: approver` (ONLY these parties may approve those); a gate with no approver_role stays open to any authorized human. The run's starter is never counted as a holder (unless a workspace admin). |
 | `owning_team_id` | integer | no | Optional. Party id of the TEAM that owns this run (Pillar P2). When the pipeline has a `team_lead` approval gate, the gate resolves to THIS team's lead — so the run need not own a team Project. Pass the team's party id when the user names a team; ignored if it is not a same-tenant team. |
 | `approver_assignments` | object | no | Optional. Per-gate, role-based approvers (Pillar P2) — a map of approver ROLE id → array of Party ids, e.g. {"underwriter":[12],"manager":[34]}. Use when a pipeline's gates declare DIFFERENT approver roles (its required_approver_roles); each named party is assigned that role on the run, so each gate resolves to its own holder(s). Unknown roles / foreign ids are ignored. For a single generic gate holder use approver_party_ids instead. |
+| `project_id` | integer | no | Optional. The ENGAGEMENT this run is for — a Project id the caller can see — when the work item is not itself that project (e.g. a ticket worked under a client project). Its spend rolls up to the project (llm_cost_stats_tool by_project) and its git operations use the project's own dev_team registry when one is attached. Omit when work_item_type is "project" (that project is the engagement) or the run belongs to no engagement. |
 | `allow_duplicate` | boolean | no | Optional, default false — LEAVE UNSET unless you are certain. Starting this template while an execution you coordinate is already in flight is refused as a concurrent double-fire (exec 169/170 incident). Pass true ONLY when a second simultaneous run of the same template is genuinely intended, and say why in the run request. |
 
 ## Input schema
@@ -117,6 +118,10 @@ The JSON Schema served for `inputSchema`, verbatim.
     "approver_assignments": {
       "type": "object",
       "description": "Optional. Per-gate, role-based approvers (Pillar P2) — a map of approver ROLE id → array of Party ids, e.g. {\"underwriter\":[12],\"manager\":[34]}. Use when a pipeline's gates declare DIFFERENT approver roles (its required_approver_roles); each named party is assigned that role on the run, so each gate resolves to its own holder(s). Unknown roles / foreign ids are ignored. For a single generic gate holder use approver_party_ids instead."
+    },
+    "project_id": {
+      "type": "integer",
+      "description": "Optional. The ENGAGEMENT this run is for — a Project id the caller can see — when the work item is not itself that project (e.g. a ticket worked under a client project). Its spend rolls up to the project (llm_cost_stats_tool by_project) and its git operations use the project's own dev_team registry when one is attached. Omit when work_item_type is \"project\" (that project is the engagement) or the run belongs to no engagement."
     },
     "allow_duplicate": {
       "type": "boolean",

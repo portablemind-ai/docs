@@ -34,6 +34,12 @@ OPTIONAL FIELDS:
   Dynamic Functions — is granted automatically with any Dynamic Function tool; no need to pass it.
   Pass "agent_pipeline_builder" for a non-admin agent given orchestration_builder_tool — building a pipeline
   takes create/update OrchestrationTemplates and create LlmAgents; it is never granted automatically.)
+- access_profile: "standard" (default — `basic` + `agent_runtime`, what every agent has always run on) or
+  "minimal" (the `agent_minimal` role INSTEAD of `basic`: it can post in conversations it is a member of,
+  keep its own documents, read files shared with it and use memory, and reaches nothing else in the
+  workspace unless shared or granted). Pick "minimal" for an agent fed by outside input (customer tickets,
+  inbound email) so a prompt injection has no standing authority to spend. Roles named in
+  security_role_iids are kept either way; change it later with update_agent_tool.
 RULE: an agent can never be given more than you hold — unless you are a workspace admin, you need the
   create LlmAgents capability, each security role must carry only capabilities you have (never an *admin
   role), each Dynamic Function tool the capabilities it uses, and new custom tools / resources / skills /
@@ -42,6 +48,12 @@ RULE: an agent can never be given more than you hold — unless you are a worksp
 - internal_tool_use_list: ["general_crud_tool", "model_schema_tool"] (system tools)
 - internal_resource_use_list: [] (system resources)
 - tool_configurations: {"tool_name": {config_key: "value"}}
+- private_memory_mode: false (default). Memory recall is WORKSPACE-WIDE by default: the agent recalls the
+  shared memories of the whole workspace and its saves join them. true walls the agent off — it recalls and
+  saves ONLY its own private memories (nothing shared, nothing of other agents or people).
+- reference_document_ids: [LlmFile ids] — documents injected into every turn as policies to follow. Each must
+  be a file YOU may attach (own, shared with you, or public in your workspace); an unknown id is refused.
+UNKNOWN KEYS ARE REFUSED (with the accepted list), never silently ignored.
 
 CUSTOM TOOLS (llm_tools array): {name, description, input_schema (JSON string), call_block (JS code), active: true}
 CUSTOM RESOURCES (llm_resources array): {name, description, is_content: true/false, content (if is_content), call_block (if !is_content)}

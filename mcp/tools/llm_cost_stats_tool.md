@@ -14,7 +14,7 @@
 
 This is the description the server sends to the model, verbatim.
 
-Retrieve comprehensive LLM cost statistics and usage data for a tenant. Provides cost breakdowns by daily/weekly/monthly periods, users, models, conversations, message types (conversation vs standalone), and deletion status (active vs deleted messages). Supports optional date filtering to analyze specific time periods.
+Retrieve comprehensive LLM cost statistics and usage data for a tenant. Provides cost breakdowns by daily/weekly/monthly periods, users, models, conversations, projects (engagements), message types (conversation vs standalone), and deletion status (active vs deleted messages). Supports optional date filtering to analyze specific time periods, and a project_id filter to narrow every breakdown to one engagement. The full payload is LARGE (by_conversation alone can run to 100+ rows): pass `sections` to return only the totals breakdowns you need, e.g. ["cache_stats"] for prompt-cache hit rates per sender and conversation, or ["grand_total", "by_user"]; add include_daily: false for the smallest payload.
 
 ## Parameters
 
@@ -26,7 +26,9 @@ Retrieve comprehensive LLM cost statistics and usage data for a tenant. Provides
 | `include_daily` | boolean | no | Include daily cost breakdown. Default: true. |
 | `include_weekly` | boolean | no | Include weekly cost breakdown. Default: false. |
 | `include_monthly` | boolean | no | Include monthly cost breakdown. Default: false. |
-| `include_totals` | boolean | no | Include total statistics breakdown (by user, model, conversation, message type, deletion status). Default: true. |
+| `include_totals` | boolean | no | Include total statistics breakdown (by user, model, conversation, project, message type, deletion status). Default: true. |
+| `project_id` | integer | no | Optional. Narrow EVERY breakdown to one engagement: the Project id the spend was for (rows stamped at write time — runs, sessions, scheduled runs and conversations linked to exactly one project). Must be a project of the tenant; otherwise invalid_project_id. |
+| `sections` | array of string | no | Which detailed_statistics.totals breakdowns to return (default: all of them). Name only what you need: the others are neither computed nor returned. One of: by_user, by_initiating_user, by_model, by_conversation, by_project, by_message_type, by_source, by_cost_basis, by_deletion_status, by_orchestration, cache_stats, grand_total. Example: ["cache_stats"] returns cache_stats.by_sender / by_conversation (prompt-cache read rate, cache create/read tokens, uncached input, message count) and no other totals breakdown. The daily series (include_daily, default true) and the cross-workspace / partner rollups are still returned; pass include_daily: false to drop the daily rows. |
 
 ## Input schema
 
@@ -62,7 +64,32 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "include_totals": {
       "type": "boolean",
-      "description": "Include total statistics breakdown (by user, model, conversation, message type, deletion status). Default: true"
+      "description": "Include total statistics breakdown (by user, model, conversation, project, message type, deletion status). Default: true"
+    },
+    "project_id": {
+      "type": "integer",
+      "description": "Optional. Narrow EVERY breakdown to one engagement: the Project id the spend was for (rows stamped at write time — runs, sessions, scheduled runs and conversations linked to exactly one project). Must be a project of the tenant; otherwise invalid_project_id."
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "by_user",
+          "by_initiating_user",
+          "by_model",
+          "by_conversation",
+          "by_project",
+          "by_message_type",
+          "by_source",
+          "by_cost_basis",
+          "by_deletion_status",
+          "by_orchestration",
+          "cache_stats",
+          "grand_total"
+        ]
+      },
+      "description": "Which detailed_statistics.totals breakdowns to return (default: all of them). Name only what you need: the others are neither computed nor returned. One of: by_user, by_initiating_user, by_model, by_conversation, by_project, by_message_type, by_source, by_cost_basis, by_deletion_status, by_orchestration, cache_stats, grand_total. Example: [\"cache_stats\"] returns cache_stats.by_sender / by_conversation (prompt-cache read rate, cache create/read tokens, uncached input, message count) and no other totals breakdown. The daily series (include_daily, default true) and the cross-workspace / partner rollups are still returned; pass include_daily: false to drop the daily rows."
     }
   },
   "required": [

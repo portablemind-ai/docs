@@ -30,6 +30,7 @@ stage_execution_id to target a specific one.
 |---|---|---|---|
 | `orchestration_execution_id` | integer | yes | The workflow execution ID whose stage should be retried. |
 | `stage_execution_id` | integer | no | Optional. The specific stage execution to retry. Defaults to the current stage. |
+| `reason` | string | no | Optional. Why the stage is retried — recorded on the superseded attempt and in the run log. |
 
 ## Input schema
 
@@ -46,6 +47,10 @@ The JSON Schema served for `inputSchema`, verbatim.
     "stage_execution_id": {
       "type": "integer",
       "description": "Optional. The specific stage execution to retry. Defaults to the current stage."
+    },
+    "reason": {
+      "type": "string",
+      "description": "Optional. Why the stage is retried — recorded on the superseded attempt and in the run log."
     }
   },
   "required": [

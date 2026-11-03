@@ -17,7 +17,9 @@ This is the description the server sends to the model, verbatim.
 Reject the current stage gate in a workflow execution.
 If the template defines a rejection transition (e.g., loop back to
 re-do the stage), the workflow follows that path. Otherwise the
-workflow fails.
+rejection is recorded and the workflow FAILS (failure_reason
+"no_reject_transition from <stage>"); the error names it — add a
+reject transition to the template, then reopen and retry the stage.
 
 Call this when the user is not satisfied with the stage output
 and provides feedback for revision.

@@ -50,8 +50,17 @@ UPDATABLE FIELDS:
 - llm_system_prompt: System prompt text (defines agent personality/behavior)
 - llm_user_prompt: User prompt text (defines specific tasks)
 - roles: Array of role internal_identifiers to assign to agent
+- access_profile: "standard" or "minimal" — the agent's standing authority (see create_agent_tool). "minimal"
+  takes `basic` off the agent and gives it `agent_minimal`; "standard" puts `basic` back. Other roles the
+  agent holds are untouched.
 - llm_tools: Array of custom tools (will replace existing; a NEW one needs the create LlmTools capability)
 - llm_resources: Array of custom resources (will replace existing; a NEW one needs create LlmResources)
+- private_memory_mode: Boolean. Memory recall is WORKSPACE-WIDE by default (the agent recalls the shared
+  memories of the whole workspace and its saves join them); true walls the agent off to ONLY its own
+  private memories
+- reference_document_ids: Array of LlmFile ids — replaces the agent's reference documents (policies injected
+  into every turn). Each must be a file YOU may attach; an unknown id refuses the whole update
+UNKNOWN KEYS ARE REFUSED (with the accepted list), never silently ignored.
 
 EXAMPLE:
 {

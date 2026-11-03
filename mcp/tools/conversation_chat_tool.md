@@ -31,6 +31,12 @@ your shared access (no parameter needed).
 
 Threads: pass thread_root_id to reply inside the thread started by that message.
 
+Addressing an agent: pass agent_id to have exactly that agent respond to this message — no @mention
+needed and no text scan (an @name quoted in a blockquote or code span never wakes anyone). The same
+rules as a mention apply: you must be able to see the agent, it must be active (an inactive, halted,
+archived or model-less agent is refused with a specific error_type: agent_inactive, agent_halted, ...),
+and pipeline stage agents cannot be addressed. agent_id cannot be combined with llm_model_id.
+
 ## Parameters
 
 | Name | Type | Required | Description |
@@ -38,6 +44,7 @@ Threads: pass thread_root_id to reply inside the thread started by that message.
 | `conversation_id` | integer | yes | ID of the conversation to send message to. |
 | `message` | string | yes | The message content to send to the conversation. |
 | `llm_model_id` | integer | no | LLM model ID to generate a response. If provided, triggers LLM response. If not provided, only adds the user message. |
+| `agent_id` | integer | no | ID of the agent that should respond to this message (from list_available_agents_tool). Invokes exactly that agent without an @mention; not combinable with llm_model_id. |
 | `include_shared` | boolean | no | DEPRECATED (accepted for back-compat, no longer needed): cross-tenant shared conversations now resolve automatically when the id is not found in your tenant. |
 | `thread_root_id` | integer | no | Optional: post as a reply in the thread started by this message id (Slack-style thread). Omit to post in the main conversation. |
 | `also_send_to_conversation` | boolean | no | With thread_root_id: also show the reply in the main conversation (default false). |
@@ -56,12 +63,25 @@ Post and ask a model to reply (asynchronous — returns `async: true` and a `job
 {"name": "conversation_chat_tool", "arguments": {"conversation_id": 3870, "message": "Summarise today's decisions", "llm_model_id": 12}}
 ```
 
+Post and have one specific agent respond, with no `@mention` in the text (the agent id comes from
+`list_available_agents_tool`; the result carries `agent_dispatch: "dispatched"`):
+
+```json
+{"name": "conversation_chat_tool", "arguments": {"conversation_id": 3870, "message": "Please review the MR", "agent_id": 42}}
+```
+
 ## Gotchas
 
 - **The async result names whose AI answers:** `ai_workspace` (`tenant_id`, `enterprise_identifier`, `name`) — in a partner's channel you were admitted to, that is the partner's workspace (its tokens, files and memories).
 - **`message` is a plain string here.** Only raw `LlmMessage` rows use the `{role, content}` object.
-- **Agents only act when mentioned.** Start the message with `@AgentName` if you want an agent in
-  the conversation to react; an unmentioned message is a note nobody acts on.
+- **Agents act when mentioned or addressed by id.** Start the message with `@AgentName`, or pass
+  `agent_id`, if you want an agent in the conversation to react; an unaddressed message is a note nobody
+  acts on. An `@name` inside a blockquote (`> …`), a code span or a code fence is quoted text and wakes
+  nobody.
+- **`agent_id` is refused with a reason before anything is posted:** `agent_not_accessible` (no such agent,
+  or not one you may see), `agent_inactive` / `agent_halted` / `agent_no_model` (the agent cannot run right
+  now — an admin fixes it in AI Studio), `agent_pipeline_only` (a pipeline stage agent), `agent_id_with_model`
+  (do not combine with `llm_model_id`; the agent is the responder).
 - **Do not re-send while a reply is pending.** With `llm_model_id` the reply is generated in the
   background; poll the conversation's messages newest-first (`general_crud_tool`, model
   `LlmMessage`, filter `llm_conversation_id`, sort `created_at desc`). Re-sending runs — and bills — it twice.
@@ -87,6 +107,10 @@ The JSON Schema served for `inputSchema`, verbatim.
     "llm_model_id": {
       "type": "integer",
       "description": "LLM model ID to generate a response. If provided, triggers LLM response. If not provided, only adds the user message."
+    },
+    "agent_id": {
+      "type": "integer",
+      "description": "ID of the agent that should respond to this message (from list_available_agents_tool). Invokes exactly that agent without an @mention; not combinable with llm_model_id."
     },
     "include_shared": {
       "type": "boolean",

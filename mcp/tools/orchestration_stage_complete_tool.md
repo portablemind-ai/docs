@@ -31,6 +31,10 @@ human approval if the stage requires it.
 | `artifacts` | array of object | no | Artifacts produced by this stage. |
 | `requirements` | array of object | no | OPT-IN traceability: structured numbered requirements a planning stage emits (only used when the stage declares keystone: project_requirements). Each becomes a child Task of the run's keystone Project. requirement_id auto-derives (R-001…) from order when omitted. Absent ⇒ no requirement Tasks are created. |
 | `pushed_branch` | string | no | If your stage pushed a git branch containing its deliverable and the run has no engine-managed integration branch, report the branch name here. The engine registers it as the run's integration branch so a downstream review gate (open_final_mr) can open the merge request for the human to approve. |
+| `verdict` | object | no | Optional structured verdict for a review/verify/scoring stage: { decision: "pass" \| "fail" \| "needs_changes" \| any label, score: number (optional), reasons: [string] }. Stored on the stage and returned on every stage row, so a client can branch on it instead of parsing the output text. |
+| `verdict.decision` | string | yes |  |
+| `verdict.score` | number | no |  |
+| `verdict.reasons` | array of string | no |  |
 | `handoff` | object | no | Structured handoff to the NEXT stage agent. This is surfaced prominently at the top of their prompt so they don't cold-start. Discipline-agnostic — works for code, document review, research, etc. |
 | `handoff.goal_next` | string | no | The objective the next stage should accomplish, given what you just did. |
 | `handoff.done` | string | no | Concise summary of what YOU accomplished this stage (decisions, outputs, what changed). |
@@ -86,6 +90,10 @@ The JSON Schema served for `inputSchema`, verbatim.
             "type": "object",
             "description": "Inline data for json_data artifacts"
           },
+          "metadata": {
+            "type": "object",
+            "description": "Optional free-form metadata about the artifact (e.g. page count, language, source commit), kept and returned for every artifact type."
+          },
           "satisfies_requirements": {
             "type": "array",
             "description": "OPT-IN traceability: requirement ids (e.g. [\"R-001\"]) this artifact fulfills. The engine attaches this artifact to those requirement Tasks and advances their status. Omit unless the pipeline uses requirements.",
@@ -138,6 +146,27 @@ The JSON Schema served for `inputSchema`, verbatim.
     "pushed_branch": {
       "type": "string",
       "description": "If your stage pushed a git branch containing its deliverable and the run has no engine-managed integration branch, report the branch name here. The engine registers it as the run's integration branch so a downstream review gate (open_final_mr) can open the merge request for the human to approve."
+    },
+    "verdict": {
+      "type": "object",
+      "description": "Optional structured verdict for a review/verify/scoring stage: { decision: \"pass\" | \"fail\" | \"needs_changes\" | any label, score: number (optional), reasons: [string] }. Stored on the stage and returned on every stage row, so a client can branch on it instead of parsing the output text.",
+      "properties": {
+        "decision": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "decision"
+      ]
     },
     "handoff": {
       "type": "object",

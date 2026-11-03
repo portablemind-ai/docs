@@ -34,7 +34,8 @@ MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact,
 PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [], memory_id (for related),
         limit (1-100, default 20), min_importance (0.0-1.0), include_related (default true), include_content (default true),
         max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags [], as_of (ISO-8601),
-        origin (deliberate | extraction)
+        origin (deliberate | extraction), track_access (default true; false = a peek that leaves the
+        usage counters alone)
 
 ORIGIN: every memory carries 'origin' — 'deliberate' (a person or an agent saved or edited it),
 'extraction' (background extraction distilled it from a conversation) or 'unknown' (before the stamps).
@@ -79,6 +80,7 @@ automatically when the id is not in your tenant.
 | `tags` | array of string | no | Filter memories by specific tags. |
 | `as_of` | string | no | Optional ISO-8601 date/time ("2026-07-01", "2026-07-01T09:00:00Z"): return what was believed at that moment (superseded versions included) instead of what is believed now. |
 | `origin` | string | no | Only memories from this source: "deliberate" (saved or edited by a person or an agent) or "extraction" (background extraction). Omit for both. One of: `deliberate`, `extraction`. |
+| `track_access` | boolean | no | Default true: a memory this read returns counts as USED (access_count / last_accessed_at, which feed its retrieval strength). false for a peek — an audit, a "what would I recall" check — that must leave the usage counters as they are. |
 
 ## Example
 
@@ -214,6 +216,10 @@ The JSON Schema served for `inputSchema`, verbatim.
         "extraction"
       ],
       "description": "Only memories from this source: \"deliberate\" (saved or edited by a person or an agent) or \"extraction\" (background extraction). Omit for both."
+    },
+    "track_access": {
+      "type": "boolean",
+      "description": "Default true: a memory this read returns counts as USED (access_count / last_accessed_at, which feed its retrieval strength). false for a peek — an audit, a \"what would I recall\" check — that must leave the usage counters as they are."
     }
   },
   "required": []
