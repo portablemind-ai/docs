@@ -17,6 +17,8 @@ This is the description the server sends to the model, verbatim.
 Retire a memory you own (soft-archive — recoverable, not permanently deleted).
 
 USE WHEN: a memory is obsolete/wrong and should stop surfacing in recall.
+USE ONLY when the person's current message asks for the forgetting (or confirms your question). Never on
+your own initiative, never because a save answered "already remembered".
 
 REQUIRED: memory_id
 OPTIONAL: superseded_by_memory_id — the newer memory that REPLACES this one. The old memory is then

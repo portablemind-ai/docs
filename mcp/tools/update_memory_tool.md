@@ -18,6 +18,8 @@ Correct or refine an existing memory you own (title / content / importance / tag
 
 USE WHEN: a fact you stored is now wrong or incomplete and should be updated
 (rather than storing a contradicting memory).
+USE ONLY when the person's current message asks for the correction (or confirms your question). Never on
+your own initiative, never because a save answered "already remembered".
 
 REQUIRED: memory_id
 OPTIONAL: title, content, importance_score, tags []
