@@ -128,7 +128,7 @@ With an active partnership you can **publish an Application to chosen partner or
 **What the partner gets — and doesn't get:**
 
 - Their members see the Application in the ticket **Application dropdown**, marked with your organization's initials so it's clearly yours, and can file tickets against it.
-- That is *all* they get. The project never appears in their Projects area, and its tasks, dates, and members stay completely invisible to them. Publishing is not a share — if you want a partner to actually *see or work in* a project, share it from the project's **Access / Membership** dialog instead (see [Workspace Sharing](workspace-sharing.md)).
+- That is *all* they get. The project never appears in their Projects area, and its tasks, dates, and members stay completely invisible to them. Publishing is not a share — if you want a partner to actually *see or work in* a project, share it from the project's **Share** button instead (see [Workspace Sharing](workspace-sharing.md)).
 
 **How to publish** (administrators only):
 

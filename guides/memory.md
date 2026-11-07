@@ -87,7 +87,7 @@ An agent's memories can also be reviewed and corrected from its **Memories** dia
 
 ## A partner's memories
 
-If a partner organization has admitted you to their workspace, you can look after their memories from your own workspace — you never switch into theirs. In **AI Studio → Memory Graph**, pick their workspace in the **Workspace** select (it lists your own workspace and every workspace you've been admitted to). The graph says whose memories it shows — for example **Memories of Trustworks · you are a guest** — and everything on it then works in that workspace:
+If a partner organization has admitted you to their workspace, you can look after their memories from your own workspace — you never switch into theirs. In **AI Studio → Memory Graph**, pick their workspace in the **Workspace** select (it lists your own workspace and every workspace you've been admitted to). The graph says whose memories it shows — for example **Memories of Trustworks · you’re a partner here** — and everything on it then works in that workspace:
 
 - you see their **shared** memories and the ones **you saved** there; their private memories stay private (the page shows shared memories only);
 - the graph shows how those memories are related;

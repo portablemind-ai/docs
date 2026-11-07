@@ -26,14 +26,16 @@ A sharing relationship is a formal link between two organizations. It moves thro
 
 > **Tip:** Revoking is permanent — it's a hard unshare, and re-establishing access afterwards requires a brand-new invitation.
 
-### Hosts and guests
+### Hosts and partners
 
 In any relationship there are two sides:
 
 - The **host** organization is the one granting access to its content.
-- The **guest** users are the people from the other organization who receive that access.
+- The **partners** are the people from the other organization who receive that access. They're marked **Partner · *their organization*** in chat, sharing and assignment lists.
 
-Host users only ever see their own workspace — they provide access, they don't receive it. Guest users work from their own workspace, where the content shared with them appears alongside their own.
+Host users only ever see their own workspace — they provide access, they don't receive it. Partners work from their own workspace, where the content shared with them appears alongside their own.
+
+> **Guest** means something else in PortableMind: someone you invite into a single conversation with **Invite Guest to Conversation**. A partner is a person from another workspace.
 
 ### Roles and shares control everything
 
@@ -57,11 +59,14 @@ For API-level details, see the [API guide](https://www.dsiloed.com/apps/apiguide
 
 ## Sharing an individual item with a partner
 
-Day to day, most cross-organization sharing happens from an item's own **share dialog** — the **Access / Membership** button on a project, chat, or file. The dialog's search offers three kinds of grantee:
+Day to day, most cross-organization sharing happens from an item's own **Access** dialog — open it with **Share** on a project, task, chat, or file. (If you can't change who has access, the channel menu says **Who has access** instead and the dialog only shows the list.) The dialog lists everyone who can open the item, the access each one has (**Can view**, **Can comment**, **Can edit**, **Full access**, **Owner**), and where it **Comes from**: a direct share, a folder or project it sits in, a team, or a membership. Rows that come from somewhere else are changed there, not here.
 
-- **A person** — anyone you can see, including people from partner organizations (marked with their organization's name).
+Its add box (*Add people, teams or partners…*) groups what it finds under **People**, **Teams**, **Partners** and **Email**:
+
+- **A person** — anyone you can see, including people from partner organizations (marked **Partner · *organization***).
 - **A team** — one of your own teams.
-- **A partner team** — under the **Partners** group (handshake icon), each active partnership offers its designated manager team, shown as *"Organization — team"*. Sharing with it grants access to the members of that specific team, at the access level you pick. This is the usual way to hand a whole partner working-group access to something in one step.
+- **A partner team** — under **Partners**, each active partnership offers its designated manager team, shown as *"Organization — team"*. Sharing with it grants access to the members of that specific team, at the access level you pick. This is the usual way to hand a whole partner working-group access to something in one step.
+- **An email address** — for someone who isn't in your workspace yet. An admin can **Invite and share**; anyone can **Share by email**, and they get access when they sign up.
 
 **Which flow do I want?**
 
@@ -72,15 +77,16 @@ Day to day, most cross-organization sharing happens from an item's own **share d
 | A partner organization to file tickets against a project **without seeing it** | Don't share — [publish the Application for ticket intake](tickets-and-partners.md#letting-partners-file-tickets-against-your-applications) |
 | A partner team to work the tickets you receive | The partnership's [standing ticket share](tickets-and-partners.md) |
 
-> **Tip:** a share always grants real visibility at the level you choose — viewer and up. If what you actually want is "they can raise tickets against this, nothing more," that's intake publishing, not sharing.
+> **Tip:** a share always grants real visibility at the level you choose — **Can view** and up. If what you actually want is "they can raise tickets against this, nothing more," that's intake publishing, not sharing.
 
 ## Giving a partner's people working access to your apps
 
 Sharing item by item works for a handful of things. When a partner's person needs to *work* in your workspace — a consultant running an engagement, an agency producing your content — give them access to whole apps instead:
 
-1. In the top bar, click the **Share workspace apps** button (the share icon next to your notifications). It is shown to your workspace's administrators.
-2. Enter the person's email address — someone from a partner organization keeps their own account — and pick the apps they need: **Chat**, **Plan & Track**, **Files**, **Admin Apps**.
-3. Click **Send Invite**. They get those apps in your workspace. In Files they reach only what you share with them — whole folders or single files — at the level you choose. Removing the partnership removes the access.
+1. Click **Add person** — the icon next to your notifications in the top bar, or the button on **Administration → Users**. It is shown to your workspace's administrators.
+2. Enter the person's email address. The dialog says whether they're already here (then the button reads **Open their page**), new to your workspace, or joining as a **Partner** — a guess from the email's domain that you can switch under **Joining as**. A partner keeps their own account in their own organization.
+3. Pick the apps they need: **Chat**, **Plan & Track**, **Files**, **Tickets** (a colleague starts with the first three). A partner can start with none — sharing a file, chat or project with them turns its app on.
+4. Click **Send invite**. In Files they reach only what you share with them — whole folders or single files — at the level you choose. Removing the partnership removes the access.
 
 To review or change what a partner's person holds later:
 
@@ -89,10 +95,10 @@ To review or change what a partner's person holds later:
 
 ## Working inside a partner's workspace
 
-You always stay in your own workspace — there is no switching. When a partner admits you to their workspace (gives you app access with **Share workspace apps**), what they share shows up where you already work:
+You always stay in your own workspace — there is no switching. When a partner admits you to their workspace (adds you with **Add person**), what they share shows up where you already work:
 
-- **Channels, files and tasks** shared with you appear in your own Chat, Files (under **Shared Files**) and Plan & Track, labelled with the partner's name. Folders you see are the ones shared with you, or that hold files you can open — never the rest of their folder tree. A folder shared with you gives you the same access to the files in it — Viewer, Editor or Full Access — except their private files, which stay private.
-- **Their memories** — pick their workspace in the **Workspace** select on **AI Studio → Memory Graph**. The graph then shows that workspace's memories you can access (its shared memories and the ones you saved there), says **Memories of *workspace* · you are a guest**, and Forget, edit and links act there. Pick **Your workspace (home)** to go back. See [Memory](memory.md#a-partners-memories).
+- **Channels, files and tasks** shared with you appear in your own Chat, Files (under **Shared Files**) and Plan & Track, labelled with the partner's name. Folders you see are the ones shared with you, or that hold files you can open — never the rest of their folder tree. A folder shared with you gives you the same access to the files in it — **Can view**, **Can edit** or **Full access** — except their private files, which stay private.
+- **Their memories** — pick their workspace in the **Workspace** select on **AI Studio → Memory Graph**. The graph then shows that workspace's memories you can access (its shared memories and the ones you saved there), says **Memories of *workspace* · you're a partner here**, and Forget, edit and links act there. Pick **Your workspace (home)** to go back. See [Memory](memory.md#a-partners-memories).
 - **Saving to memory** from a partner's channel asks which workspace it goes to (see below).
 - **A connected AI app** acts in a partner's workspace through that workspace's own connection URL — see [Acting in a partner's workspace](mcp-connections.md#acting-in-a-partners-workspace).
 
@@ -125,7 +131,7 @@ Every channel shows it, so you never have to guess:
 
 A connected AI app gets the same answer in its results: chat, memory and usage tools name the workspace they acted in.
 
-To give a partner's people working access to your apps, files and memories, use **Share workspace apps** (see [above](#giving-a-partners-people-working-access-to-your-apps)). Roles given under Users or Assignments add to that access; they don't replace it.
+To give a partner's people working access to your apps, files and memories, use **Add person** (see [above](#giving-a-partners-people-working-access-to-your-apps)). Roles given under Users or Assignments add to that access; they don't replace it.
 
 ## Where shared content appears
 

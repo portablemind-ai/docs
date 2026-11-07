@@ -58,7 +58,7 @@ You can always override the default by flipping the toggle before uploading.
 
 ### Sharing a folder
 
-When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (Viewer, Editor, Full Access) applies to every file in it too, including files added later, and stops applying the moment you unshare the folder. Sharing one of those files on its own can give someone more access to it than the folder does, never less. Sharing a folder at Viewer with someone who could already edit limits them to viewing inside it, as a per-file Viewer share does. Changing the folder's level later changes it for those files too, up or down — lower a folder from Editor to Viewer and its files go to Viewer — while a file shared with someone on its own keeps that share.
+When you share a folder with someone (or a team), they can see **all the files inside that folder and its subfolders** — including files uploaded in the future. This is the same as sharing a Google Drive folder: share once, and everything inside is accessible. The access level you pick for the folder (**Can view**, **Can edit**, **Full access**) applies to every file in it too, including files added later, and stops applying the moment you unshare the folder. Sharing one of those files on its own can give someone more access to it than the folder does, never less. Sharing a folder at **Can view** with someone who could already edit limits them to viewing inside it, as a per-file **Can view** share does. Changing the folder's level later changes it for those files too, up or down — lower a folder from **Can edit** to **Can view** and its files go to **Can view** — while a file shared with someone on its own keeps that share.
 
 Sharing a single file is different: the person can open that file (and see the folder it sits in, so they can find it), but not the other files next to it.
 
@@ -66,11 +66,11 @@ Sharing a single file is different: the person can open that file (and see the f
 
 The actions on a file or folder row follow the access you hold on it, and actions you can't take aren't shown:
 
-- **Viewer**: open, preview, download, and see who has access.
-- **Editor**: everything a viewer can, plus edit it, and move it within your own workspace. Files shared with you from another workspace stay where their owners filed them.
-- **Full Access**: everything an editor can, plus delete it and change who it's shared with.
+- **Can view**: open, preview, download, and see who has access.
+- **Can edit**: everything **Can view** allows, plus edit it, and move it within your own workspace. Files shared with you from another workspace stay where their owners filed them.
+- **Full access**: everything **Can edit** allows, plus delete it and change who it's shared with.
 
-The share icon is on every row. With Full Access it opens **Share**. Without it, the icon is labelled **Who has access** and shows who can open the item, but doesn't let you change that. With Full Access you can also lower your own level (to Editor, say) or remove yourself, but not raise it; if a change is refused, nothing changes and you keep the access you had.
+The share icon is on every row and opens the **Access** dialog. With **Full access** you can add people and change their access there; without it, the dialog shows who can open the item but doesn't let you change that. With **Full access** you can also lower your own level (to **Can edit**, say) or remove yourself, but not raise it; if a change is refused, nothing changes and you keep the access you had.
 
 ### Private files in shared folders
 
@@ -113,9 +113,9 @@ If you open a file that isn't shared with you — or that has been deleted — P
 
 ### What the Access dialog shows
 
-The file's **Access** dialog shows **Private** only when the file itself is private. A file that isn't private shows **All Tenant Members** — every member of the workspace can open it — marked *workspace default* when that is also your organization's default for new files. If you can change who the file is shared with and you administer the workspace's access settings, a **Change workspace default** link there opens them; on a dialog you can only view, it isn't shown. The line at the bottom says who can open it: **Everyone in *workspace*** (plus any guests or partners it's shared with) for a file that isn't private, or the number of people — the owner, the people and the members of teams it's shared with, and anyone holding the folder it's in — for a private one.
+The file's **Access** dialog shows **Only people you add** only when the file itself is private. A file that isn't private shows **Everyone in *workspace*** — every member of the workspace can open it — marked *workspace default* when that is also your organization's default for new files. If you can change who the file is shared with and you administer the workspace's access settings, a **change default** link there opens them; on a dialog you can only view, it isn't shown. The line at the bottom says who can open it: **Everyone in *workspace*** (plus the number of people from outside it's shared with) for a file that isn't private, or the number of people — the owner, the people and the members of teams it's shared with, and anyone holding the folder it's in — for a private one.
 
-Everyone who has access to a file through the folder it's in is listed too, marked **Inherited from *folder name***, with the level the folder gives them — including someone the folder was shared with before the file was added. Those rows are read-only in the file's dialog: you can't change their level or remove them there. To change or remove that access, open **Share** on the folder.
+Everyone who has access to a file through the folder it's in is listed too, marked **via folder *folder name*** in the **Comes from** column, with the level the folder gives them — including someone the folder was shared with before the file was added. Those rows are read-only in the file's dialog: you can't change their level or remove them there. To change or remove that access, open **Share** on the folder.
 
 ## AI and your files
 
