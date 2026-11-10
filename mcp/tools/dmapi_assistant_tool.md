@@ -24,7 +24,11 @@ This tool uses the project documentation to provide accurate answers about:
 - MCP (Model Context Protocol) integration
 - Guest engagement system
 - Webhook system
-- And much more!
+- Dynamic Functions
+- Which AI tools exist — ALL of them, on or off in this conversation — and how to turn one on
+
+If the user wants something you have no tool for, ask here BEFORE saying it does not exist: the tool
+may only be switched off in this conversation, and this tells you how the user can add it.
 
 The tool searches through the comprehensive DMAPI documentation to provide detailed, 
 accurate answers based on the actual implementation.
@@ -34,7 +38,7 @@ accurate answers based on the actual implementation.
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `question` | string | yes | The question about DMAPI implementation, features, or architecture. |
-| `category` | string | no | Optional category to focus the search. One of: `security`, `llm`, `api`, `models`, `mcp`, `webhooks`, `guest`, `general`. |
+| `category` | string | no | Optional category to focus the search. One of: `security`, `llm`, `api`, `models`, `mcp`, `webhooks`, `guest`, `tools`, `general`. |
 | `detail_level` | string | no | Level of detail in the response. One of: `brief`, `normal`, `detailed`. Default: `normal`. |
 
 ## Input schema
@@ -60,6 +64,7 @@ The JSON Schema served for `inputSchema`, verbatim.
         "mcp",
         "webhooks",
         "guest",
+        "tools",
         "general"
       ]
     },
