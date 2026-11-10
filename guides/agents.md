@@ -46,6 +46,8 @@ Context-based behavioral guidelines. Assigning a persona like "Software Engineer
 
 The actions the agent can perform — sending emails, creating reports, updating records, or integrating with external systems. You can select from built-in system tools or add custom ones. Reusable capabilities can also be packaged as skills the agent draws on — see [Skills](skills.md). An agent that works with your source code gets `git_provider_tool`, which opens, reviews and merges requests on GitLab or GitHub — see [Git Repositories & Merge Requests](git-repositories.md) for the one-time workspace setup.
 
+An agent's tools are separate from the tools `@ai` gets in a conversation, which are set per workspace and per conversation. A conversation's own tool list can also narrow what an agent may use there — see [Choosing which tools the AI can use](ai-assistant.md#choosing-which-tools-the-ai-can-use).
+
 ### Resources
 
 Data sources and information access: databases, documents, APIs, and other sources the agent needs to complete its tasks effectively.

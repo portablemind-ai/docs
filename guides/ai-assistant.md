@@ -77,7 +77,76 @@ Portablemind manages this for you:
 
 If a thread has drifted onto an unrelated topic, **starting a new conversation is the single most effective thing you can do** — a fresh conversation has nothing to re-read, so it answers in seconds. Long-running threads are worth keeping for continuity; they aren't the right place for quick, unrelated questions.
 
+The tools the AI carries are re-sent on every turn as well, which is why each conversation gets a short list rather than the whole catalog — see [Choosing which tools the AI can use](#choosing-which-tools-the-ai-can-use).
+
 Per-message token usage and cost are tracked for every model, so you can see this directly rather than guess at it — see [Setting Up AI Models](ai-setup.md).
+
+## Choosing which tools the AI can use
+
+Tools are what let the AI act instead of only answering: look up and change records, read and write files, search the web, send email, hand work to an agent. Portablemind has about 90 built-in tools, plus any custom tools and MCP servers your workspace has added.
+
+The AI is deliberately **not** given all of them. Every tool's description is sent to the model with every message, whether or not the tool is used, and the full catalog runs to tens of thousands of tokens. Handing it all over makes every reply slower and more expensive, leaves less room for the conversation itself, and makes the AI more likely to pick the wrong tool. So each conversation gets a short list, which you control at two levels:
+
+- **The workspace default** applies to every AI Chat and to `@ai` in every channel and direct message.
+- **A single conversation** can have its own list, which replaces the default there.
+
+Both use the same picker: search for a tool by what it does ("sending emails", "web search"), check or uncheck it, and save.
+
+If you ask the AI for something it has no tool for, it should tell you which tool is switched off and how to add it, rather than say it can't be done. You can also ask it directly: "which tools are available?" lists every tool and whether it's on in this conversation.
+
+### What's on by default
+
+Until an administrator changes it, every conversation gets this list:
+
+| The AI can… | Tools |
+| --- | --- |
+| Remember and recall — **always on** | `store_memory_tool`, `load_memories_tool`, `update_memory_tool`, `forget_memory_tool`, `link_memories_tool` |
+| Know the date and time — **always on** | `current_date_time_tool` |
+| Search this conversation's earlier messages — **always on** | `search_conversation_history_tool` |
+| Find, create and update records (projects, tasks, tickets and more) and set their status | `general_crud_tool`, `model_schema_tool`, `apply_status_tool` |
+| Work with files | `create_llm_file_tool`, `read_llm_file_tool`, `update_llm_file_tool`, `list_llm_files_tool`, `move_llm_file_tool`, `delete_llm_directory_tool`, `convert_to_pdf_tool` |
+| Research on the web | `web_research_tool` |
+| Send email | `send_email_tool` |
+| Post in other conversations and start direct messages | `conversation_chat_tool`, `start_dm_with_user_tool` |
+| Use skills | `load_skill_tool`, `use_skill_tool` |
+| Find agents, hand them work and check on it | `list_available_agents_tool`, `execute_agent_tool`, `check_agent_status_tool` |
+| Look up who's who in your organization | `org_lookup_tool` |
+| Answer questions about how Portablemind works | `dmapi_assistant_tool` |
+| Take you to a screen, point something out, or walk you through a task | `navigate_user_tool`, `show_user_tool`, `walk_user_tool` |
+
+The **always on** tools appear checked and locked in the picker. They can't be removed, so memory and conversation history keep working whatever else you choose.
+
+### Changing the workspace default
+
+Workspace administrators set the default under **Administration → System Defaults → AI Conversation Tools**.
+
+1. Search or browse the catalog. Built-in tools are grouped by category, your workspace's own tools are under **Custom Tools**, and each connected MCP server has its own group.
+2. Check the tools every conversation should have and uncheck the ones it shouldn't.
+3. Click **Save Defaults**.
+
+The label beside the page title shows which list is in effect: **Using platform defaults** (the table above) or **Tenant default configured** (your own list). **Reset to Platform Defaults** returns to the table above.
+
+Add a tool to the default when most of your team needs it in most conversations — a custom tool that looks up orders in your own system, say. Remove one when the AI shouldn't do something anywhere in your workspace, such as sending email. Keep the list short: every tool you add is paid for on every message in every conversation.
+
+> **Note:** A custom tool or MCP server is never added to conversations automatically. Create it in **AI Studio → Models & Tools** (**LLM Tools** or **MCP Servers**), then check it here or in a conversation's AI Tools.
+
+### Changing the tools for one conversation
+
+Open **AI Tools** for the conversation in either of two ways:
+
+- In the chat sidebar, click the gear icon beside a channel, then **AI Tools**.
+- In any open conversation, including an AI Chat, click **⋮** (More actions) at the top of the conversation, then **AI Tools**.
+
+Check or uncheck tools and click **Save for Conversation**. The label at the top changes from **Following tenant defaults** to **Conversation override**.
+
+A conversation with its own list keeps exactly that list. It no longer picks up changes to the workspace default. To go back to following the default, open AI Tools and click **Use Tenant Defaults**.
+
+Give a conversation its own list when it needs something the rest of the workspace doesn't: a specialist or custom tool for one team's channel, or a tool that's too heavy to give everyone. Or go the other way and remove tools, for example taking email away in a channel shared with guests.
+
+Two things to know:
+
+- **Only the conversation's owner or an admin of it can change its tools.** If you don't see AI Tools in the menu, you aren't one, or the conversation belongs to another workspace, which manages its own tools.
+- **The list applies to agents in the conversation too.** An agent answering there can't use a built-in tool you left unchecked, even if the agent normally has it. Its own custom tools and skills are unaffected.
 
 ## Memory across conversations
 
