@@ -26,13 +26,23 @@ DO NOT use general_crud_tool to create LlmConversation + LlmConversationMember m
 that path routinely produces one-sided "ghost" DMs because the after-create hook only adds
 the creator as a member, not the counterparty.
 
+A DM WITH AN AGENT, FROM THE AI ASSISTANT: a DM is lasting — it stays in the person's message list.
+To get an agent's answer, use execute_agent_tool: the answer comes back in this conversation
+and nothing is left behind (the person can also @mention the agent here). Open a DM with an
+agent only when the person asks for one. In the AI Assistant the first call for an agent
+opens nothing and says so; ask the person, and only if they say yes call again with
+confirm_lasting_dm: true.
+
 INPUTS:
 - party_id: the *Party.id* of the other side (NOT user_id, NOT llm_agent_id). For an agent,
   use agent.party_id. For a user, use user.party_id.
 - message: the opening message text.
+- confirm_lasting_dm: true only after the person confirmed they want a lasting DM with that
+  agent (see above). Not needed for a person.
 
 RETURNS: conversation_id, conversation_name, was_created (bool — true if a new DM was created,
-false if an existing one was reused), message_id of the posted opening message.
+false if an existing one was reused), message_id of the posted opening message. When a DM
+with an agent needs the person's confirmation first: opened: false, needs_confirmation: true.
 
 ## Parameters
 
@@ -40,6 +50,7 @@ false if an existing one was reused), message_id of the posted opening message.
 |---|---|---|---|
 | `party_id` | integer | yes | Party.id of the other DM participant (use party_id, NOT user_id or llm_agent_id). |
 | `message` | string | yes | Opening message content. |
+| `confirm_lasting_dm` | boolean | no | true only when, in this conversation, you asked the person whether to open a lasting DM with this agent and they replied yes. Their asking for a DM is not that confirmation. Never set it on your first call. Not needed for a person. |
 
 ## Example
 
@@ -54,8 +65,13 @@ was reused) and the `message_id` of the opening message.
 
 - **`party_id`, not `user_id` or `llm_agent_id`.** Every user and agent has a Party; look it up
   with `general_crud_tool` (`Individual` / `LlmAgent` details expose `party_id`) or `org_lookup_tool`.
-- **Do not build DMs by hand.** Creating `LlmConversation` + `LlmConversationMember` rows through
-  `general_crud_tool` produces one-sided "ghost" DMs. This tool is the supported path.
+- **Do not build DMs by hand.** `general_crud_tool`, `POST /api/v1/llm_conversations` and the tenant
+  JS sandbox's `createRecord` refuse a `dm`-type conversation; it used to produce one-sided "ghost" and
+  duplicate DMs. This tool (or `POST /api/v1/direct_messages`) is the supported path.
+- **From the AI Assistant, a DM with an agent asks first.** In an `assistant`-type turn, a call whose
+  target is an agent opens nothing and returns `opened: false, needs_confirmation: true`. Get the agent's
+  answer in place with `execute_agent_tool`, or ask the person; only if they want a lasting DM, call again
+  with `confirm_lasting_dm: true`. A person as the target, and every other conversation, are unchanged.
 
 ## Input schema
 
@@ -72,6 +88,10 @@ The JSON Schema served for `inputSchema`, verbatim.
     "message": {
       "type": "string",
       "description": "Opening message content."
+    },
+    "confirm_lasting_dm": {
+      "type": "boolean",
+      "description": "true only when, in this conversation, you asked the person whether to open a lasting DM with this agent and they replied yes. Their asking for a DM is not that confirmation. Never set it on your first call. Not needed for a person."
     }
   },
   "required": [
