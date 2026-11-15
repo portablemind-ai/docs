@@ -95,7 +95,7 @@ To review or change what a partner's person holds later:
 
 ## Working inside a partner's workspace
 
-You always stay in your own workspace — there is no switching. When a partner admits you to their workspace (adds you with **Add person**), what they share shows up where you already work:
+You always stay in your own workspace — a partner's workspace is never switched into (the one exception is a workspace you manage as its steward, below). When a partner admits you to their workspace (adds you with **Add person**), what they share shows up where you already work:
 
 - **Channels, files and tasks** shared with you appear in your own Chat, Files (under **Shared Files**) and Plan & Track, labelled with the partner's name. Folders you see are the ones shared with you, or that hold files you can open — never the rest of their folder tree. A folder shared with you gives you the same access to the files in it — **Can view**, **Can edit** or **Full access** — except their private files, which stay private.
 - **Their memories** — pick their workspace in the **Workspace** select on **AI Studio → Memory Graph**. The graph then shows that workspace's memories you can access (its shared memories and the ones you saved there), says **Memories of *workspace* · you're a partner here**, and Forget, edit and links act there. Pick **Your workspace (home)** to go back. See [Memory](memory.md#a-partners-memories).
@@ -103,6 +103,17 @@ You always stay in your own workspace — there is no switching. When a partner 
 - **A connected AI app** acts in a partner's workspace through that workspace's own connection URL — see [Acting in a partner's workspace](mcp-connections.md#acting-in-a-partners-workspace).
 
 Content shared with you item by item works the same way, filtered by the permissions you hold on each shared resource.
+
+## Managing a workspace you created for a customer
+
+An admin of a workspace with a sub-tenant billing agreement can create a workspace for a customer **without an administrator of its own**: on **Tenants → New Tenant**, tick **I'll manage this workspace myself**. You become its **steward** — you build it (agents, channels, files, memories, pipelines) from your own login, and can hand it over to the customer later.
+
+- **Open workspace** — from the success message after creating it, from the **workspace switcher** in the top bar, or with the switch icon on its row in **Tenants**; **Back to *your workspace*** returns you. This is the one kind of workspace the whole app switches into: a banner reads **Working in *workspace* as steward**, with the way home. A partner's workspace is never switched into.
+- The switch lasts for your browser session, and only while you still steward the workspace.
+- The Tenants list shows such a workspace as **Managed by** its steward's name, with a **Managed** label.
+- Once the customer has their own admin, their people, their admins and the workspace's account (deleting, pausing or re-billing it) are theirs to manage; anything you granted beyond the basics ends with your stewardship unless their admin keeps it.
+- Once they have their own admin, its account settings are theirs too: sign-in and white-label settings, branding and branded email templates. You can still view them.
+- **Ending the stewardship** is the customer's step: their administrator opens **Administration → Partners**, where the **Managed workspace** card names you, and chooses **End stewardship**. Your access there ends and anything you granted beyond the basics goes with it, while everything you built stays. Until the workspace has an administrator of its own, its stewardship can't be ended. If the work stops before then, delete the workspace instead (**Tenants**).
 
 ### @ai in a partner's channels
 
