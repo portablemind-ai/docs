@@ -14,7 +14,7 @@ acting as the connected user, in that user's workspace, with that user's permiss
 - **Never send `tenant_id`.** The server resolves the workspace from your credential.
 - **Recipes** for the calls agents most often get wrong: [recipes.md](../recipes.md).
 
-89 tools in 19 categories.
+90 tools in 19 categories.
 
 ## agents
 
@@ -113,6 +113,7 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=conversation`
 | [`conversation_chat_tool`](tools/conversation_chat_tool.md) | Send a chat message directly to an LLM conversation. |
 | [`search_conversation_history_tool`](tools/search_conversation_history_tool.md) | Search the message history of a conversation for a keyword or phrase. |
 | [`start_dm_with_user_tool`](tools/start_dm_with_user_tool.md) | Open a direct-message conversation with another user/agent in the same tenant and post an opening message. |
+| [`conversation_pins_tool`](tools/conversation_pins_tool.md) | List, search, pin and unpin the pinned messages and files of a conversation (Slack-style pins: the conversation's shared list of items worth finding again). |
 
 ## dynamic_functions
 
