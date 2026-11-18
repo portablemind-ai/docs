@@ -28,6 +28,10 @@ Actions:
                when Claude is stuck on an irrelevant prompt.
 - `nudge`    — wake an idle session by enqueuing a system message.
 
+A STOPPED session (no pane) is not controlled here: post a message in its
+conversation (conversation_chat_tool) and the daemon relaunches it in that
+same conversation. Do not launch a new session to "restart" one.
+
 `conversation_id` is required for stop / interrupt / nudge — these
 target a specific session. For `peek`, omitting both
 `conversation_id` and `agent_session_id` peeks all sessions on the

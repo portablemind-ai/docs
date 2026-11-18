@@ -24,6 +24,12 @@ You can run the session on any of three coding-agent CLIs via `coding_agent`:
 (OpenAI Codex CLI). Pick whichever fits the task; omit to use the daemon's
 default (normally claude).
 
+RESTARTING A STOPPED SESSION: do NOT call this tool. A session whose pane
+ended (peek shows 0 sessions) comes back in its SAME conversation when you
+post a message there (conversation_chat_tool) — the daemon auto-launches it
+with the conversation's history restored. This tool always creates a NEW
+conversation, which strands the old one's history. Use it only for new work.
+
 Use this when you need to:
 - Review a codebase to understand its architecture
 - Search for specific code patterns or files
