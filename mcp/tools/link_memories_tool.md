@@ -2,7 +2,7 @@
 
 # link_memories_tool
 
-> Create a relationship edge between two memories in the same tenant.
+> Create — or remove — a relationship edge between two memories in the same tenant.
 
 | | |
 |---|---|
@@ -14,10 +14,19 @@
 
 This is the description the server sends to the model, verbatim.
 
-Create a relationship edge between two memories in the same tenant.
+Create — or remove — a relationship edge between two memories in the same tenant.
 
-REQUIRED: source_memory_id, target_memory_id, relationship_type
-OPTIONAL: strength (0.0-1.0, default 0.8)
+action "link" (default) REQUIRED: source_memory_id, target_memory_id, relationship_type
+                        OPTIONAL: strength (0.0-1.0, default 0.8)
+action "remove": relationship_id (from load_memories mode "links"), OR source_memory_id +
+                 target_memory_id + relationship_type. Removes deliberate and automatic edges alike.
+action "remove_automatic": bulk-remove AUTOMATIC edges (the ones nightly consolidation added) of ONE of
+                 memory_id (its edges both ways) or mind_id (edges whose source memory is in that Mind;
+                 needs permission to update the Mind). Deliberate edges — your links and revision
+                 (supersedes) edges — are never touched. dry_run: true returns the count only, to preview.
+In every case the source must be a memory you may change (one you created) and the other end one you can
+read; edges that fail that are left alone (and not counted).
+List a memory's edges, with their origin (deliberate / automatic), via load_memories mode "links".
 
 RECOMMENDED relationship_type:
   related_to  — the two memories are about the same thing (the default choice)
@@ -30,9 +39,14 @@ Also accepted when the link really is that specific: caused_by, depends_on, lead
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `source_memory_id` | integer | yes | ID of the source memory (required) |
-| `target_memory_id` | integer | yes | ID of the target memory (required) |
-| `relationship_type` | string | yes | Type of relationship (required); related_to, supersedes or exemplifies unless a more specific type truly applies. One of: `caused_by`, `depends_on`, `leads_to`, `references`, `spawns`, `supersedes`, `validates`, `related_to`, `exemplifies`. |
+| `action` | string | no | "link" (default) or "remove". One of: `link`, `remove`, `remove_automatic`. |
+| `relationship_id` | integer | no | action "remove": the edge to delete. |
+| `memory_id` | integer | no | action "remove_automatic": the memory whose automatic edges go. |
+| `mind_id` | integer | no | action "remove_automatic": the Mind whose automatic edges go. |
+| `dry_run` | boolean | no | action "remove_automatic": true = only count what would go. |
+| `source_memory_id` | integer | no | ID of the source memory (required) |
+| `target_memory_id` | integer | no | ID of the target memory (required) |
+| `relationship_type` | string | no | Type of relationship (required to link); related_to, supersedes or exemplifies unless a more specific type truly applies. One of: `caused_by`, `depends_on`, `leads_to`, `references`, `spawns`, `supersedes`, `validates`, `related_to`, `exemplifies`. |
 | `strength` | number | no | Edge strength 0.0-1.0 (default 0.8) |
 
 ## Input schema
@@ -43,6 +57,31 @@ The JSON Schema served for `inputSchema`, verbatim.
 {
   "type": "object",
   "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "link",
+        "remove",
+        "remove_automatic"
+      ],
+      "description": "\"link\" (default) or \"remove\""
+    },
+    "relationship_id": {
+      "type": "integer",
+      "description": "action \"remove\": the edge to delete"
+    },
+    "memory_id": {
+      "type": "integer",
+      "description": "action \"remove_automatic\": the memory whose automatic edges go"
+    },
+    "mind_id": {
+      "type": "integer",
+      "description": "action \"remove_automatic\": the Mind whose automatic edges go"
+    },
+    "dry_run": {
+      "type": "boolean",
+      "description": "action \"remove_automatic\": true = only count what would go"
+    },
     "source_memory_id": {
       "type": "integer",
       "description": "ID of the source memory (required)"
@@ -64,7 +103,7 @@ The JSON Schema served for `inputSchema`, verbatim.
         "related_to",
         "exemplifies"
       ],
-      "description": "Type of relationship (required); related_to, supersedes or exemplifies unless a more specific type truly applies"
+      "description": "Type of relationship (required to link); related_to, supersedes or exemplifies unless a more specific type truly applies"
     },
     "strength": {
       "type": "number",
@@ -73,11 +112,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       "description": "Edge strength 0.0-1.0 (default 0.8)"
     }
   },
-  "required": [
-    "source_memory_id",
-    "target_memory_id",
-    "relationship_type"
-  ]
+  "required": []
 }
 ```
 

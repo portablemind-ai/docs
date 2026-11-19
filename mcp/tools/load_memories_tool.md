@@ -25,14 +25,27 @@ MODES (pick by what you have):
   like search. Use for paraphrases when search found nothing.
 - recent / important / all: browse by date / by importance >= 0.7 / by importance, no query.
 - type: browse memory_types (required). conversation / agent: browse by llm_conversation_id /
-  agent_id. related: the graph neighbours of memory_id.
+  agent_id.
+- related: what is near memory_id — graph neighbours up to 2 hops (each tagged via:"link") plus up to 10
+  vector-similar memories (via:"similar"). Cached up to an hour.
+- links: memory_id's DIRECT edges, both ways, for curating the graph — each with direction
+  (outgoing/incoming), relationship_id, type, strength, other_memory_id, other_memory_title, origin,
+  created_at. Paged with limit/offset (total and has_more tell you if there is more); never cached, no
+  vector neighbours. Remove one with link_memories_tool action:"remove" and its relationship_id.
 Auto-selects: search (if query), conversation (if llm_conversation_id), agent (if agent_id),
 related (if memory_id), recent (default).
 
-MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact, preference, decision, insight, context, solution, relationship, goal, execution — memory_types filters every mode the same way (except related).
+LINK ORIGIN: every edge (links mode, and each memory's relationships summary) carries origin —
+'deliberate' (someone linked it on purpose; created_via names how) or 'automatic' (nightly consolidation
+linked similar memories). A Mind's automatic similarity links can be turned off with its
+custom_fields.auto_link_similar = false.
 
-PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [], memory_id (for related),
-        limit (1-100, default 20), min_importance (0.0-1.0), include_related (default true), include_content (default true),
+MEMORY TYPES: code_change, bug_fix, discussion, learning, derived_insight, fact, preference, decision, insight, context, solution, relationship, goal, execution — memory_types filters every mode the same way (except related).
+TAGS: tags [] keeps memories carrying ANY of the tags, applied before the limit in every mode.
+
+PARAMS: mode, query, agent_id, llm_conversation_id, mind_id (for scoping), memory_types [],
+        memory_id (for related / links), limit (1-100, default 20), offset (links mode, default 0),
+        min_importance (0.0-1.0), include_related (default true), include_content (default true),
         max_relationships (0-20), relationship_strength_threshold (0.0-1.0), tags [], as_of (ISO-8601),
         origin (deliberate | extraction), track_access (default true; false = a peek that leaves the
         usage counters alone)
@@ -64,20 +77,21 @@ automatically when the id is not in your tenant.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `mode` | string | no | How to find memories. "search" (default with a query) = stemmed word match on title/description/body, fused with semantic similarity when embeddings are on; "semantic" = meaning only (falls back to search without embeddings); the rest browse. Defaults to "recent" with no query. One of: `conversation`, `agent`, `search`, `semantic`, `recent`, `important`, `type`, `related`, `all`. |
+| `mode` | string | no | How to find memories. "search" (default with a query) = stemmed word match on title/description/body, fused with semantic similarity when embeddings are on; "semantic" = meaning only (falls back to search without embeddings); the rest browse. Defaults to "recent" with no query. One of: `conversation`, `agent`, `search`, `semantic`, `recent`, `important`, `type`, `related`, `links`, `all`. |
 | `query` | string | no | A few distinctive plain words (or a short phrase) for "search" / "semantic" mode. |
 | `agent_id` | integer | no | Agent ID for retrieving agent-specific memories. Used with "agent" mode. |
 | `llm_conversation_id` | integer | no | Conversation ID for retrieving conversation-specific memories. Used with "conversation" mode. |
 | `mind_id` | integer | no | Optional: id of an existing LlmMind to restrict results to. Omit to search the whole tenant. |
 | `memory_types` | array of string | no | Filter by specific memory types. Can be combined with other modes. |
-| `memory_id` | integer | no | Specific memory ID to find related memories. Used with "related" mode. |
+| `memory_id` | integer | no | The memory whose neighbours ("related" mode) or direct edges ("links" mode) to list. |
+| `offset` | integer | no | "links" mode: how many edges to skip, for paging a memory with many links. Defaults to 0. |
 | `limit` | integer | no | Maximum number of memories to retrieve. Defaults to 20. |
 | `min_importance` | number | no | Minimum importance score for filtering memories. Defaults to 0.0 (no filtering). |
 | `include_related` | boolean | no | Whether to include related memories through relationships. Defaults to true. |
 | `include_content` | boolean | no | Whether to include full memory content in results. Defaults to true. |
 | `max_relationships` | integer | no | Maximum number of relationships to include per memory. Defaults to 5. Set to 0 to exclude all relationships. |
 | `relationship_strength_threshold` | number | no | Minimum relationship strength to include. Defaults to 0.70. Only relationships with strength >= this value will be included. |
-| `tags` | array of string | no | Filter memories by specific tags. |
+| `tags` | array of string | no | Keep memories carrying ANY of these tags (applied before the limit, every mode) |
 | `as_of` | string | no | Optional ISO-8601 date/time ("2026-07-01", "2026-07-01T09:00:00Z"): return what was believed at that moment (superseded versions included) instead of what is believed now. |
 | `origin` | string | no | Only memories from this source: "deliberate" (saved or edited by a person or an agent) or "extraction" (background extraction). Omit for both. One of: `deliberate`, `extraction`. |
 | `track_access` | boolean | no | Default true: a memory this read returns counts as USED (access_count / last_accessed_at, which feed its retrieval strength). false for a peek — an audit, a "what would I recall" check — that must leave the usage counters as they are. |
@@ -119,6 +133,7 @@ The JSON Schema served for `inputSchema`, verbatim.
         "important",
         "type",
         "related",
+        "links",
         "all"
       ],
       "description": "How to find memories. \"search\" (default with a query) = stemmed word match on title/description/body, fused with semantic similarity when embeddings are on; \"semantic\" = meaning only (falls back to search without embeddings); the rest browse. Defaults to \"recent\" with no query."
@@ -164,7 +179,12 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "memory_id": {
       "type": "integer",
-      "description": "Specific memory ID to find related memories. Used with \"related\" mode."
+      "description": "The memory whose neighbours (\"related\" mode) or direct edges (\"links\" mode) to list."
+    },
+    "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "\"links\" mode: how many edges to skip, for paging a memory with many links. Defaults to 0."
     },
     "limit": {
       "type": "integer",
@@ -203,7 +223,7 @@ The JSON Schema served for `inputSchema`, verbatim.
       "items": {
         "type": "string"
       },
-      "description": "Filter memories by specific tags"
+      "description": "Keep memories carrying ANY of these tags (applied before the limit, every mode)"
     },
     "as_of": {
       "type": "string",

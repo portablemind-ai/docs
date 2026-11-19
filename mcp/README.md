@@ -101,7 +101,7 @@ Filter: `https://www.dsiloed.com/api/v1/mcp?categories=memory`
 | [`load_memories_tool`](tools/load_memories_tool.md) | Load memories to provide context for AI conversations. |
 | [`update_memory_tool`](tools/update_memory_tool.md) | Correct or refine an existing memory you own (title / content / importance / tags). |
 | [`forget_memory_tool`](tools/forget_memory_tool.md) | Retire a memory you own (soft-archive — recoverable, not permanently deleted). |
-| [`link_memories_tool`](tools/link_memories_tool.md) | Create a relationship edge between two memories in the same tenant. |
+| [`link_memories_tool`](tools/link_memories_tool.md) | Create — or remove — a relationship edge between two memories in the same tenant. |
 | [`update_memory_profile_tool`](tools/update_memory_profile_tool.md) | Rewrite your own always-on memory block — the short "About me" notes injected into EVERY prompt you run with, ahead of recalled memories. |
 
 ## conversation
