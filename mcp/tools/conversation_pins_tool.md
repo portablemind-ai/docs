@@ -18,8 +18,9 @@ List, search, pin and unpin the pinned messages and files of a conversation (Sla
 conversation's shared list of items worth finding again).
 
 action:
-  - list  — the pinned items, newest first: who pinned each and when, a message preview or the file name.
-            Optional query (text search over message content and file names), page, per_page.
+  - list  — the pinned items, newest first: who pinned each and when, a message preview (with the
+            attachments you may open) or the file name. Optional query (text search over message content,
+            attachment names and file names), page, per_page.
   - pin   — pin a message (llm_message_id) or a file shared in the conversation (llm_file_id). Pinning an
             already-pinned item returns the existing pin.
   - unpin — remove a pin by pin_id (from list).
@@ -32,7 +33,7 @@ You see only the pins of items you can read; pinning and unpinning need posting 
 |---|---|---|---|
 | `action` | string | yes | list \| pin \| unpin. One of: `list`, `pin`, `unpin`. |
 | `conversation_id` | integer | yes | The conversation whose pins to read or change. |
-| `query` | string | no | list only: text to search pinned message content and file names. |
+| `query` | string | no | list only: text to search pinned message content, attachment and file names. |
 | `page` | integer | no | list only: page number (default 1) |
 | `per_page` | integer | no | list only: page size (default 25, max 100) |
 | `llm_message_id` | integer | no | pin only: the message to pin. |
@@ -62,7 +63,7 @@ The JSON Schema served for `inputSchema`, verbatim.
     },
     "query": {
       "type": "string",
-      "description": "list only: text to search pinned message content and file names"
+      "description": "list only: text to search pinned message content, attachment and file names"
     },
     "page": {
       "type": "integer",
