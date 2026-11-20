@@ -23,6 +23,8 @@ Two complete open-source applications built on Portablemind are published as pub
 | [pm-ticket-portal](https://gitlab.com/russonrails/pm-ticket-portal) | White-label customer support portal: clients register with an access key, submit tickets, and chat with an AI support agent that responds autonomously — with human staff able to step in at any time. |
 | [pm-payer-portal](https://gitlab.com/russonrails/pm-payer-portal) | White-label healthcare payer portal: prior-authorization workflows driven by UM intake agents, with turnaround-time tracking and clinician-controlled denials. |
 
+For an app that opens **inside** Portablemind, start smaller: the [Hello App](https://github.com/portablemind-ai/portablemind-hello-app) is the smallest embedded app — one static page and a manifest, talking to Portablemind over the bridge, with no server and no secret. See [Building an embedded app](#building-an-embedded-app).
+
 These are the same kind of apps showcased on the [Apps](/apps) page — working examples of what you can build on the platform. In fact, `pm-ticket-portal` is the code behind our own live support site at [support.portablemind.ai](https://support.portablemind.ai), so you can see exactly what the template produces in production.
 
 ### Build your own app with a coding agent
@@ -143,6 +145,8 @@ A JSON document a workspace administrator pastes into Administration → Apps �
 | `commands` / `nav` | What the app contributes to Portablemind's menus. An embedded command opens `/app/x/<iid><path>`; `nav` places it (`pm.app_switcher.apps`, `pm.jump_bar.apps`, …). A `when` clause (`roles_any`, `capabilities_any`) hides an entry from people who lack a role or capability |
 | `roles` | Optional: role files the app ships ([Shipping a role with your app](#shipping-a-role-with-your-app)); the administrator uploads them with the manifest |
 
+The complete version of this example is the [Hello App](https://github.com/portablemind-ai/portablemind-hello-app): clone it, serve it, install its manifest.
+
 Icons come from a fixed set of Material icon names; labels are short plain text. The review an administrator sees before confirming is a dry run of the same validation, so a refused manifest tells you exactly which field and why.
 
 ### 2. The bridge
@@ -173,7 +177,7 @@ Portablemind never hands your app the user's own sign-in. The flow is:
 
 An app token is deliberately narrower than a person's session: it is refused by the security-administration endpoints (roles, users, API keys), sharing, invitations and membership changes, MCP, and anything that issues tokens or keys; and it cannot switch workspaces. Disabling or uninstalling the app, or rotating its secret, stops every token it holds.
 
-The secret is used only as the `client_secret` at `POST /oauth/token`; it never signs or verifies a session token. Keep it on the server only, and allow-list the API paths your UI actually uses rather than proxying everything. Portablemind's own AI Office is built exactly this way and is the reference implementation; the API guide carries the endpoint-level detail.
+The secret is used only as the `client_secret` at `POST /oauth/token`; it never signs or verifies a session token. Keep it on the server only, and allow-list the API paths your UI actually uses rather than proxying everything. Portablemind's own AI Office is built exactly this way: it is our app, not a public template. The public starting point is the [Hello App](https://github.com/portablemind-ai/portablemind-hello-app); the API guide carries the endpoint-level detail.
 
 ## Interactive API reference
 

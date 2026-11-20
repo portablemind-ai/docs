@@ -57,3 +57,5 @@ Every install, change of status, uninstall and secret rotation is recorded in th
 ## Your own apps
 
 Anyone who can build a web page can build an app. The smallest one is a single static page and a manifest of about thirty lines; an app that reads or writes workspace data adds a small server that holds the secret. Developers start at [Building an embedded app](developers.md#building-an-embedded-app).
+
+Building your own? Start from the [Hello App](https://github.com/portablemind-ai/portablemind-hello-app).
