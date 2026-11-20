@@ -27,7 +27,7 @@ Return visits are simple: sign in at [app.portablemind.ai](https://app.portablem
 
 ## A tour of the app
 
-Once you're signed in, you land on the **AI Assistant** — the app's home page. The **app switcher** (the grid icon in the top bar) moves you between the other areas, and an optional **Jump Bar** adds one-click shortcuts to the core apps (toggle it from the app switcher menu). Here's what each area is for:
+Once you're signed in, you land on the **AI Assistant** — the app's home page. The **app switcher** (the grid icon in the top bar) moves you between the other areas, and an optional **Jump Bar** adds one-click shortcuts to the core apps (toggle it from the app switcher menu). When your workspace has installed [apps](apps.md), they appear in the switcher under **Apps**. Here's what each area is for:
 
 | Area | What you'll use it for |
 |---|---|

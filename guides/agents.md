@@ -142,4 +142,5 @@ In AI Studio → Agents, use the share icon on the agent's card to let people or
 - Give your agents durable knowledge with [Memory](memory.md).
 - Package reusable capabilities as [Skills](skills.md) your agents can share.
 - Coordinate multiple agents on multi-stage work with [Orchestration](orchestration.md).
+- See your agents at work, and talk to one by walking up to its desk, in [the AI Office](ai-office.md).
 - Need another model for a new agent? See [Setting Up AI Models](ai-setup.md).

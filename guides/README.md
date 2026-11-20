@@ -16,6 +16,7 @@
 - [Chat & the AI Assistant](ai-assistant.md): Work with AI in conversations — @ai mentions, files, and more.
 - [Automind](automind.md): Let Automind answer your messages and @mentions as you while you're away, and check with you on the rest.
 - [Scheduled Runs](scheduled-runs.md): Ask an agent to do something later, once or on a schedule, and see or cancel what you have asked for.
+- [The AI Office](ai-office.md): Walk a floor where every agent has a desk that shows what it is doing, and talk to one by walking up to it.
 - [AI Memory](memory.md): How Portablemind agents remember context across conversations.
 
 ## Collaboration
@@ -38,6 +39,7 @@
 
 ## Automation & Advanced
 
+- [Apps](apps.md): Add apps to your workspace from the catalog or build your own: they open inside Portablemind and act as you, within limits you control.
 - [Skills](skills.md): Reusable instruction bundles that extend what your agents can do.
 - [Custom Data: Levels & Tiers](custom-data-tiers.md): Define your own object types and fields, or connect data that lives in your own systems.
 - [Dynamic Functions](dynamic-functions.md): Your own serverless JavaScript, running inside your workspace.
