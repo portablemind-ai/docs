@@ -62,6 +62,7 @@ automatically when the id is not in your tenant.
 | `content` | string | yes | The fact to remember, stated as briefly as it can be stated and still stand on its own. A short paragraph is almost always enough. Recall injects this verbatim into future conversations, so length here is paid for on every turn that matches — prefer the fact and its "why" over a transcript, and link or reference detail that lives elsewhere rather than copying it in. |
 | `memory_type` | string | no | Type of memory being stored: fact (default), preference, decision, learning or context. The other listed types are accepted but rarely needed. One of: `code_change`, `bug_fix`, `discussion`, `learning`, `derived_insight`, `fact`, `preference`, `decision`, `insight`, `context`, `solution`, `relationship`, `goal`, `execution`. |
 | `importance_score` | number | no | Importance score from 0.0 to 1.0. Higher scores mean more important. Defaults to 0.5. |
+| `description` | string | no | Optional one-line summary of what this memory is about, in words the body does not already use (it is searched and embedded with the memory). Omit it rather than repeating the body. |
 | `tags` | array of string | no | Optional tags to help categorize and retrieve the memory later. |
 | `agent_id` | integer | no | Optional: Associate this memory with a specific agent (yours, or one you own). If not provided, will use conversation context. |
 | `llm_conversation_id` | integer | no | Optional: Associate this memory with a specific conversation. If provided, the memory will be linked to this conversation. |
@@ -126,6 +127,10 @@ The JSON Schema served for `inputSchema`, verbatim.
       "minimum": 0.0,
       "maximum": 1.0,
       "description": "Importance score from 0.0 to 1.0. Higher scores mean more important. Defaults to 0.5."
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional one-line summary of what this memory is about, in words the body does not already use (it is searched and embedded with the memory). Omit it rather than repeating the body."
     },
     "tags": {
       "type": "array",
