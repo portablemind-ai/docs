@@ -2,7 +2,7 @@
 
 # update_memory_tool
 
-> Correct or refine an existing memory you own (title / content / importance / tags).
+> Correct or refine an existing memory you own (title / content / description / importance / tags).
 
 | | |
 |---|---|
@@ -14,7 +14,7 @@
 
 This is the description the server sends to the model, verbatim.
 
-Correct or refine an existing memory you own (title / content / importance / tags).
+Correct or refine an existing memory you own (title / content / description / importance / tags).
 
 USE WHEN: a fact you stored is now wrong or incomplete and should be updated
 (rather than storing a contradicting memory).
@@ -22,11 +22,12 @@ USE ONLY when the person's current message asks for the correction (or confirms 
 your own initiative, never because a save answered "already remembered".
 
 REQUIRED: memory_id
-OPTIONAL: title, content, importance_score, tags []
+OPTIONAL: title, content, description, importance_score, tags []
 
 A new `content` or `title` creates a NEW VERSION: the response carries the new memory_id (use it from
-now on); the old version is kept as history and no longer recalled. Importance / tags alone are
-edited in place and the id does not change.
+now on); the old version is kept as history and no longer recalled. Description / importance / tags
+alone are edited in place and the id does not change. A version keeps the old description unless
+you pass a new one; pass description "" to clear it.
 
 You can only update memories you created. To retire a memory entirely, use forget_memory.
 
@@ -37,6 +38,7 @@ You can only update memories you created. To retire a memory entirely, use forge
 | `memory_id` | integer | yes | ID of the memory to update (required) |
 | `title` | string | no | New title (optional) |
 | `content` | string | no | New content body (optional, replaces existing content) |
+| `description` | string | no | New one-line summary in words the body does not already use (optional; searched and embedded with the memory; "" clears it) |
 | `importance_score` | number | no | New importance 0.0-1.0 (optional) |
 | `tags` | array of string | no | New tags (optional, replaces existing) |
 
@@ -59,6 +61,10 @@ The JSON Schema served for `inputSchema`, verbatim.
     "content": {
       "type": "string",
       "description": "New content body (optional, replaces existing content)"
+    },
+    "description": {
+      "type": "string",
+      "description": "New one-line summary in words the body does not already use (optional; searched and embedded with the memory; \"\" clears it)"
     },
     "importance_score": {
       "type": "number",
